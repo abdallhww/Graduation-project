@@ -1,0 +1,31 @@
+{
+  "name": "graduation-project",
+  "version": "1.0.0",
+  "description": " Abdullah's graduation project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start:dev":"nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdallhww/Graduation-project.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Abdallh Wael Shaynawi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdallhww/Graduation-project/issues"
+  },
+  "homepage": "https://github.com/abdallhww/Graduation-project#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

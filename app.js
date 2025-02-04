@@ -1,28 +1,41 @@
-const http=require("node:http");
-const PORT=3000;
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const PORT = 3000;
 
-const server = http.createServer((req, res) => {
-    //const url = req.url;//الاشياء الي بدي ياها 
-    //const method = req.method;//الاشياء الي بدي ياها 
-    const {url, method}=req;
+const { usersRouter } = require("./routes/users");
+//const { cartsRouter } = require("./routes/carts");
+//const { productsRouter } = require("./routes/products");
 
-    console.log(method,url);
+const app = express();
 
-    if (url === "/hello" && method === "GET") {
-      res.write(`<div> Welcome In Home Page</div>`);
-
-      return res.end();
-    }
-    
-   if (url === "/admin" && method === "GET") {
-    res.write(`<div> Abdallh Wael Shatnawi</div>`);
-
-    return res.end();
-  }
-  res.write(`<div>Not Found</div>`);
-
-  return res.end();
+// Middleware لطباعة 
+app.use((req, res, next) => {
+  console.log(`Method: ${req.method} | URL: ${req.url}`);
+  next(); 
 });
-server.listen(PORT, () => {
-  console.log("Server is running on http://localhost: "+PORT);
+
+
+// when deals with templating pages should definde 3 things :
+// 1 - set view path
+app.set("views", path.join(__dirname, "./views"));
+// 2- set view engin type
+app.set("view engine", "ejs");
+// 3- use express.static method style عشان اقدر اوصل لا ملفات الي جوا  
+app.use(express.static(path.join(__dirname, "./style")));
+
+app.use(bodyParser.json());
+
+// users , carts , products
+app.use("/users", usersRouter);
+
+//app.use("/carts", cartsRouter);
+
+//app.use("/products", productsRouter);
+
+app.use((req, res) => {
+  console.log("404 Error NOT FOUND PAGE");
+ res.render("404" , {title: "404 Error Page"})
 });
+
+app.listen(PORT, () => console.log("Server is running on : " + PORT));

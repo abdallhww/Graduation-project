@@ -34,8 +34,8 @@ app.use("/users", usersRouter);
 //app.use("/products", productsRouter);
 
 app.use((req, res) => {
-  console.log("404 Error NOT FOUND PAGE");
- res.render("404" , {title: "404 Error Page"})
+  //console.log("404 Error NOT FOUND PAGE");
+  res.status(404).render("404" , {title: "404 Error Page"})
 });
 
 app.listen(PORT, () => console.log("Server is running on : " + PORT));

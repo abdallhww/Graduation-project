@@ -1,65 +1,108 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-<link rel="stylesheet" href="/css1.css" />
-    <title>Users Page</title>
-  </head>
-  <body>
-    <body>
-    <div class="container" id="container">
-        <div class="form-container sign-up">
-            <form>
-                <h1>Create Account</h1>
-                <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+<!-- coding by @_.codedevotee -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Register form</title>
+
+    <!--Boxicons CDN-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' 
+    rel='stylesheet'>
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="/style/css1.css">
+
+</head>
+
+<body>
+    <!-- FOR SOURCE CODE COMMENT "CODE" -->
+<h1>W</h1>
+    <div class="wrapper">
+        <span class="rotate-bg"></span>
+        <span class="rotate-bg2"></span>
+
+        <div class="form-box login">
+            <h2 class="title animation" style="--i:0; --j:21">Login</h2>
+            <form action="#">
+
+                <div class="input-box animation" style="--i:1; --j:22">
+                    <input type="text" required>
+                    <label for="">Username</label>
+                    <i class='bx bxs-user'></i>
                 </div>
-                <span>or use your email for registeration</span>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <button>Sign Up</button>
+
+                <div class="input-box animation" style="--i:2; --j:23">
+                    <input type="password" required>
+                    <label for="">Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn animation" style="--i:3; --j:24">Login</button>
+                <div class="linkTxt animation" style="--i:5; --j:25">
+                    <p>Don't have an account? <a href="#" class="register-link">Sign Up</a></p>
+                </div>
             </form>
         </div>
-        <div class="form-container sign-in">
-            <form>
-                <h1>Sign In</h1>
-                <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+
+        <div class="info-text login" style="color: white;">
+            <h2 class="animation" style="--i:0; --j:20 ">Welcome Back!</h2>
+            <p class="animation" style="--i:1; --j:21" >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Deleniti,rem?</p>
+        </div>
+
+
+
+
+
+
+
+        <div class="form-box register">
+
+            <h2 class="title animation" style="--i:17; --j:0">Sign Up</h2>
+
+            <form action="#">
+
+                <div class="input-box animation" style="--i:18; --j:1">
+                    <input type="text" required>
+                    <label for="">Username</label>
+                    <i class='bx bxs-user'></i>
                 </div>
-                <span>or use your email password</span>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <a href="#">Forget Your Password?</a>
-                <button>Sign In</button>
+
+                <div class="input-box animation" style="--i:19; --j:2">
+                    <input type="email" required>
+                    <label for="">Email</label>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+
+                <div class="input-box animation" style="--i:20; --j:3">
+                    <input type="password" required>
+                    <label for="">Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+
+                <button type="submit" class="btn animation" style="--i:21;--j:4">Sign Up</button>
+
+                <div class="linkTxt animation" style="--i:22; --j:5">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+
             </form>
         </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
-                    <button class="hidden" id="login">Sign In</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Register with your personal details to use all of site features</p>
-                    <button class="hidden" id="register">Sign Up</button>
-                </div>
-            </div>
+
+        <div class="info-text register" style="color: white;">
+            <h2 class="animation" style="--i:17; --j:0;">Welcome</h2>
+            <p class="animation" style="--i:18; --j:1;">A site to support local traders and brokers</p>
         </div>
+
     </div>
-    <script src="js/script.js"></script>
+
+    <!--Script.js-->
+    <script src="/js/script1.js"></script>
 </body>
-</html>
+
+</html> 
 <!--<!DOCTYPE html>
 <html lang="en">
   <head>

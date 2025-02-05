@@ -3,27 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-<link rel="stylesheet" href="/404.css" />
-    <title>Users Page</title>
+    <title>404 Error</title>
+    <link rel="stylesheet" href="/style/404.css" />
   </head>
   <body>
-    <header>
-      <h1>Abdallh</h1>
-      <div>
-        <ul>
-          <li>Home</li>
-          <li>Products</li>
-          <li>Cart</li>
-        </ul>
+    <div class="container">
+      <div class="glass">
+        <h1>404</h1>
+        <p>Oops! The page you're looking for doesn't exist.</p>
+        <button onclick="goBack()">Go Back</button>
       </div>
-    </header>
-    <main>
-      <div><%= title %></div>
-      
+    </div>
 
-    </main>
-
-    <footer>Project Footer</footer>
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
   </body>
 </html>

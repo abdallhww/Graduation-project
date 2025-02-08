@@ -1,10 +1,11 @@
 const express = require("express");
 const usersRouter = express.Router();
+const {login,registration } = require("../controllers/users");
 
-const { getAllUsers,addNewUser} = require("../controllers/users");
-// /users
-usersRouter.get("/", getAllUsers);
-//  "/users/add-user"
-usersRouter.post("/add-user", addNewUser);
-
+usersRouter.get('/login', (req, res) => {
+    res.render("users", { title: "=>Shop Store" });
+    res.end();
+});
+usersRouter.post('/login', login);
+usersRouter.post('/registration',registration);
 module.exports =  {usersRouter};

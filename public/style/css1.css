@@ -1,48 +1,4 @@
-/*body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  * {
-    padding: 0;
-    margin: 0;
-  }
-  
-  header {
-    padding: 20px 35px;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: aqua;
-  }
-  
-  ul {
-    list-style: none;
-    display: flex;
-    color: rgb(172, 92, 70);
-  }
-  
-  ul li {
-    margin-left: 20px;
-  }
-  
-  main {
-    height: calc(100vh - 60px - 60px - 40px);
-  }
-  
-  #TITIL {
-    margin: auto;
-    color: blue;
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-  
-  footer {
-    height: 60px;
-    background-color: cadetblue;
-  }*/
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
   :root{
       --white: black;
@@ -81,8 +37,8 @@
   
   .wrapper{
       position: relative;
-      width: 750px;
-      height: 450px;
+      width: 800px;
+      height: 500px;
       background: var(--white);
       border: 2px solid #ff2770;
       border-radius: 10px;

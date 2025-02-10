@@ -1,11 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const { pool } = require("./utils/db");
 const PORT = 3000;
 
 const { usersRouter } = require("./routes/users");
 const { homeRouter } = require("./routes/home");
 //const { productsRouter } = require("./routes/products");
+
+
 
 const app = express();
 
@@ -34,10 +37,9 @@ app.use("/", usersRouter);
 
 app.use("/", homeRouter);
 
-//app.use("/products", productsRouter);
+//app.use("/", productsRouter);
 
 app.use((req, res) => {
-  //console.log("404 Error NOT FOUND PAGE");
   res.status(404).render("404");
 });
 

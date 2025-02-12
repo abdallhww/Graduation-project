@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brokers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .broker-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .broker {
+      border: 1px solid #ccc;
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .broker img {
+      width: 100%;
+      border-radius: 50%;
+    }
+    .broker h3 {
+      margin-top: 10px;
+    }
+    .broker p {
+      font-size: 14px;
+      color: #555;
+    }
+    .broker a {
+      display: block;
+      margin-top: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <h1><%= title %> وسيط</h1>
+  <h1>Our Brokers</h1>
+  <div class="broker-container">
+    <% brokers.forEach(broker => { %>
+      <div class="broker">
+        <img src="<%= broker.image %>" alt="<%= broker.name %>">
+        <h3><%= broker.name %></h3>
+        <p><%= broker.details %></p>
+        <a href="<%= broker.website %>" target="_blank">Visit Website</a>
+        <a href="<%= broker['Facebook-account'] %>" target="_blank">Facebook</a>
+        <a href="<%= broker.Instagram_account %>" target="_blank">Instagram</a>
+      </div>
+    <% }) %>
+  </div>
 </body>
 </html>

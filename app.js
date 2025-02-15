@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const { pool } = require("./utils/db");
+
 const PORT = 3000;
 
 const { usersRouter } = require("./routes/users");

@@ -11,6 +11,13 @@
       <div class="glass">
         <h1>404</h1>
         <p>Oops! The page you're looking for doesn't exist.</p>
+        <% if (errors) { %>
+          <ul>
+              <% for (let key in errors) { %>
+                  <li class="error"><%= errors[key] %></li>
+              <% } %>
+          </ul>
+      <% } %>
         <button onclick="goBack()">Go Back</button>
       </div>
     </div>

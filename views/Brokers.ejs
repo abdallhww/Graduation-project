@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <title>Brokers</title>
   <style>
-    body {
+   body {
       font-family: Arial, sans-serif;
     }
     .broker-container {
@@ -34,10 +35,29 @@
       color: #555;
     }
     .broker a {
-      display: block;
+      display: inline-block;
       margin-top: 10px;
+      font-size: 20px; /* تغيير حجم الأيقونات */
       color: #007bff;
       text-decoration: none;
+      margin-right: 10px;
+    }
+    .broker a:hover {
+      color: #0056b3;
+    }
+    .star-rating {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .star-rating i {
+      font-size: 20px;
+      color: #FFD700; /* اللون الذهبي للنجوم */
+      cursor: pointer;
+    }
+    .star-rating i:hover,
+    .star-rating i.active {
+      color: #FFAC33; /* لون عند التفاعل مع النجمة */
     }
   </style>
 </head>
@@ -49,11 +69,39 @@
         <img src="<%= broker.image %>" alt="<%= broker.name %>">
         <h3><%= broker.name %></h3>
         <p><%= broker.details %></p>
-        <a href="<%= broker.website %>" target="_blank">Visit Website</a>
-        <a href="<%= broker['Facebook-account'] %>" target="_blank">Facebook</a>
-        <a href="<%= broker.Instagram_account %>" target="_blank">Instagram</a>
+        <a href="<%= broker.website %>" target="_blank">
+          <i class="fas fa-globe"></i></a>
+        <a href="<%= broker['Facebook-account'] %>" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="<%= broker.Instagram_account %>" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <div class="star-rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
       </div>
     <% }) %>
+    
   </div>
+  <script>
+    // إضافة وظائف النجوم
+    const stars = document.querySelectorAll('.star-rating i');
+    
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        // إزالة التحديد من جميع النجوم
+        stars.forEach(s => s.classList.remove('active'));
+        // إضافة التحديد على النجوم التي تم النقر عليها
+        for (let i = 0; i <= index; i++) {
+          stars[i].classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

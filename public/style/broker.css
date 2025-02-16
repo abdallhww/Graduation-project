@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  .broker-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .broker {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  .broker img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  .broker h3 {
+    margin-top: 10px;
+  }
+  .broker p {
+    font-size: 14px;
+    color: #555;
+  }
+  .broker a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 20px; /* تغيير حجم الأيقونات */
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  .broker a:hover {
+    color: #0056b3;
+  }
+  .star-rating {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .star-rating i {
+    font-size: 20px;
+    color: #FFD700; /* اللون الذهبي للنجوم */
+    cursor: pointer;
+  }
+  .star-rating i:hover,
+  .star-rating i.active {
+    color: #FFAC33; /* لون عند التفاعل مع النجمة */
+  }

@@ -3,48 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/css4.css">
-    <title>Document</title>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/style/profile.css">
 </head>
 <body>
-    <!-- Profile Screen -->
-    <div id="profile-screen" class="screen-content">
-        <div class="profile-header">
-            <div class="profile-avatar">
-                <span class="material-icons-round">account_circle</span>
-            </div>
-            <h3 id="profile-name"></h3>
-            <p id="profile-email"></p>
-            <p id="profile-phone"></p>
+
+    <div class="profile-container">
+        <h2>My Profile</h2>
+        <div class="profile-image">
+            <img class="profile-pic" src="<%= user.profile_picture %>" alt="<%= user.username %>" />
         </div>
-        <div class="profile-menu">
-            <div class="menu-item">
-                <span class="material-icons-round">location_on</span>
-                <span>Delivery Address</span>
-                <span class="material-icons-round">chevron_right</span>
-            </div>
-            <div class="menu-item">
-                <span class="material-icons-round">payment</span>
-                <span>Payment Methods</span>
-                <span class="material-icons-round">chevron_right</span>
-            </div>
-            <div class="menu-item">
-                <span class="material-icons-round">settings</span>
-                <span>Settings</span>
-                <span class="material-icons-round">chevron_right</span>
-            </div>
-            <div class="menu-item">
-                <span class="material-icons-round">help</span>
-                <span>Help & Support</span>
-                <span class="material-icons-round">chevron_right</span>
-            </div>
+
+        <div class="profile-details">
+            <label>Username:</label>
+            <input type="text" value="<%= user.username %>" disabled>
+
+            <label>Email:</label>
+            <input type="email" value="<%= user.email %>" disabled>
+
+            <label>Bio:</label>
+            <textarea disabled><%= user.bio %></textarea>
+
+            <a href="/logout">
+                <button type="button" class="logout-btn">Logout</button>
+            </a>
         </div>
-        <div class="logout-container">
-            <button class="button button-secondary logout-button">
-                <span class="material-icons-round">logout</span>
-                Logout
-            </button>
+
+        <div class="upload-image">
+            <h3>Upload New Profile Picture</h3>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" required />
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
         </div>
     </div>
+
 </body>
 </html>

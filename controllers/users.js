@@ -6,7 +6,7 @@ const login = async (req, res, next) => {
   let errors = {};
   if (!username || !password) {
     errors.general = "اسم المستخدم وكلمة السر مطلوبان";
-    return res.render("404", { errors });
+    return res.render("404", { errors ,message:null});
   }
 
   try {
@@ -17,14 +17,15 @@ const login = async (req, res, next) => {
 
     if (existingUser.length === 0) {
       errors.general = "اسم المستخدم أو البريد الإلكتروني غير موجود";
-      return res.render("404", { errors });
+      return res.render("404", { errors ,message:null});
     }
     const isPasswordValid = existingUser[0].password === password; // يمكن استخدام bcrypt هنا لتشفير ومقارنة كلمة السر
     if (!isPasswordValid) {
       errors.general = "كلمة السر غير صحيحة";
-      return res.render("404", { errors });
+      return res.render("404", { errors ,message:null});
     }
-
+    req.session.userId = existingUser[0].id;
+    console.log("User logged in, session userId:", req.session.userId);
     // التحقق من الدور لتوجيه المستخدم بشكل مناسب
     const role = existingUser[0].role;
     res.render("home", { role });
@@ -59,7 +60,7 @@ const registration = async (req, res, next) => {
     }
 
     if (Object.keys(errors).length > 0) {
-      return res.render("404", { errors, regusername, regemail, role });
+      return res.render("404", { errors, regusername, regemail, role ,message:null});
     }
 
 
@@ -80,7 +81,7 @@ const registration = async (req, res, next) => {
 
   } catch (err) {
     console.error("Error during registration:", err);
-    res.render("404", { errors: { general: "حدث خطأ أثناء التسجيل" }, regusername, regemail, role });
+    res.render("404", { errors: { general: "حدث خطأ أثناء التسجيل" }, regusername, regemail, role ,message:null});
   }
 };
 module.exports = {login,registration};

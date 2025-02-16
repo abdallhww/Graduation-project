@@ -1,0 +1,130 @@
+/* تنسيق الجسم */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* تنسيق الحاوية الرئيسية للملف الشخصي */
+  .profile-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* تنسيق العنوان */
+  h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* تنسيق الصورة الشخصية */
+  .profile-image {
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  /* تنسيق الحقول */
+  .profile-details {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  
+  label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #f7f7f7;
+  }
+  
+  textarea {
+    height: 100px;
+    resize: none;
+  }
+  
+  /* زر تسجيل الخروج */
+  .logout-btn {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .logout-btn:hover {
+    background-color: #e04b4b;
+  }
+  
+  /* تنسيق قسم رفع الصورة */
+  .upload-image {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .upload-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .upload-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  input[type="file"] {
+    margin-bottom: 15px;
+  }
+  
+  input[type="file"]::file-selector-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  input[type="file"]::file-selector-button:hover {
+    background-color: #0056b3;
+  }
+  

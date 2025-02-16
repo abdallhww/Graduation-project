@@ -6,8 +6,27 @@ const Technicalsupport = (req, res,next) => {
     res.end();
   };
 
+const Profile = (req, res, next) => {
+    if (!req.session.userId) {
+      console.log(req.session.userId);
+        return res.status(401).render("404", { message: "Unauthorized" ,errors:null});
+    }
+    pool.query(
+        "SELECT username, email, role, phone, profile_picture FROM users WHERE id = ?",
+        [req.session.userId],
+        (err, results) => {
+            if (err) {
+                return res.render("404", { message: "Database error",errors:null});
+            }
+            if (results.length === 0) {
+                return res.render("404", { message: "User not found",errors:null});
+            }
+            res.render("profile", {user: results[0],});
+        }
+    );
+};
 
-  
+
   const Brokers = (req, res, next) => {
     const query = 'SELECT * FROM brokers';
     pool.query(query, (err, rows) => {
@@ -27,4 +46,7 @@ const Technicalsupport = (req, res,next) => {
 
     });
   };
-  module.exports = {Brokers,Technicalsupport,Viewproducts}; 
+
+
+
+  module.exports = {Brokers,Technicalsupport,Viewproducts,Profile}; 

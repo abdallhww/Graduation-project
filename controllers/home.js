@@ -11,19 +11,30 @@ const Profile = (req, res, next) => {
       console.log(req.session.userId);
         return res.status(401).render("404", { message: "Unauthorized" ,errors:null});
     }
-    pool.query(
-        "SELECT username, email, role, phone, profile_picture FROM users WHERE id = ?",
-        [req.session.userId],
-        (err, results) => {
-            if (err) {
-                return res.render("404", { message: "Database error",errors:null});
-            }
-            if (results.length === 0) {
-                return res.render("404", { message: "User not found",errors:null});
-            }
-            res.render("profile", {user: results[0],});
+    const userId = req.session.userId;
+    const userRole = req.session.role;
+
+    let query = "";
+    if (userRole === "broker") {
+        query = "SELECT name, emil, role, phone, image AS profile_picture FROM brokers WHERE id = ?";
+    } else {
+        query = "SELECT username, email, role, phone, profile_picture FROM users WHERE id = ?";
+    }
+    
+    console.log(userId);
+    console.log(userRole);
+
+    pool.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error("❌ Database error:", err);
+            return res.render("404", { message: "Database error", errors: null });
         }
-    );
+        if (results.length === 0) {
+            console.log("❌ User not found in", userRole === "broker" ? "brokers" : "users");
+            return res.render("404", { message: "User not found", errors: null });
+        }
+        res.render("profile", { user: results[0] });
+    });
 };
 
 

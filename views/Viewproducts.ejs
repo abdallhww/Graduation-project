@@ -20,20 +20,32 @@
                         <button class="chip" onclick="filterByCategory('Sushi')">Sushi</button>
                         <button class="chip" onclick="filterByCategory('Dessert')">Dessert</button>
                     </div>
+                    
                     <div class="food-grid" id="food-grid">
-                        
+                        <% products.forEach(product => { %>
+                            <div class="product-card">
+                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                                <div class="details">
+                                    <h3><%= product.name %></h3>
+                                    <p class="category"><%= product.category %></p>
+                                    <p class="description"><%= product.description %></p>
+                                    <p class="price">$<%= product.price %></p>
+                                    
+                                    <div class="like-container">
+                                        <button class="like-button" onclick="toggleLike(this)">
+                                            <span class="material-icons-round">favorite_border</span>
+                                        </button>
+                                        <span class="like-count" id="like-count-<%= product.id %>">0</span>
+                                    </div>
+                                    
+                                    <button class="buy-button">Buy</button>
+                                </div>
+                            </div>
+                        <% }); %>
                     </div>
                 </div>
             </div>
         </div>
     </div> 
-    <div>
-        <%  products.forEach(product => { %> <!-- استخدام حلقة لعرض كل منتج --> 
-            <h1><%= product.name %></h1>
-            <p><%= product.description %></p>
-            <hr> <!-- عرض وصف المنتج -->
-      <% }); %>
-    </div>
-    <script src="/js/script2.js"></script>
 </body>
 </html>

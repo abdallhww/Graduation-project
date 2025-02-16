@@ -45,8 +45,9 @@ app.use("/", ProfileRouter);
 
 //app.use("/", productsRouter);
 
-app.use((req, res) => {
-  res.status(404).render("404",{ereors:"not found"});
+app.use((err, req, res, next) => {
+  console.error("🚨 ERROR:", err.stack); // طباعة الخطأ مع التفاصيل
+  res.status(500).render("404", { errors: { general: "حدث خطأ غير متوقع" } });
 });
 
 app.listen(PORT, () => console.log("Server is running on : " + PORT));

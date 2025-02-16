@@ -20,11 +20,11 @@ const uploadImage = (req, res, next) => {
     if (userRole === 'broker') {
       // إذا كان الدور broker، سيتم تخزين الصورة في جدول brokers
       pool.query(
-        'INSERT INTO brokers (id, image) VALUES (?, ?)',
-        [req.session.userId, imageUrl],  // استخدام الـ userId من الجلسة
+        'UPDATE brokers SET image = ? WHERE id = ?',
+        [imageUrl, req.session.userId],  // استخدام الـ userId من الجلسة
         (err, result) => {
           if (err) {
-            console.error('Error storing image in brokers table:', err);
+            console.error('❌Error storing image in brokers table:', err);
             return res.status(500).render("405", {message:"حدث خطأ في تخزين الصورة في جدول brokers."});
           }
           console.log('The image has been successfully uploaded to the brokers table!');

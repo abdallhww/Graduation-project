@@ -4,36 +4,51 @@ const bcrypt = require('bcrypt');
 const login = async (req, res, next) => {
   const { username, password } = req.body;
   let errors = {};
+
   if (!username || !password) {
     errors.general = "اسم المستخدم وكلمة السر مطلوبان";
     return res.render("404", { errors ,message:null});
   }
 
   try {
-    const [existingUser] = await pool.promise().query(
+    let tableName = "users";
+
+    let [existingUser] = await pool.promise().query(
       "SELECT * FROM users WHERE username = ? OR email = ?",
       [username, username] // اسم المستخدم أو البريد الإلكتروني
     );
 
     if (existingUser.length === 0) {
+      [existingUser] = await pool.promise().query(
+        "SELECT * FROM brokers WHERE name = ? OR emil = ?",
+        [username, username]
+      );
+      tableName = "broker"; // تم العثور عليه في جدول broker
+    }
+
+    if (existingUser.length === 0) {
       errors.general = "اسم المستخدم أو البريد الإلكتروني غير موجود";
       return res.render("404", { errors ,message:null});
     }
+
     const isPasswordValid = existingUser[0].password === password; // يمكن استخدام bcrypt هنا لتشفير ومقارنة كلمة السر
     if (!isPasswordValid) {
       errors.general = "كلمة السر غير صحيحة";
       return res.render("404", { errors ,message:null});
     }
+
+    req.session.role = existingUser[0].role;
     req.session.userId = existingUser[0].id;
-    console.log("User logged in, session userId:", req.session.userId);
+    console.log(`User logged in from ${tableName}, session userId:`, req.session.userId);
+    
     // التحقق من الدور لتوجيه المستخدم بشكل مناسب
     const role = existingUser[0].role;
-    res.render("home", { role });
+    res.render("home", { role ,message:null });
 
   } catch (err) {
     console.error("Error during login:", err);
     res.render("404", { errors: { general: "حدث خطأ أثناء تسجيل الدخول" } });
-  }
+  } 
 };
 
 
@@ -77,7 +92,7 @@ const registration = async (req, res, next) => {
       [regusername, regemail, regpassword, role]
     );}
 
-    res.render("home", { role });
+    res.render("users", { role,message: "تم تسجيل اذهب الي  (login)" });
 
   } catch (err) {
     console.error("Error during registration:", err);

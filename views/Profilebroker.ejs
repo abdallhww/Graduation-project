@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker Profile</title>
+    <link rel="stylesheet" href="/style/profilebroker.css">
+</head>
+<body>
+    <h1><%=broker.name%></h1>
+    <div class="profile-container">
+        <div class="profile-image">
+            <img class="profile-pic" src="<%= broker.image %>" alt="<%= broker.name %>" />
+        </div>
+        <h1><%=broker.name%></h1>
+        <div class="profile-details">
+            <form action="/updateBroker" method="POST">
+                <label>Name:</label>
+                <input type="text" name="name" value="<%= broker.name %>" required>
+
+                <label>Email:</label>
+                <input type="email" name="email" value="<%= broker.emil %>" required>
+
+                <label>Phone:</label>
+                <input type="text" name="phone" value="<%= broker.phone %>">
+
+                <label>Facebook Account:</label>
+                <input type="text" name="facebook" value="<%= broker.Facebook_account %>">
+
+                <label>Instagram Account:</label>
+                <input type="text" name="instagram" value="<%= broker.Instagram_account %>">
+
+                <label>Website:</label>
+                <input type="text" name="website" value="<%= broker.website %>">
+
+                <label>Details:</label>
+                <textarea name="details"><%= broker.details %></textarea>
+
+                <button type="submit" class="update-btn">Update Profile</button>
+            </form>
+
+            <a href="/logout">
+                <button type="button" class="logout-btn">Logout</button>
+            </a>
+        </div>
+        <div class="upload-image">
+            <h3>Upload New Profile Picture</h3>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" required />
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
+        </div>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+<script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+</body>
+</html>

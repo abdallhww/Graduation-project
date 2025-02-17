@@ -83,7 +83,7 @@ const registration = async (req, res, next) => {
     if (role=="broker"){
       await pool.promise().query(
       "INSERT INTO brokers (name,password,emil,role) VALUES (?,?,?,?)",
-      [regusername, regemail, regpassword, role]
+      [regusername, regpassword, regemail, role]
     );
     }
     else{

@@ -6,21 +6,23 @@ const Technicalsupport = (req, res,next) => {
     res.end();
   };
 
-const Profile = (req, res, next) => {
+  const Profile = (req, res, next) => {
     if (!req.session.userId) {
-      console.log(req.session.userId);
-        return res.status(401).render("404", { message: "Unauthorized" ,errors:null});
+        console.log(req.session.userId);
+        return res.status(401).render("404", { message: "Unauthorized", errors: null });
     }
+
     const userId = req.session.userId;
     const userRole = req.session.role;
 
     let query = "";
     if (userRole === "broker") {
-        query = "SELECT name, emil, role, phone, image AS profile_picture FROM brokers WHERE id = ?";
+      query = "SELECT name, emil, role, phone, image, details, Facebook_account, website, Instagram_account FROM brokers WHERE id = ?";
+
     } else {
         query = "SELECT username, email, role, phone, profile_picture FROM users WHERE id = ?";
     }
-    
+
     console.log(userId);
     console.log(userRole);
 
@@ -33,7 +35,13 @@ const Profile = (req, res, next) => {
             console.log("❌ User not found in", userRole === "broker" ? "brokers" : "users");
             return res.render("404", { message: "User not found", errors: null });
         }
-        res.render("profile", { user: results[0] });
+
+        // تحديد الصفحة بناءً على الدور
+        if (userRole === "broker") {
+            res.render("Profilebroker", { broker: results[0] }); // توجيه إلى صفحة broker
+        } else {
+            res.render("Profile", { user: results[0] }); // توجيه إلى صفحة profile العادية
+        }
     });
 };
 

@@ -11,6 +11,34 @@
         <div class="sidebar">
             <h3>Add New Product</h3>
             <form action="/add_product" method="POST" enctype="multipart/form-data">
+                <label>id:</label>
+                <input type="text" name="id" required>
+                <label>Name:</label>
+                <input type="text" name="name" required>
+
+                <label>Description:</label>
+                <textarea name="description" required></textarea>
+
+                <label>Price:</label>
+                <input type="number" name="price" step="0.01" required>
+
+                <label>Stock Quantity:</label>
+                <input type="number" name="stock_quantity" required>
+
+                <label>Category:</label>
+                <input type="text" name="category">
+
+                <label>Upload Image:</label>
+                <input type="file" name="image" required>
+
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+        <div class="sidebar">
+            <h3>updit New Product</h3>
+            <form action="/updit_product" method="POST" enctype="multipart/form-data">
+                <label>id:</label>
+                <input type="text" name="id" required>
                 <label>Name:</label>
                 <input type="text" name="name" required>
 
@@ -34,11 +62,18 @@
         </div>
 
         <div class="profile-container">
-            <h2>My Profile</h2>
+            <h2>My Profile ID=><%= user.id %></h2>
+
             <div class="profile-image">
                 <img class="profile-pic" src="<%= user.profile_picture %>" alt="<%= user.username %>" />
             </div>
-
+            <div class="upload-image">
+                <h3>Upload New Profile Picture</h3>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="image" required />
+                    <button type="submit" class="upload-btn">Upload</button>
+                </form>
+            </div>
             <div class="profile-details">
                 <label>Username:</label>
                 <input type="text" value="<%= user.username %>" disabled>
@@ -46,20 +81,12 @@
                 <label>Email:</label>
                 <input type="email" value="<%= user.email %>" disabled>
 
-                <label>Bio:</label>
-                <textarea disabled><%= user.bio %></textarea>
+                <label>phone:</label>
+                <textarea disabled><%= user.phone %></textarea>
 
                 <a href="/logout">
                     <button type="button" class="logout-btn">Logout</button>
                 </a>
-            </div>
-
-            <div class="upload-image">
-                <h3>Upload New Profile Picture</h3>
-                <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="image" required />
-                    <button type="submit" class="upload-btn">Upload</button>
-                </form>
             </div>
         </div>
     </div>

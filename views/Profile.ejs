@@ -13,6 +13,13 @@
         <div class="profile-image">
             <img class="profile-pic" src="<%= user.profile_picture %>" alt="<%= user.username %>" />
         </div>
+        <div class="upload-image">
+            <h3>Upload New Profile Picture</h3>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" required />
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
+        </div>
 
         <div class="profile-details">
             <label>Username:</label>
@@ -21,20 +28,14 @@
             <label>Email:</label>
             <input type="email" value="<%= user.email %>" disabled>
 
-            <label>Bio:</label>
-            <textarea disabled><%= user.bio %></textarea>
+            <label>created_at:</label>
+            <input type="text" value="<%= new Date(user.created_at).toLocaleString() %>" disabled>
+
+            <h3><%= user.phone %></h3>
 
             <a href="/logout">
                 <button type="button" class="logout-btn">Logout</button>
             </a>
-        </div>
-
-        <div class="upload-image">
-            <h3>Upload New Profile Picture</h3>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" name="image" required />
-                <button type="submit" class="upload-btn">Upload</button>
-            </form>
         </div>
     </div>
 

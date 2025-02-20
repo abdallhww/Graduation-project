@@ -19,10 +19,10 @@ const Profile = (req, res, next) => {
   let query = "";
   if (userRole === "broker") {
     query =
-      "SELECT id,name, emil, role, phone, image, details, Facebook_account,created_at, website, Instagram_account FROM brokers WHERE id = ?";
+      "SELECT id,name, emil, role, phone,password, image, details, Facebook_account,created_at, website, Instagram_account FROM brokers WHERE id = ?";
   } else {
     query =
-      "SELECT id,username, email, role, phone, profile_picture,created_at FROM users WHERE id = ?";
+      "SELECT id,username, email,password, role, phone, profile_picture,created_at FROM users WHERE id = ?";
   }
 
   console.log(userId);
@@ -45,7 +45,7 @@ const Profile = (req, res, next) => {
       res.render("Profilebroker", { broker: results[0] });
     } 
     else if (userRole === "seller") {
-      res.render("Profileselers", { user: results[0] });
+      res.render("Profileselers", { user: results[0] ,message: "hi"});
     }
     else {
       res.render("Profile", { user: results[0] });
@@ -56,7 +56,7 @@ const Profile = (req, res, next) => {
 const Brokers = (req, res, next) => {
   const query = "SELECT * FROM brokers";
   pool.query(query, (err, rows) => {
-    if (err) return next(err); // تمرير الخطأ إلى middleware الخطأ
+    if (err) return next(err);
     res.render("Brokers", { brokers: rows });
   });
 };
@@ -71,4 +71,4 @@ const Viewproducts = (req, res, next) => {
   });
 };
 
-module.exports = { Brokers, Technicalsupport, Viewproducts, Profile };
+module.exports = { Brokers, Technicalsupport , Viewproducts , Profile };

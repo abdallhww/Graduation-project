@@ -7,12 +7,21 @@
     <link rel="stylesheet" href="/style/profilebroker.css">
 </head>
 <body>
-    <h1><%=broker.name%></h1>
+    
+    <h1><%=broker.name%> <%=broker.id%></h1>
     <div class="profile-container">
         <div class="profile-image">
             <img class="profile-pic" src="<%= broker.image %>" alt="<%= broker.name %>" />
         </div>
-        <h1><%=broker.name%></h1>
+
+        <div class="upload-image">
+            <h3>Upload New Profile Picture</h3>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" required />
+                <button type="submit" class="upload-btn">Upload</button>
+            </form>
+        </div>
+        
         <div class="profile-details">
             <form action="/updateBroker" method="POST">
                 <label>Name:</label>
@@ -43,19 +52,9 @@
                 <button type="button" class="logout-btn">Logout</button>
             </a>
         </div>
-        <div class="upload-image">
-            <h3>Upload New Profile Picture</h3>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" name="image" required />
-                <button type="submit" class="upload-btn">Upload</button>
-            </form>
-        </div>
-        <button onclick="goBack()">Go Back</button>
+        <form action="/home" method="POST" style="display: inline;">
+            <button type="submit" class="home-btn logout-btn">Home</button>
+        </form>
     </div>
-<script>
-      function goBack() {
-        window.history.back();
-      }
-    </script>
 </body>
 </html>

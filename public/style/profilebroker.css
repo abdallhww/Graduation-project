@@ -4,9 +4,8 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #313638;
-    background-image: url('./a.webp');
-    /*background: linear-gradient(135deg, #ff2770, #313638);*/
+    /*background-image: url('./a.webp');*/
+    background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
     background-size: cover;
 }
 h1 {
@@ -16,7 +15,7 @@ h1 {
     transform: translateX(-50%); 
     font-size: 80px; 
     font-weight: 800;
-    color: #eaacc1;
+    color: #333;
     text-shadow: 5px 5px 10px rgba(234, 7, 189, 0.992); /* تأثير ظل */
     font-family: 'Poppins', sans-serif;
 }
@@ -25,18 +24,6 @@ h1 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-/* Body and overall layout */
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #313638;
-    background-image: url('./a.webp');
-    /*background: linear-gradient(135deg, #ff2770, #313638);*/
-    background-size: cover;
 }
 
 /* Profile container */
@@ -169,4 +156,19 @@ button {
 
 button:hover {
     background-color: #c0392b;
+}
+.logout-btn {
+    background-color: #d9534f;
+}
+
+.logout-btn:hover {
+    background-color: #c9302c;
+}
+
+.home-btn {
+    background-color: #5bc0de;
+}
+
+.home-btn:hover {
+    background-color: #31b0d5;
 }

@@ -1,38 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-    <!-- codeing by @_.CodeDevotee -->
-
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio Website HTML CSS Only | Codehal</title>
+    <title>Shop | Home</title>
     <link rel="stylesheet" href="/style/home.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
-
 <body>
+
+    <!-- شريط التنقل -->
     <header class="header">
-        <h1  class="logo">abdallh You selected: <%= role %></h1>
-        <br>
-        <nav class="navbar">
+        <h1 class="logo">Shop</h1>
+        <nav>
             <a href="#" class="active">Home</a>
-            <a href="/Technicalsupport">Technical support</a>
+            <a href="/Technicalsupport">Technical Support</a>
             <a href="/Profile">Portfolio</a>
             <a href="/Brokers">Brokers</a>
-            <a href="/Viewproducts">View products</a>
+            <a href="/Viewproducts">View Products</a>
         </nav>
     </header>
-    
+
     <!-- فقرة الترحيب -->
-    <div class="welcome-message">
-        <p>مرحبًا بك في موقعنا!</p>
-    </div>
-    <div class="welcome-message1">
-        <p>Welcome to our website!</p>
+    <div class="welcome-section">
+        <h2>مرحبًا بك في موقعنا</h2>
+        <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك!</p>
+        <a href="/Viewproducts" class="btn">استكشاف المنتجات</a>
     </div>
 
+    <!-- تأثير الصورة -->
     <span class="home-imgHover"></span>
-    </body>
-    
+
+    <script src="script.js"></script>
+</body>
 </html>

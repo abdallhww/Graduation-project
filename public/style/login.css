@@ -19,7 +19,7 @@
     transform: translateX(-50%); 
     font-size: 80px; 
     font-weight: 800;
-    color: #eaacc1;
+    color: #333;
     text-shadow: 5px 5px 10px rgba(234, 7, 189, 0.992); /* تأثير ظل */
     font-family: 'Poppins', sans-serif;
 }
@@ -31,7 +31,7 @@
       min-height: 100vh;
       background-color: #313638;
       /*background-image: url('./a.webp');*/
-      background: linear-gradient(135deg, #ff2770, #313638);
+      background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
       background-size: cover;
   }
   
@@ -190,12 +190,6 @@
       filter: blur(10px);
       transition-delay: calc(.1s * var(--i));
   }
-  
-  
-  
-  
-  
-  
   .wrapper .info-text{
       position: absolute;
       top: 0;
@@ -225,7 +219,6 @@
       color: var(--white);
   }
   
-  
   .wrapper .info-text.login .animation{
       transform: translateX(0);
       opacity: 1;
@@ -233,6 +226,7 @@
       transition: 0.7s ease;
       transition-delay: calc(.1s * var(--j));
   }
+
   .wrapper.active .info-text.login .animation{
       transform: translateX(120px);
       opacity: 0;
@@ -240,11 +234,7 @@
       transition: 0.7s ease;
       transition-delay: calc(.1s * var(--i));
   }
-  
-  
-  
-  
-  
+
   .wrapper .rotate-bg{
       position: absolute;
       top: -4px;
@@ -257,20 +247,12 @@
       transition: 1.5s ease;
       transition-delay: 1.6s;
   }
-  
+
   .wrapper.active .rotate-bg{
       transform: rotate(0) skewY(0);
       transition-delay: 0.5s;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   .wrapper .form-box.register{
       padding: 0 40px 0 60px;
       right: 0;
@@ -279,7 +261,6 @@
   .wrapper.active .form-box.register{
       pointer-events: auto;
   }
-  
   
   .wrapper .form-box.register .animation{
       transform: translateX(120%);
@@ -296,8 +277,6 @@
       transition-delay: calc(.1s * var(--i));
   }
   
-  
-  
   .wrapper .info-text.register{
       left: 0;
       text-align: left;
@@ -308,7 +287,6 @@
   .wrapper.active .info-text.register{
       pointer-events: auto;
   }
-  
   
   .wrapper .info-text.register .animation{
       transform: translateX(-120%);
@@ -324,9 +302,6 @@
       filter: blur(0);
       transition-delay: calc(.1s * var(--i));
   }
-  
-  
-  
   
   .wrapper .rotate-bg2{
       position: absolute;
@@ -398,4 +373,13 @@
 .input-box select:focus~i,
 .input-box select:valid~i {
     color: var(--lightBulue);
+}
+.alert-container {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    z-index: 1050;
+    text-align: center;
 }

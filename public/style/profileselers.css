@@ -1,164 +1,212 @@
+/* تصميم عام للصفحة */
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, rgba(255, 39, 112, 0.9), rgba(49, 54, 56, 0.9));
+  margin: 0;
+  padding: 0;
+  color: #fff;
 }
+
+/* الحاوية الرئيسية */
 .container {
   display: flex;
-  gap: 20px;
-  max-width: 900px;
-  background: white;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 50px auto;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
+/* تصميم الشريط الجانبي لإضافة المنتجات */
 .sidebar {
-  flex: 1;
+  width: 30%;
+  background: rgba(0, 0, 0, 0.8);
   padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
-.sidebar form {
+
+.sidebar h3 {
+  text-align: center;
+  color: #FFD700; /* لون ذهبي */
+}
+
+
+.sidebar label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #ddd;
+}
+
+.sidebar input,
+.sidebar textarea,
+.sidebar select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFD700;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.sidebar button:hover {
+  background-color: #FFC107;
+  transform: scale(1.05);
+}
+
+/* تصميم ملف التعريف */
+.profile-container {
+  width: 65%;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  position: relative;
 }
-.sidebar label {
+
+/* صورة البروفايل في الزاوية اليسرى العلوية */
+.profile-image {
+  position: absolute;
+  top: -50px;
+  left: 20px;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #FFD700;
+  transition: transform 0.3s;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+/* تفاصيل الملف الشخصي */
+.profile-details {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.profile-details label {
+  display: block;
+  margin: 10px 0 5px;
   font-weight: bold;
+  color: #FFD700;
+  text-align: left;
+}
+
+.profile-details input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.profile-details input:focus {
+  border-color: #FFC107;
+  outline: none;
+}
+
+/* أزرار التحديث وتسجيل الخروج */
+.update-btn,
+.logout-btn {
+  background-color: #FFD700;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-right: 10px;
   margin-top: 10px;
 }
-.sidebar input,
-.sidebar textarea {
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
+
+.update-btn:hover,
+.logout-btn:hover {
+  background-color: #FFC107;
+  transform: scale(1.05);
 }
-.sidebar button {
-  margin-top: 15px;
-  padding: 10px;
-  background: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.profile-container {
-  flex: 2;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-.profile-image img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-.profile-details input,
-.profile-details textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #f9f9f9;
-}
-.logout-btn {
-  margin-top: 15px;
-  padding: 10px;
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.upload-image {
-  margin-top: 20px;
-}
-body {
+
+/* أزرار الصفحة الرئيسية و عرض المنتجات */
+.action-buttons {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-  font-family: Arial, sans-serif;
+  gap: 15px;
+  margin-top: 15px;
 }
-.container {
-  display: flex;
-  gap: 20px;
-  max-width: 900px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-.sidebar {
-  flex: 1;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
-.sidebar form {
-  display: flex;
-  flex-direction: column;
-}
-.sidebar label {
+
+.home-btn,
+.view-product-btn {
+  background-color: #4a90e2;
+  color: white;
   font-weight: bold;
-  margin-top: 10px;
-}
-.sidebar input,
-.sidebar textarea {
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-}
-.sidebar button {
-  margin-top: 15px;
-  padding: 10px;
-  background: #28a745;
-  color: white;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.profile-container {
-  flex: 2;
-  padding: 20px;
-  background: #fff;
+  padding: 10px 15px;
   border-radius: 8px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
-.profile-image img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+
+.home-btn:hover,
+.view-product-btn:hover {
+  background-color: #357ab8;
+  transform: scale(1.05);
 }
-.profile-details input,
-.profile-details textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #f9f9f9;
-}
-.logout-btn {
-  margin-top: 15px;
-  padding: 10px;
-  background: #dc3545;
-  color: white;
+
+/* زر رفع الصورة */
+.upload-btn {
+  background-color: #FFD700;
+  color: black;
+  font-weight: bold;
   border: none;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
-.upload-image {
-  margin-top: 20px;
+
+.upload-btn:hover {
+  background-color: #FFC107;
+  transform: scale(1.05);
+}
+
+/* تصميم التنبيهات */
+.alert-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  z-index: 1050;
+  text-align: center;
+}
+
+/* تحسين تناسق الأزرار */
+button {
+  font-size: 16px;
 }

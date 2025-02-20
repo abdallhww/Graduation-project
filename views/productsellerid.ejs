@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منتجاتي</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/productsellerid.css">
+</head>
+<body class="bg-light">
+    <div class="alert-container mt-2">
+        <% if (m) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= m %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="container">
+        <!-- نموذج تعديل المنتج -->
+        <div class="product-form">
+            <h3 class="text-center mb-3">تعديل المنتج</h3>
+            <form action="/updateProduct" method="POST">
+                <label>(ID)</label>
+                <input type="number" class="form-control" id="id" name="id" required>
+
+                <label>اسم المنتج</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+
+                <label>الوصف</label>
+                <textarea class="form-control" id="description" name="description" required></textarea>
+
+                <label>السعر</label>
+                <input type="text" class="form-control" id="price" name="price" required>
+                <!--<input type="number" class="form-control" id="price" name="price" step="0.01" required>-->
+
+
+                <label>الكمية المتاحة</label>
+                <input type="number" class="form-control" id="stock_quantity" name="stock_quantity" required>
+
+                <label>التصنيف</label>
+                <select name="category" id="category" required>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Clothing">Clothing</option>
+                    <option value="Food">Food</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Books">Books </option>
+                    <option value="Furniture">Furniture </option>
+
+                </select>
+                
+
+                <button type="submit" class="btn btn-primary">تعديل المنتج</button>
+            </form>
+        </div>
+        <!-- قائمة المنتجات -->
+        <div class="products-container">
+            <h2 class="text-center mb-4">قائمة المنتجات</h2>
+
+            <% if (products.length === 0) { %>
+                <div class="alert alert-warning text-center">لا توجد منتجات متاحة</div>
+            <% } else { %>
+                <div class="row">
+                    <% products.forEach(product => { %>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="<%= product.image %>" class="card-img-top" alt="<%= product.name %>">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title"><%= product.name %> /ID=><%= product.id %></h5>
+                                    <p class="card-text"><%= product.description %></p>
+                                    <p class="text-success">السعر: <%= product.price %> $</p>
+                                    <p class="text-muted">المتوفر: <%= product.stock_quantity %> قطعة</p>
+                                    <p class="text-primary">التصنيف: <%= product.category ? product.category : "غير محدد" %></p>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="#" class="btn btn-danger">حذف</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+
+            <form action="/home" method="POST" style="display: inline;">
+                <button type="submit" class="logout-btn">العودة للرئيسية</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

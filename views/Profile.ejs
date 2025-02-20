@@ -4,38 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="/style/profile.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, rgba(255, 39, 112, 0.9), rgba(49, 54, 56, 0.9));
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7); /* خلفية داكنة مع شفافية */
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center; /* محاذاة العمود */
+            position: relative; /* للسماح بوضع الصورة بشكل مطلق */
+        }
+
+        .profile-image {
+            margin-right: 20px; /* مسافة بين الصورة وباقي المحتوى */
+            flex-shrink: 0; /* منع انكماش الصورة */
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4a90e2;
+            transition: transform 0.3s;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-details {
+            flex: 1; /* يسمح للمحتوى بأن يأخذ المساحة المتبقية */
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+            background: rgba(255, 255, 255, 0.2); /* خلفية مدخلة شفافة */
+            color: #fff; /* لون النص أبيض */
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .upload-btn,
+        .update-btn,
+        .logout-btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .upload-btn:hover,
+        .update-btn:hover,
+        .logout-btn:hover {
+            background-color: #357ab8;
+        }
+
+        h4 {
+            color: #ddd;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
 
     <div class="profile-container">
-        <h2>My Profile</h2>
         <div class="profile-image">
             <img class="profile-pic" src="<%= user.profile_picture %>" alt="<%= user.username %>" />
         </div>
-        <div class="upload-image">
-            <h3>Upload New Profile Picture</h3>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" name="image" required />
-                <button type="submit" class="upload-btn">Upload</button>
-            </form>
-        </div>
-
         <div class="profile-details">
-            <label>Username:</label>
-            <input type="text" value="<%= user.username %>" disabled>
+            <h2>My Profile</h2>
+            <div class="upload-image">
+                <h3>Upload New Profile Picture</h3>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="image" required />
+                    <button type="submit" class="upload-btn">Upload</button>
+                </form>
+            </div>
+            <h4>Created at: "<%= new Date(user.created_at).toLocaleString() %>" </h4>
+            <form action="/updateusers" method="POST">
+                <label>Username:</label>
+                <input type="text" name="username" value="<%= user.username %>" required>
 
-            <label>Email:</label>
-            <input type="email" value="<%= user.email %>" disabled>
+                <label>Email:</label>
+                <input type="email" name="email" value="<%= user.email %>" required>
 
-            <label>created_at:</label>
-            <input type="text" value="<%= new Date(user.created_at).toLocaleString() %>" disabled>
+                <label>Phone:</label>
+                <input type="text" name="phone" value="<%= user.phone %>">
 
-            <h3><%= user.phone %></h3>
+                <label>Password:</label>
+                <input type="text" name="password" value="<%= user.password %>">
 
-            <a href="/logout">
-                <button type="button" class="logout-btn">Logout</button>
-            </a>
+                <button type="submit" class="update-btn">Update Profile</button>
+            </form>
+            <div>
+                <form action="/home" method="POST" style="display: inline;">
+                    <button type="submit" class="logout-btn">Home</button>
+                </form>
+                <a href="/logout">
+                    <button type="button" class="logout-btn">Logout</button>
+                </a>
+            </div>
         </div>
     </div>
 

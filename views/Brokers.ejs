@@ -8,13 +8,11 @@
   <title>Brokers</title>
 </head>
 <body>
-  <h1>Our Brokers</h1>
   <div class="broker-container">
     <% brokers.forEach(broker => { %>
       <div class="broker">
-        <h1><%=broker.id %></h1>
         <img src="<%= broker.image %>" alt="<%= broker.name %>">
-        <h3><%= broker.name %></h3>
+        <h3>Name: <%= broker.name %>//ID: <%=broker.id %></h3>
         <h3><%= broker.phone %></h3>
         <p><%= broker.details %></p>
         <a href="<%= broker.website %>" target="_blank">
@@ -26,10 +24,6 @@
           <i class="fab fa-instagram"></i>
         </a>
         <div class="star-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
         </div>
         <button>تقيم/Evaluate</button>

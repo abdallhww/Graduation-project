@@ -9,7 +9,7 @@ const PORT = 3000;
 const { usersRouter } = require("./routes/users");
 const { homeRouter } = require("./routes/home");
 const { ProfileRouter}=require("./routes/Profile");
-//const { productsRouter } = require("./routes/products");
+const { productsRouter } = require("./routes/products");
 
 
 app.use((req, res, next) => {
@@ -43,7 +43,7 @@ app.use("/", homeRouter);
 
 app.use("/", ProfileRouter);
 
-//app.use("/", productsRouter);
+app.use("/", productsRouter);
 
 app.use((err, req, res, next) => {
   console.error("🚨 ERROR:", err.stack); // طباعة الخطأ مع التفاصيل

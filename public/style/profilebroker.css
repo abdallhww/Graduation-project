@@ -1,54 +1,25 @@
-/* Reset some default styles */
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /*background-image: url('./a.webp');*/
-    background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
-    background-size: cover;
-}
-h1 {
-    position: absolute;
-    top: 40px;
-    left: 70%; 
-    transform: translateX(-50%); 
-    font-size: 80px; 
-    font-weight: 800;
-    color: #333;
-    text-shadow: 5px 5px 10px rgba(234, 7, 189, 0.992); /* تأثير ظل */
-    font-family: 'Poppins', sans-serif;
-}
-/* Reset some default styles */
-* {
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, rgba(255, 39, 112, 0.9), rgba(49, 54, 56, 0.9));
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    color: #fff;
 }
 
-/* Profile container */
 .profile-container {
-    max-width: 1200px;
+    max-width: 800px;
     margin: 50px auto;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.1);  /* Transparent white background */
+    background: rgba(0, 0, 0, 0.7); /* خلفية داكنة مع شفافية */
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Header */
-h2 {
-    font-size: 28px;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Profile image */
-.profile-image {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
+    align-items: center; /* محاذاة العمود */
+}
+
+.profile-image {
+    margin-right: 20px; /* مسافة بين الصورة وباقي المحتوى */
+    flex-shrink: 0; /* منع انكماش الصورة */
 }
 
 .profile-pic {
@@ -56,119 +27,67 @@ h2 {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid #ff2770;
+    border: 3px solid #4a90e2;
+    transition: transform 0.3s;
 }
 
-/* Profile details */
+.profile-pic:hover {
+    transform: scale(1.05);
+}
+
 .profile-details {
-    display: grid;
-    gap: 15px;
-    margin-bottom: 40px;
+    flex: 1; /* يسمح للمحتوى بأن يأخذ المساحة المتبقية */
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
 }
 
 label {
+    display: block;
+    margin: 10px 0 5px;
     font-weight: bold;
-    font-size: 14px;
-    color: #fff;  /* Light color for text */
-}
-
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #333;
-    background-color: #fff;  /* White background for input fields */
-}
-
-input[type="text"], input[type="email"], textarea {
-    margin-top: 5px;
-}
-
-/* Update and logout buttons */
-.update-btn,
-.logout-btn {
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #ff2770;
     color: #fff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+    background: rgba(255, 255, 255, 0.2); /* خلفية مدخلة شفافة */
+    color: #fff; /* لون النص أبيض */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.upload-btn,
+.update-btn,
+.logout-btn,
+.home-btn {
+    background-color: #4a90e2;
+    color: white;
     border: none;
-    border-radius: 8px;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.update-btn:hover,
-.logout-btn:hover {
-    background-color: #e21c62;
-}
-
-.update-btn {
-    width: 100%;
-}
-
-.logout-btn {
-    width: auto;
+    transition: background-color 0.3s;
     margin-top: 10px;
 }
 
-/* Upload Image Section */
-.upload-image {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-.upload-image h3 {
-    font-size: 20px;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.upload-btn {
-    padding: 12px 20px;
-    background-color: #2ecc71;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.upload-btn:hover {
-    background-color: #27ae60;
-}
-
-/* Go Back Button */
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #c0392b;
-}
-.logout-btn {
-    background-color: #d9534f;
-}
-
-.logout-btn:hover {
-    background-color: #c9302c;
-}
-
-.home-btn {
-    background-color: #5bc0de;
-}
-
+.upload-btn:hover,
+.update-btn:hover,
+.logout-btn:hover,
 .home-btn:hover {
-    background-color: #31b0d5;
+    background-color: #357ab8;
 }

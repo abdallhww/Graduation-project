@@ -7,22 +7,20 @@
     <link rel="stylesheet" href="/style/profilebroker.css">
 </head>
 <body>
-    
-    <h1><%=broker.name%> <%=broker.id%></h1>
     <div class="profile-container">
         <div class="profile-image">
             <img class="profile-pic" src="<%= broker.image %>" alt="<%= broker.name %>" />
         </div>
 
         <div class="upload-image">
+        </div>
+        
+        <div class="profile-details">
             <h3>Upload New Profile Picture</h3>
             <form action="/upload" method="POST" enctype="multipart/form-data">
                 <input type="file" name="image" required />
                 <button type="submit" class="upload-btn">Upload</button>
             </form>
-        </div>
-        
-        <div class="profile-details">
             <form action="/updateBroker" method="POST">
                 <label>Name:</label>
                 <input type="text" name="name" value="<%= broker.name %>" required>
@@ -48,13 +46,15 @@
                 <button type="submit" class="update-btn">Update Profile</button>
             </form>
 
-            <a href="/logout">
-                <button type="button" class="logout-btn">Logout</button>
-            </a>
+            <div>
+                <form action="/home" method="POST" style="display: inline;">
+                    <button type="submit" class="home-btn">Home</button>
+                </form>
+                <a href="/logout">
+                    <button type="button" class="logout-btn">Logout</button>
+                </a>
+            </div>
         </div>
-        <form action="/home" method="POST" style="display: inline;">
-            <button type="submit" class="home-btn logout-btn">Home</button>
-        </form>
     </div>
 </body>
 </html>

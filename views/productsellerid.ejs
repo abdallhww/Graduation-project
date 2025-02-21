@@ -49,11 +49,29 @@
                     <option value="Furniture">Furniture </option>
 
                 </select>
-                
-
                 <button type="submit" class="btn btn-primary">تعديل المنتج</button>
             </form>
+
+            <hr>
+            <form action="/deleteProduct" method="POST">
+                <label>(ID)</label>
+                <input type="number" class="form-control" id="id" name="id" required>
+
+                <button type="submit" class="btn btn-primary">حذف المنتج</button>
+            </form>
+
+            <hr>
+            <form action="/uploadProductImage" method="POST" enctype="multipart/form-data">
+                <label>(ID) المنتج</label>
+                <input type="number" class="form-control" id="id" name="id" required>
+            
+                <label>صورة المنتج</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+            
+                <button type="submit" class="btn btn-success mt-2">رفع الصورة</button>
+            </form>
         </div>
+
         <!-- قائمة المنتجات -->
         <div class="products-container">
             <h2 class="text-center mb-4">قائمة المنتجات</h2>
@@ -72,9 +90,6 @@
                                     <p class="text-success">السعر: <%= product.price %> $</p>
                                     <p class="text-muted">المتوفر: <%= product.stock_quantity %> قطعة</p>
                                     <p class="text-primary">التصنيف: <%= product.category ? product.category : "غير محدد" %></p>
-                                    <div class="d-flex justify-content-between">
-                                        <a href="#" class="btn btn-danger">حذف</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

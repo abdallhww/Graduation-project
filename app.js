@@ -1,15 +1,19 @@
 const express = require("express");
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 const bodyParser = require("body-parser");
 const path = require("path");
-const session = require("express-session");
+const db = require("./utils/db");
 
 const app = express();
 const PORT = 3000;
 
 const { usersRouter } = require("./routes/users");
 const { homeRouter } = require("./routes/home");
-const { ProfileRouter}=require("./routes/Profile");
+const { ProfileRouter} =require("./routes/Profile");
 const { productsRouter } = require("./routes/products");
+const { cartRoutes } = require("./routes/cart");
+const { reviewsRoutes} = require("./routes/reviews");
 
 
 app.use((req, res, next) => {
@@ -36,7 +40,7 @@ app.use(session({
   cookie: { secure: false } 
 }));
 
-// users , home , products
+
 app.use("/", usersRouter);
 
 app.use("/", homeRouter);
@@ -44,6 +48,11 @@ app.use("/", homeRouter);
 app.use("/", ProfileRouter);
 
 app.use("/", productsRouter);
+
+app.use("/", cartRoutes);
+
+app.use("/",reviewsRoutes);
+
 
 app.use((err, req, res, next) => {
   console.error("🚨 ERROR:", err.stack); // طباعة الخطأ مع التفاصيل

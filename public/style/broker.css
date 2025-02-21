@@ -73,3 +73,53 @@ body{
 .star-rating i.active {
   color: #FFAC33; /* لون عند التفاعل مع النجمة */
 }
+.evaluate-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* تأثير عند التحويل على الزر */
+.evaluate-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* تأثير عند الضغط على الزر */
+.evaluate-btn:active {
+  transform: scale(0.95);
+}
+.rating-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  z-index: 1000;
+}
+.rating-popup select, .rating-popup textarea {
+  width: 100%;
+  margin: 10px 0;
+}
+.rating-popup button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+.rating-popup button.close-btn {
+  background: red;
+}

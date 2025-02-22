@@ -29,72 +29,72 @@
     </div>
     <div class="container">
         <div class="sidebar">
-            <h3>Add New Product</h3>
+            <h3>إضافة منتج جديد</h3>
             <form action="/addProduct" method="POST">
-                <label>product name</label>
+                <label>اسم المنتج</label>
                 <input type="text" name="name" required>
 
-                <label>description</label>
+                <label>وصف</label>
                 <textarea name="description" required></textarea>
 
-                <label>price</label>
+                <label>سعر</label>
                 <input type="number" name="price" required>
 
-                <label>stock_quantity</label>
+                <label>كمية المخزون</label>
                 <input type="number" name="stock_quantity" required>
 
-                <label>category</label>
+                <label>فئة</label>
                 <select name="category" id="category" required>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Clothing">Clothing</option>
-                    <option value="Food">Food</option>
-                    <option value="Beauty">Beauty</option>
-                    <option value="Books">Books </option>
-                    <option value="Furniture">Furniture </option>
+                    <option value="Electronics">إلكترونيات</option>
+                    <option value="Clothing">ملابس</option>
+                    <option value="Food">طعام</option>
+                    <option value="Beauty">ادواة تجميل</option>
+                    <option value="Books">كتب </option>
+                    <option value="Furniture">اثاث</option>
 
                 </select>
 
-                <button type="submit">Add Product</button>
+                <button type="submit">اضافة منتج</button>
             </form>
         </div>
         <div class="profile-container">
-            <h2 style="color: rgb(239, 179, 69);" >My Profile ID=><%= user.id %></h2>
+            <h2 style="color: rgb(239, 179, 69);" >ملف شخصي </h2>
 
             <div class="profile-image">
                 <img class="profile-pic" src="<%= user.profile_picture %>" alt="<%= user.username %>" />
             </div>
             <div class="upload-image">
-                <h3 style="color: rgb(239, 179, 69);" >Upload New Profile Picture</h3>
+                <h3 style="color: rgb(239, 179, 69);" >تحميل صورة الملف الشخصي الجديدة</h3>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
                     <input type="file" name="image" required />
-                    <button type="submit" class="upload-btn">Upload</button>
+                    <button type="submit" class="upload-btn">رفع</button>
                 </form>
             </div>
             <div class="profile-details">
                 <form action="/updateusers" method="POST">
-                    <label>Username:</label>
+                    <label>الاسم:</label>
                     <input type="text" name="username" value="<%= user.username %>" required>
     
-                    <label>Email:</label>
+                    <label>ايميل:</label>
                     <input type="email" name="email" value="<%= user.email %>" required>
     
-                    <label>Phone:</label>
+                    <label>هاتف:</label>
                     <input type="text" name="phone" value="<%= user.phone %>">
     
-                    <label>password:</label>
+                    <label>كلمة سر:</label>
                     <input type="text" name="password" value="<%= user.password %>">
     
-                    <button type="submit" class="update-btn">Update Profile</button>
+                    <button type="submit" class="update-btn">تعديل</button>
                 </form>
                 <form action="/home" method="POST" style="display: inline;">
                     <button type="submit" class="logout-btn">home</button>
                 </form>
                 <form action="/productsellerid" method="POST" style="display: inline;">
-                    <button type="submit" class="logout-btn">viwe prodect</button>
+                    <button type="submit" class="logout-btn">عرض منتجات</button>
                 </form>
 
                 <a href="/logout">
-                    <button type="button" class="logout-btn">Logout</button>
+                    <button type="button" class="logout-btn">تسجيل خروج</button>
                 </a>
             </div>
         </div>

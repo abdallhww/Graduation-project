@@ -22,28 +22,28 @@
                 <button type="submit" class="upload-btn">Upload</button>
             </form>
             <form action="/updateBroker" method="POST">
-                <label>Name:</label>
+                <label>الاسم</label>
                 <input type="text" name="name" value="<%= broker.name %>" required>
 
-                <label>Email:</label>
+                <label>ايميل</label>
                 <input type="email" name="email" value="<%= broker.emil %>" required>
 
-                <label>Phone:</label>
+                <label>رقم هاتف</label>
                 <input type="text" name="phone" value="<%= broker.phone %>">
 
-                <label>Facebook Account:</label>
+                <label>حساب فيس</label>
                 <input type="text" name="facebook" value="<%= broker.Facebook_account %>">
 
-                <label>Instagram Account:</label>
+                <label>حساب انستا</label>
                 <input type="text" name="instagram" value="<%= broker.Instagram_account %>">
 
                 <label>Website:</label>
                 <input type="text" name="website" value="<%= broker.website %>">
 
-                <label>Details:</label>
+                <label>تفاصيل</label>
                 <textarea name="details"><%= broker.details %></textarea>
 
-                <button type="submit" class="update-btn">Update Profile</button>
+                <button type="submit" class="update-btn">تعديل</button>
             </form>
 
             <div>
@@ -51,7 +51,7 @@
                     <button type="submit" class="home-btn">Home</button>
                 </form>
                 <a href="/logout">
-                    <button type="button" class="logout-btn">Logout</button>
+                    <button type="button" class="logout-btn">تسجيل خروج</button>
                 </a>
             </div>
         </div>

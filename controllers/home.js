@@ -57,7 +57,7 @@ const Brokers = (req, res, next) => {
   const query = "SELECT * FROM brokers";
   pool.query(query, (err, rows) => {
     if (err) return next(err);
-    res.render("Brokers", { brokers: rows });
+    res.render("Brokers", { brokers: rows,message:null });
   });
 };
 

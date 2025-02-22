@@ -110,36 +110,36 @@
             <img class="profile-pic" src="<%= user.profile_picture %>" alt="<%= user.username %>" />
         </div>
         <div class="profile-details">
-            <h2>My Profile</h2>
+            <h2>ملف شخصي</h2>
             <div class="upload-image">
-                <h3>Upload New Profile Picture</h3>
+                <h3>تحميل صورة الملف الشخصي الجديدة</h3>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
                     <input type="file" name="image" required />
-                    <button type="submit" class="upload-btn">Upload</button>
+                    <button type="submit" class="upload-btn">رفع</button>
                 </form>
             </div>
-            <h4>Created at: "<%= new Date(user.created_at).toLocaleString() %>" </h4>
+            <h4>تم الإنشاء في:"<%= new Date(user.created_at).toLocaleString() %>" </h4>
             <form action="/updateusers" method="POST">
-                <label>Username:</label>
+                <label>الاسم:</label>
                 <input type="text" name="username" value="<%= user.username %>" required>
 
-                <label>Email:</label>
+                <label>ايميل:</label>
                 <input type="email" name="email" value="<%= user.email %>" required>
 
-                <label>Phone:</label>
+                <label>رقم هاتف</label>
                 <input type="text" name="phone" value="<%= user.phone %>">
 
-                <label>Password:</label>
+                <label>كلمة سر </label>
                 <input type="text" name="password" value="<%= user.password %>">
 
-                <button type="submit" class="update-btn">Update Profile</button>
+                <button type="submit" class="update-btn">تعديل </button>
             </form>
             <div>
                 <form action="/home" method="POST" style="display: inline;">
                     <button type="submit" class="logout-btn">Home</button>
                 </form>
                 <a href="/logout">
-                    <button type="button" class="logout-btn">Logout</button>
+                    <button type="button" class="logout-btn">تسجيل خروج</button>
                 </a>
             </div>
         </div>

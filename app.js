@@ -14,6 +14,7 @@ const { ProfileRouter} =require("./routes/Profile");
 const { productsRouter } = require("./routes/products");
 const { cartRoutes } = require("./routes/cart");
 const { reviewsRoutes} = require("./routes/reviews");
+const {productfilter}=require("./routes/productfilter");
 
 
 app.use((req, res, next) => {
@@ -52,6 +53,8 @@ app.use("/", productsRouter);
 app.use("/", cartRoutes);
 
 app.use("/",reviewsRoutes);
+
+app.use("/",productfilter);
 
 
 app.use((err, req, res, next) => {

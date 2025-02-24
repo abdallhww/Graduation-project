@@ -6,6 +6,9 @@ const home = (req, res, next) => {
   res.render("home");
   res.end();
 };
+const homes=(req,res,next)=>{
+  res.render("home");
+}
 
 const uploadImage = (req, res, next) => {
   if (!req.file) {
@@ -215,4 +218,4 @@ const updateusers = async (req, res, next) => {
   }
 };
 
-module.exports = {upload , uploadImage ,home, updateBroker , updateusers};
+module.exports = {upload , uploadImage ,home, updateBroker , updateusers,homes};

@@ -28,10 +28,10 @@ const addproduct = async (req, res, next) => {
         [name]
       );
   
-      if (existingProducts.length > 0) {
+      /*if (existingProducts.length > 0) {
         errors.existingProduct = "اسم المنتج مسجل مسبقًا";
         return res.render("404", { errors, message: null });
-      }
+      }*/
   
     try {
       const seler_id = req.session.userId;

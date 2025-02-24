@@ -4,6 +4,50 @@ body {
     background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
     margin: 0;
     padding: 0;
+    direction: rtl;
+    text-align: right;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* استايل اللوجو */
+.logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* استايل التنقل */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+/* استايل الروابط */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+/* تفاعل عند تمرير الماوس */
+nav a:hover,
+nav a.active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .app-container {

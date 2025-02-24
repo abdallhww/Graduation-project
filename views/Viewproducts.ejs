@@ -13,13 +13,20 @@
         <div id="main-app" class="screen">
             <div class="content-container">
                 <div id="home-screen" class="screen-content active">
-                    <div class="categories">
-                        <button class="chip active" onclick="filterByCategory('all')">All</button>
-                        <button class="chip" onclick="filterByCategory('Pizza')">Pizza</button>
-                        <button class="chip" onclick="filterByCategory('Burger')">Burger</button>
-                        <button class="chip" onclick="filterByCategory('Sushi')">Sushi</button>
-                        <button class="chip" onclick="filterByCategory('Dessert')">Dessert</button>
-                    </div>
+                    <header class="header">
+                        <h1 class="logo">Shop</h1>
+                        <nav>
+                            <a href="/homes" class="active">الصفحه الرئيسه</a>
+                            <a href="/Viewproducts"> كل منتجات</a>
+                            <a href="/Technicalsupport"> إلكترونيات</a>
+                            <a href="/Profile">ملابس</a>
+                            <a href="/Brokers">طعام</a>
+                            <a href="/Viewproducts">اثاث</a>
+                            <a href="/Profile">كتب</a>
+                            <a href="/Brokers">ادوات تجميل</a>
+                            <a href="/Viewproducts">عطور</a>
+                        </nav>
+                    </header>
                     
                     <div class="food-grid" id="food-grid">
                         <% products.forEach(product => { %>

@@ -16,6 +16,9 @@ pool.getConnection((err, connection) => {
   console.log('Connected to the database as ID ' + connection.threadId);
   connection.release(); // إطلاق الاتصال بعد التحقق
 });
+const getPool = () => {
+  return pool;
+};
 
 
-module.exports = { pool };
+module.exports = { pool,getPool };

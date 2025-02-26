@@ -9,5 +9,77 @@ const Viewproducts = (req, res, next) => {
       res.render("Viewproducts", { products: rows });
     });
   };
+
+  const ViewFoodProducts = (req, res, next) => {
+    pool.query("SELECT * FROM products WHERE category = 'Food'", (err, rows) => {
+        if (err) {
+            console.error("Error fetching food products:", err);
+            return res.status(500).json({ error: "Error fetching food products" });
+        }
+        res.render("Viewproducts", { products: rows });
+    });
+};
+
+const ViewElectronicsProducts = (req, res, next) => {
+  pool.query("SELECT * FROM products WHERE category = 'Electronics'", (err, rows) => {
+      if (err) {
+          console.error("Error fetching electronics products:", err);
+          return res.status(500).json({ error: "Error fetching electronics products" });
+      }
+      res.render("Viewproducts", { products: rows });
+  });
+};
+
+const ViewClothingProducts = (req, res, next) => {
+  pool.query("SELECT * FROM products WHERE category = 'Clothing'", (err, rows) => {
+      if (err) {
+          console.error("Error fetching clothing products:", err);
+          return res.status(500).json({ error: "Error fetching clothing products" });
+      }
+      res.render("Viewproducts", { products: rows });
+  });
+};
+
+const ViewFurnitureProducts = (req, res, next) => {
+  pool.query("SELECT * FROM products WHERE category = 'Furniture'", (err, rows) => {
+      if (err) {
+          console.error("Error fetching furniture products:", err);
+          return res.status(500).json({ error: "Error fetching furniture products" });
+      }
+      res.render("Viewproducts", { products: rows });
+  });
+};
+
+const ViewBeautyProducts = (req, res, next) => {
+  pool.query("SELECT * FROM products WHERE category = 'Beauty'", (err, rows) => {
+      if (err) {
+          console.error("Error fetching beauty products:", err);
+          return res.status(500).json({ error: "Error fetching beauty products" });
+      }
+      res.render("Viewproducts", { products: rows });
+  });
+};
+
+const ViewBooksProducts = (req, res, next) => {
+  pool.query("SELECT * FROM products WHERE category = 'Books'", (err, rows) => {
+      if (err) {
+          console.error("Error fetching books products:", err);
+          return res.status(500).json({ error: "Error fetching books products" });
+      }
+      res.render("Viewproducts", { products: rows });
+  });
+};
+
+const ViewPerfumesProducts = (req, res, next) => {
+  pool.query("SELECT * FROM products WHERE category = 'Perfumes'", (err, rows) => {
+      if (err) {
+          console.error("Error fetching perfumes products:", err);
+          return res.status(500).json({ error: "Error fetching perfumes products" });
+      }
+      res.render("Viewproducts", { products: rows });
+  });
+};
+
   
-  module.exports = {Viewproducts };
+  module.exports = {Viewproducts,ViewFoodProducts,ViewElectronicsProducts,
+    ViewClothingProducts,ViewFurnitureProducts,ViewBeautyProducts,ViewBooksProducts,ViewPerfumesProducts};

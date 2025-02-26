@@ -17,35 +17,41 @@
                         <h1 class="logo">Shop</h1>
                         <nav>
                             <a href="/homes" class="active">الصفحه الرئيسه</a>
-                            <a href="/Viewproducts"> كل منتجات</a>
-                            <a href="/Technicalsupport"> إلكترونيات</a>
-                            <a href="/Profile">ملابس</a>
-                            <a href="/Brokers">طعام</a>
-                            <a href="/Viewproducts">اثاث</a>
-                            <a href="/Profile">كتب</a>
-                            <a href="/Brokers">ادوات تجميل</a>
-                            <a href="/Viewproducts">عطور</a>
+                            <a href="/Viewproducts">كل منتجات</a>
+                            <a href="/ViewElectronicsProducts">إلكترونيات</a>
+                            <a href="/ViewClothingProducts">ملابس</a>
+                            <a href="/ViewFoodProducts">طعام</a>
+                            <a href="/ViewFurnitureProducts">أثاث</a>
+                            <a href="/ViewBooksProducts">كتب</a>
+                            <a href="/ViewBeautyProducts">أدوات تجميل</a>
+                            <a href="/ViewPerfumesProducts">عطور</a>
                         </nav>
                     </header>
                     
                     <div class="food-grid" id="food-grid">
                         <% products.forEach(product => { %>
                             <div class="product-card">
-                                <img src="<%= product.image %>" alt="<%= product.name %>">
-                                <div class="details">
-                                    <h3><%= product.name %> / ID=><%=product.id %></h3>
-                                    <p class="category"><%= product.category %></p>
-                                    <p class="description"><%= product.description %></p>
-                                    <p class="price">$<%= product.price %></p>
-                                    
-                                    <div class="like-container">
-                                        <button class="like-button" onclick="toggleLike(this)">
-                                            <span class="material-icons-round">favorite_border</span>
-                                        </button>
-                                        <span class="like-count" id="like-count-<%= product.id %>">0</span>
+                                <div class="card">
+                                    <div class="card-front" style="background-image: url('<%= product.image %>');">
+                                        <div class="image-overlay"></div> <!-- Optional overlay for better text visibility -->
                                     </div>
                                     
-                                    <button class="buy-button">add to cart</button>
+                                    <div class="card-back">
+                                        <div class="details">
+                                            <h3><%= product.name %> / ID=><%= product.id %></h3>
+                                            <p class="description"><%= product.description %></p>
+                                            <p class="price">$<%= product.price %></p>
+                                            
+                                            <div class="like-container">
+                                                <button class="like-button" onclick="toggleLike(this, <%= product.id %>)">
+                                                    <span class="material-icons-round" id="like-icon-<%= product.id %>">favorite_border</span>
+                                                </button>
+                                                <span class="like-count" id="like-count-<%= product.id %>"><%= product.likes %></span>
+                                            </div>
+                                            
+                                            <button class="buy-button">Add to Cart</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         <% }); %>
@@ -54,5 +60,46 @@
             </div>
         </div>
     </div> 
+    <script>
+        function toggleLike(button, productId) {
+    const icon = button.querySelector('span');
+    const likeCountElement = document.getElementById(`like-count-${productId}`);
+    let currentLikes = parseInt(likeCountElement.innerText);
+
+    if (icon.innerText === 'favorite_border') {
+        // User likes the product
+        icon.innerText = 'favorite'; // Change to filled heart
+        currentLikes++;
+        updateLikesInDB(productId, currentLikes);
+    } else {
+        // User unlikes the product
+        icon.innerText = 'favorite_border'; // Change to outlined heart
+        currentLikes--;
+        updateLikesInDB(productId, currentLikes);
+    }
+
+    likeCountElement.innerText = currentLikes; // Update the displayed like count
+}
+
+function updateLikesInDB(productId, likes) {
+    fetch(`/update-likes/${productId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ likes: likes }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            console.error('Error updating likes:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+    </script>
 </body>
 </html>

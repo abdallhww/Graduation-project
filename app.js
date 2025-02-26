@@ -4,17 +4,19 @@ const MySQLStore = require("express-mysql-session")(session);
 const bodyParser = require("body-parser");
 const path = require("path");
 const db = require("./utils/db");
+const { getPool } = require('./utils/db');
 
 const app = express();
 const PORT = 3000;
 
+const { likesRoutes } = require('./routes/likes');
 const { usersRouter } = require("./routes/users");
 const { homeRouter } = require("./routes/home");
-const { ProfileRouter} =require("./routes/Profile");
+const { ProfileRouter } = require("./routes/Profile");
 const { productsRouter } = require("./routes/products");
 const { cartRoutes } = require("./routes/cart");
 const { reviewsRoutes} = require("./routes/reviews");
-const {productfilter}=require("./routes/productfilter");
+const { productfilter } = require("./routes/productfilter");
 
 
 app.use((req, res, next) => {
@@ -41,6 +43,8 @@ app.use(session({
   cookie: { secure: false } 
 }));
 
+//--------------------------
+app.locals.pool = getPool();// استخدام الدالة للحصول على pool
 
 app.use("/", usersRouter);
 
@@ -55,6 +59,9 @@ app.use("/", cartRoutes);
 app.use("/",reviewsRoutes);
 
 app.use("/",productfilter);
+
+app.use('/', likesRoutes);
+//app.use('/api/likes', likesRoutes);
 
 
 app.use((err, req, res, next) => {

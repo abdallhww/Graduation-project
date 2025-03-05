@@ -14,7 +14,7 @@ const add_rait = async (req, res) => {
         const user_id = req.session.userId; // الحصول على ID المستخدم من الجلسة
         console.log("user ", user_id);
         
-        // تحقق مما إذا كان المستخدم قد قام بتقييم الوسيط من قبل
+        // تحقق مما إذا كان المستخدم قد قام بتقييم الوسيط  
         const [existingReview] = await pool.promise().query(
             "SELECT * FROM reviews WHERE user_id = ? AND broker_id = ?",
             [user_id, broker_id]
@@ -63,6 +63,10 @@ const add_rait = async (req, res) => {
     }
 };
 
+const viwecommint = (req, res, next) => {
+    res.render("Technicalsupport", { title: "=>Technical" });
+    res.end();
+  };
 
 
-module.exports = { add_rait };
+module.exports = { add_rait,viwecommint};

@@ -73,6 +73,7 @@
             </div>
             <div class="profile-details">
                 <form action="/updateusers" method="POST">
+                    <label>تم الإنشاء في:"<%= new Date(user.created_at).toLocaleString() %>" </label>
                     <label>الاسم:</label>
                     <input type="text" name="username" value="<%= user.username %>" required>
     
@@ -88,7 +89,7 @@
                     <button type="submit" class="update-btn">تعديل</button>
                 </form>
                 <form action="/home" method="POST" style="display: inline;">
-                    <button type="submit" class="logout-btn">home</button>
+                    <button type="submit" class="logout-btn">الصفحه الرئيسيه</button>
                 </form>
                 <form action="/productsellerid" method="POST" style="display: inline;">
                     <button type="submit" class="logout-btn">عرض منتجات</button>

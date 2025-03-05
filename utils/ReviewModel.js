@@ -1,4 +1,4 @@
-const pool = require("./db"); // الاتصال بقاعدة البيانات
+const pool = require("./db");
 
 const ReviewModel = {
   addReview: async (user_id, broker_id, rating, review) => {

@@ -62,7 +62,7 @@ const addproduct = async (req, res, next) => {
     const { id, name, description, price, stock_quantity, category } = req.body;
     let errors = {};
 
-    // التحقق من إدخال جميع الحقول المطلوبة
+    //التحقق من إدخال جميع  مطلوبات
     if (!id || !name || !description || !price || !stock_quantity) {
         errors.general = "جميع الحقول مطلوبة";
     }
@@ -82,7 +82,7 @@ const addproduct = async (req, res, next) => {
     try {
         const seler_id = req.session.userId; // الحصول على معرف البائع من الجلسة
 
-        // التحقق من أن المنتج موجود ويعود إلى هذا البائع
+        // التحقق من أن المنتج موجود ويعود إلى  البائع
         const [product] = await pool.promise().query(
             "SELECT * FROM products WHERE id = ? AND seler_id = ?",
             [id, seler_id]

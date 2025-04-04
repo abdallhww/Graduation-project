@@ -3,9 +3,24 @@ const multer = require("multer");
 const upload = multer({ dest: "public/uploads/" });
 
 const home = (req, res, next) => {
+
+  if(req.session.role=="seller")
+    {
+  res.render("home2");
+  res.end();
+    }
+else 
+{
   res.render("home");
   res.end();
+}
 };
+
+const logout =(req,res,next) =>{
+  res.render("users", {messags:null, messag:"نتمنى انا تجربتك لل موقع كانت جيده" });
+  res.end;
+}
+
 const homes=(req,res,next)=>{
   res.render("home");
 }
@@ -218,4 +233,4 @@ const updateusers = async (req, res, next) => {
   }
 };
 
-module.exports = {upload , uploadImage ,home, updateBroker , updateusers,homes};
+module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes ,logout};

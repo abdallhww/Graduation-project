@@ -68,5 +68,4 @@ const viwecommint = (req, res, next) => {
     res.end();
   };
 
-
 module.exports = { add_rait,viwecommint};

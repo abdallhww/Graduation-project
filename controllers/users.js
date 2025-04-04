@@ -42,7 +42,14 @@ const login = async (req, res, next) => {
     console.log(`User logged in from ${tableName}, session userId:`, req.session.userId);
     
     const role = existingUser[0].role;
+    console.log(role);
+
+    if(role=='seller')
+    res.render("home2", {message:null });
+  else if(role=='buyer')
     res.render("home", {message:null });
+  else
+  res.render("home3", {message:null });
 
   } catch (err) {
     console.error("Error during login:", err);

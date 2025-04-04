@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعليقات على الوسيط</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="/style/reviews.css">
+</head>
+<body>
+    <% brokers.forEach(broker => { %>
+        <div class="broker">
+            <img src="<%= broker.image %>" alt="<%= broker.name %>">
+            <h3>Name : <%= broker.name %></h3>
+            <h3>Phone : <%= broker.phone %></h3>
+            <p><%= broker.details %></p>
+            <a href="<%= broker.website %>" target="_blank">
+                <i class="fas fa-globe"></i>
+            </a>
+            <a href="<%= broker.Facebook_account %>" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="<%= broker.Instagram_account %>" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <div class="star-rating">
+                <h3> <%= broker.Rating %> </h3> <i class="fas fa-star"></i>
+            </div>
+        </div> 
+    <% }); %> 
+    <h1>تعليقات على الوسيط</h1>
+
+    <% if (reviews.length > 0) { %>
+        <ul>
+            <% reviews.forEach(review => { %>
+                <li>
+                    <p><strong>التقييم:⭐</strong> <%= review.rating %></p>
+                    <p><strong>التعليق:</strong> <%= review.review %></p>
+                    <p><strong>تاريخ:</strong> <%= new Date(review.created_at).toLocaleDateString() %></p>
+                    <hr>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>لا توجد تعليقات لهذا الوسيط.</p>
+    <% } %>
+
+    
+
+    <form action="/home" method="POST" style="display: inline;">
+        <button type="submit" class="logout-btn">الصفحة الرئيسية</button>
+    </form>
+</body>
+</html>

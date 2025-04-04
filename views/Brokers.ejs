@@ -85,9 +85,11 @@
          <h3> <%=broker.Rating%> </h3> <i class="fas fa-star"></i>
         </div>
         <button class="evaluate-btn" data-id="<%= broker.id %>" >تقييم وسيط </button>
-        <form action="/viwecommnt" method="POST">
-        <button class="view-comments-btn" data-id="<%= broker.id %>">عرض التعليقات</button>
-        </form>
+  
+        <form action="/reviews/<%= broker.id %>" method="GET" style="display: inline;">
+          <button type="submit" class="btn">عرض التعليقات</button>
+      </form>
+        
       </div>
     <% }) %>
   </div>
@@ -110,16 +112,6 @@
   </form>
   <button class="close-btn">إغلاق</button>
   </div>
-
-  <!-- نافذة عرض التعليقات -->
-<div id="comments-popup" class="rating-popup ">
-  <h3 style="color: black;">تعليقات الوسيط</h3>
-  <p style="color: black;">معرف: <span id="comments-broker-id"></span></p>
-  <div id="comments-list">
-    <!-- سيتم عرض التعليقات هنا -->
-  </div>
-  <button class="close-btn">إغلاق</button>
-</div>
 
   <script>
     // الحصول على جميع أزرار التقييم

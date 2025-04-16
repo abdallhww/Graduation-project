@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= title %> Support</title>
+  <link rel="stylesheet" href="/style/tecnicals.css"/>
 </head>
 <body>
-    <h1><%= title %> support</h1>
+  <h1><%= title %> Support</h1>
+  <p>إذا واجهت أي مشكلة أو تحتاج لمساعدة، يرجى ملء النموذج أدناه وسنقوم بالتواصل معك في أقرب وقت.</p>
+
+  <form action="send" method="POST">
+    <input type="text" name="name" placeholder="الاسم الكامل" required />
+    <input type="email" name="email" placeholder="البريد الإلكتروني" required />
+    <textarea name="message" rows="5" placeholder="اكتب رسالتك هنا..." required></textarea>
+    <input type="submit" value="إرسال الرسالة" />
+  </form>
+  <button onclick="goBack()">Go Back</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </body>
 </html>

@@ -62,6 +62,7 @@ const Brokers = (req, res, next) => {
 };
 
 const Viewproducts = (req, res, next) => {
+
   pool.query("SELECT * FROM products", (err, rows) => {
     if (err) {
       console.error("Error fetching products:", err);
@@ -69,6 +70,77 @@ const Viewproducts = (req, res, next) => {
     }
     res.render("Viewproducts", { products: rows });
   });
+
 };
 
-module.exports = { Brokers, Technicalsupport , Viewproducts , Profile };
+const send = (req, res, next) => {
+  const { name, email, message } = req.body;
+  const userId = req.session.userId;         
+  const brokerId = req.session.brokerId;     
+
+  if (!userId && !brokerId) {
+    return res.status(401).send('يجب تسجيل الدخول أولاً.');
+  }
+
+  // التحقق من المستخدم العادي
+  if (userId) {
+    const checkUserSql = "SELECT * FROM users WHERE id = ? AND username = ? AND email = ?";
+    pool.query(checkUserSql, [userId, name, email], (err, results) => {
+      if (err) {
+        console.error("خطأ في التحقق من المستخدم:", err);
+        return res.status(500).send("حدث خطأ داخلي.");
+      }
+
+      if (results.length === 0) {
+        return res.status(400).render("supportError", {
+          message: "الاسم أو البريد الإلكتروني غير صحيح."
+        });
+      }
+
+      const insertSql = "INSERT INTO support_messages (user_id , name , email , message , status) VALUES (?, ?, ?, ?,'بانتظار الرد')";
+      pool.query(insertSql, [userId, name, email, message], (err, result) => {
+        if (err) {
+          console.error("خطأ أثناء التخزين:", err);
+          return res.status(500).send("حدث خطأ أثناء إرسال الرسالة.");
+        }
+
+        res.render("supportSuccess", {
+          message: "تم إرسال رسالتك بنجاح! شكراً لتواصلك معنا.",
+          name
+        });
+      });
+    });
+  }
+
+  // التحقق من الوسيط
+  else if (brokerId) {
+    const checkBrokerSql = "SELECT * FROM brokers WHERE id = ? AND name = ? AND emil = ?";
+    pool.query(checkBrokerSql, [brokerId, name, email], (err, results) => {
+      if (err) {
+        console.error("خطأ في التحقق من الوسيط:", err);
+        return res.status(500).send("حدث خطأ داخلي.");
+      }
+
+      if (results.length === 0) {
+        return res.status(400).render("supportError", {
+          message: "الاسم أو البريد الإلكتروني غير صحيح (وسيط)."
+        });
+      }
+
+      const insertSql = "INSERT INTO support_messages (broker_id , name , email , message , status) VALUES (?, ?, ?, ?,'بانتظار الرد')";
+      pool.query(insertSql, [brokerId, name, email, message], (err, result) => {
+        if (err) {
+          console.error("خطأ أثناء التخزين (وسيط):", err);
+          return res.status(500).send("حدث خطأ أثناء إرسال الرسالة.");
+        }
+
+        res.render("supportSuccess", {
+          message: "تم إرسال رسالتك بنجاح أيها الوسيط! سنقوم بالتواصل معك.",
+          name
+        });
+      });
+    });
+  }
+};
+
+module.exports = { Brokers , Technicalsupport , Viewproducts , Profile ,send};

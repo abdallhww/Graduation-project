@@ -194,22 +194,7 @@
             return;
         }
 
-        // إرسال الطلب بعد جلب userId
-        /*fetch('/place-order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id: userData.userId, cart: cart })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                localStorage.removeItem("cart"); // مسح السلة بعد الطلب
-                window.location.href = "/payment?order_id=" + data.order_id;
-            } else {
-                alert("حدث خطأ أثناء تسجيل الطلب!");
-            }
-        })
-        .catch(error => console.error('Error:', error));*/
+        
     })
     .catch(error => console.error('Error fetching user data:', error));
 }

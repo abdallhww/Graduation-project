@@ -44,12 +44,12 @@ const login = async (req, res, next) => {
     const role = existingUser[0].role;
     console.log(role);
 
-    if(role=='seller')
+    if(role=='seller'||role=='broker')
     res.render("home2", {message:null });
   else if(role=='buyer')
     res.render("home", {message:null });
-  else
-  res.render("home3", {message:null });
+  else if(role=='admin')
+  res.render("admin", {message:null });
 
   } catch (err) {
     console.error("Error during login:", err);

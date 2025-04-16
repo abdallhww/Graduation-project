@@ -51,5 +51,14 @@
     <form action="/home" method="POST" style="display: inline;">
         <button type="submit" class="logout-btn">الصفحة الرئيسية</button>
     </form>
+
+    <button class="logout-btn" onclick="goBack()">رجوع</button>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+
 </body>
 </html>

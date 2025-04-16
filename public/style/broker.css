@@ -218,3 +218,43 @@ h1 {
 .btn-close:hover {
   color: #0c5460; /* تغيير لون الزر عند التمرير */
 }
+.view-comments-btn {
+  background: linear-gradient(45deg, #58d77c, #025c1a);
+color: white;
+border: none;
+padding: 10px 20px;
+font-size: 16px;
+font-weight: bold;
+border-radius: 8px;
+cursor: pointer;
+transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+margin-top: 10px;
+}
+
+.view-comments-btn:hover {
+background: linear-gradient(45deg, #1ff51c, #012b10);
+transform: scale(1.1);
+box-shadow: 0 0 10px rgba(39, 255, 93, 0.6);
+}
+
+.view-comments-btn:active {
+background-color: #3e8e41; /* لون خلفية أخضر داكن عند النقر */
+}
+.comments-popup {
+display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background-color: white;
+padding: 20px;
+border: 1px solid #ccc;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+.comment {
+margin-bottom: 10px;
+padding: 10px;
+border-bottom: 1px solid #eee;
+}

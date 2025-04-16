@@ -17,6 +17,7 @@ const { productsRouter } = require("./routes/products");
 const { cartRoutes } = require("./routes/cart");
 const { reviewsRoutes} = require("./routes/reviews");
 const { productfilter } = require("./routes/productfilter");
+const { admanRouter }= require("./routes/adman");
 
 
 app.use((req, res, next) => {
@@ -26,7 +27,7 @@ app.use((req, res, next) => {
 
 // إعداد EJS كـ View Engine
 app.set("view engine", "ejs");
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views')); 
 
 // إعداد المجلدات العامة 
 app.use(express.static(path.join(__dirname, "/public")));
@@ -62,6 +63,8 @@ app.use("/",productfilter);
 
 app.use('/', likesRoutes);
 //app.use('/api/likes', likesRoutes); 
+
+app.use("/",admanRouter);
 
 
 app.use((err, req, res, next) => {

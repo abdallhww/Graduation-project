@@ -7,48 +7,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/style/broker.css">
   <title>Brokers</title>
-  <style>
-    .view-comments-btn {
-      background: linear-gradient(45deg, #58d77c, #025c1a);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  margin-top: 10px;
-}
-
-.view-comments-btn:hover {
-  background: linear-gradient(45deg, #1ff51c, #012b10);
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(39, 255, 93, 0.6);
-}
-
-.view-comments-btn:active {
-  background-color: #3e8e41; /* لون خلفية أخضر داكن عند النقر */
-}
-.comments-popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.comment {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-  </style>
 </head>
 <body>
   <div class="alert-container mt-2">
@@ -99,7 +57,7 @@
     <h3 style="color: black;" >تقييم الوسيط</h3>
     <p style="color: black;" >معرف : <span id="broker-id"></span></p>
     <form action="/evaluate" method="POST">
-      <p style="color: black;" >ادخل معرف وسيط<input type="number" id="broker-id" name="broker_id"></p>
+      <p style="color: black;" >ادخل معرف وسيط<input type="number" id="broker-id" name="broker_id" ></p>
       <textarea id="comint" name="comint" placeholder="أدخل تعليقك هنا"></textarea>
       <select id="rating" name="rating">
         <option value="1">⭐ 1</option>

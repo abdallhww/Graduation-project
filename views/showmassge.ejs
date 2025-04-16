@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>رسائل الدعم الفني</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      padding: 40px;
+      margin: 0;
+      direction: rtl;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      background-color: #ffffffaa;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #009688;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #009688;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00796b;
+      transform: scale(1.05);
+    }
+
+    /* تعديل أعمدة طويلة */
+    td:nth-child(3) {
+      max-width: 300px;
+      word-wrap: break-word;
+    }
+
+    select, form button {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+
+    form {
+      display: inline;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>لوحة تحكم الدعم الفني</h2>
+
+  <form action="/supportStats" method="get" style="display: inline;">
+    <button type="submit" class="logout-btn">عرض الإحصائيات</button>
+  </form>
+
+  
+  <table>
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>البريد</th>
+        <th>الرسالة</th>
+        <th>التاريخ</th>
+        <th>الحالة</th>
+        <th>تعديل</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% showmassge.forEach(msg => { %>
+        <tr>
+          <td><%= msg.name %></td>
+          <td><%= msg.email %></td>
+          <td><%= msg.message %></td>
+          <td><%= msg.created_at.toLocaleString() %></td>
+          <td><%= msg.status %></td>
+          <td>
+            <!-- زر تعديل أو تحديد حالة جديد -->
+            <form action="/updateStatus" method="post">
+                <input type="hidden" name="id" value="<%= msg.id %>">
+                <select name="status">
+                  <option value="بانتظار الرد" <%= msg.status === 'بانتظار الرد' ? 'selected' : '' %>>بانتظار الرد</option>
+                  <option value="تم الرد" <%= msg.status === 'تم الرد' ? 'selected' : '' %>>تم الرد</option>
+                  <option value="مغلق" <%= msg.status === 'مغلق' ? 'selected' : '' %>>مغلق</option>
+                </select>
+                <button type="submit">تحديث</button>
+              </form>
+              
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <form action="/goadminhome" method="POST" style="display: inline;">
+    <button type="submit" class="logout-btn">ذهاب الي الصفحه الرئيسيه</button>
+</form>
+ 
+
+</body>
+</html>

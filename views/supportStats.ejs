@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إحصائيات الدعم الفني</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+      color: #333;
+      padding: 40px;
+      text-align: center;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .stat {
+      margin: 20px 0;
+      font-size: 22px;
+    }
+    .stat span {
+      font-weight: bold;
+      color: #0077b6;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f86;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>إحصائيات رسائل الدعم الفني</h2>
+
+    <div class="stat">بانتظار الرد: <span><%= stats["بانتظار الرد"] %></span></div>
+    <div class="stat">تم الرد: <span><%= stats["تم الرد"] %></span></div>
+    <div class="stat">مغلق: <span><%= stats["مغلق"] %></span></div>
+
+    <button onclick="window.history.back()">رجوع</button>
+  </div>
+
+</body>
+</html>

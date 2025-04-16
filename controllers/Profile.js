@@ -4,7 +4,7 @@ const upload = multer({ dest: "public/uploads/" });
 
 const home = (req, res, next) => {
 
-  if(req.session.role=="seller")
+  if(req.session.role=="seller"||req.session.role=="broker")
     {
   res.render("home2");
   res.end();

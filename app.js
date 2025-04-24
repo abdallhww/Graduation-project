@@ -62,9 +62,11 @@ app.use("/",reviewsRoutes);
 app.use("/",productfilter); 
 
 app.use('/', likesRoutes);
+
 //app.use('/api/likes', likesRoutes); 
 
 app.use("/",admanRouter);
+
 
 
 app.use((err, req, res, next) => {

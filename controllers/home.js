@@ -1,7 +1,7 @@
 const { pool } = require("../utils/db");
 
 const Technicalsupport = (req, res, next) => {
-  res.render("Technicalsupport", { title: "=>Technical" });
+  res.render("Technicalsupport", { title: "Technical" });
   res.end();
 };
 
@@ -63,12 +63,16 @@ const Brokers = (req, res, next) => {
 
 const Viewproducts = (req, res, next) => {
 
+  const userId = req.session.userId;
+
+  console.log(userId);
+
   pool.query("SELECT * FROM products", (err, rows) => {
     if (err) {
       console.error("Error fetching products:", err);
       return res.status(500).json({ error: "Error fetching products" });
     }
-    res.render("Viewproducts", { products: rows });
+    res.render("Viewproducts", { products: rows ,userId});
   });
 
 };
@@ -103,7 +107,7 @@ const send = (req, res, next) => {
           console.error("خطأ أثناء التخزين:", err);
           return res.status(500).send("حدث خطأ أثناء إرسال الرسالة.");
         }
-
+       console.log("delet broker scsess");
         res.render("supportSuccess", {
           message: "تم إرسال رسالتك بنجاح! شكراً لتواصلك معنا.",
           name

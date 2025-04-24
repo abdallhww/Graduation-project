@@ -2,7 +2,7 @@
 /* تعميم الخطوط */
 body {
     font-family: 'Tajawal', sans-serif;
-    background: linear-gradient(135deg, #ff2770, #313638, #808080);
+    background: linear-gradient(135deg, #2c3e50, #3498db);
     color: #fff;
     margin: 0;
     padding: 0;
@@ -80,7 +80,9 @@ a {
 }
 
 a:hover {
-    color: #ff2770;
+    color: #3b10d3;
+    background: linear-gradient(45deg, #3737b9, #3b33ae);
+
 }
 
 /* تصنيف النجوم */
@@ -93,7 +95,7 @@ a:hover {
 
 /* زر الصفحة الرئيسية */
 button.logout-btn {
-    background: #ff2770;
+    background: #4537c2;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -105,6 +107,6 @@ button.logout-btn {
 }
 
 button.logout-btn:hover {
-    background: #e61a5f;
+    background: linear-gradient(45deg, #360f84, #2d0b8b);
     transform: scale(1.1);
 }

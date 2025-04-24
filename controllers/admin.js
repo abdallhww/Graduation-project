@@ -57,4 +57,69 @@ const goadminhome = (req, res, next) => {
     });
   };
 
-module.exports = { showmassge,updateStatus,getSupportStats,goadminhome};
+  const deleteMessage = (req, res) => {
+    const { id } = req.body;
+  
+    const sql = "DELETE FROM support_messages WHERE id = ?";
+    pool.query(sql, [id], (err, result) => {
+      if (err) {
+        console.error("فشل في حذف الرسالة:", err);
+        return res.status(500).send("حدث خطأ أثناء حذف الرسالة.");
+      }
+      res.redirect('/showmassge'); // تأكد إنه الراوت هذا يطابق عرض الرسائل
+    });
+  };
+
+  const deletBroker = (req, res) => {
+    const { id } = req.body;
+
+    const sql = "DELETE FROM brokers WHERE id = ?";
+    pool.query(sql,[id],(err,result) => {
+        if(err) {
+            console.error("فشل في حذف المندوب:", err);
+            return res.status(500).send("حدث خطأ أثناء حذف المندوب.");
+        }
+        res.redirect('/viweBrokers');
+        
+    });
+};
+
+
+  const viweBrokers = (req, res, next) => {
+    const query = "SELECT * FROM brokers";
+    pool.query(query, (err, rows) => {
+      if (err) return next(err);
+      res.render("adminbroker", { brokers: rows,message:null });
+    });
+  };
+
+  const searchBroker = (req, res) => {
+    const { name } = req.query;
+
+    const sql = "SELECT * FROM brokers WHERE name LIKE ?";
+    const searchValue = `%${name}%`; // للبحث الجزئي
+
+    pool.query(sql, [searchValue], (err, results) => {
+        if (err) {
+            console.error("خطأ في البحث عن الوسيط:", err);
+            return res.status(500).send("حدث خطأ أثناء البحث.");
+        }
+
+        // عرض نفس صفحة الوسطاء مع النتائج
+        res.render("adminbroker", { brokers: results });
+    });
+};
+
+const showmassf = (req, res, next) => {
+  const id = req.session.userId;
+
+  const query = "SELECT * FROM support_messages WHERE user_id = ? ORDER BY created_at DESC";
+  pool.query(query, [id], (err, rows) => {
+    if (err) return next(err);
+    res.render("showmassf", { showmassf: rows, message: null });
+  });
+};
+
+
+  module.exports = { showmassge,updateStatus,getSupportStats,goadminhome,deleteMessage,
+    viweBrokers,deletBroker,searchBroker,showmassf};

@@ -24,24 +24,7 @@
     </style>
 </head>
 <body>
-    <!-- زر السلة -->
-    <div class="cart-icon" onclick="toggleCart()">
-        🛒 <span id="cart-count">0</span>
-    </div>
-
-    <!-- صندوق السلة -->
-    <div class="cart-container" id="cart-container">
-        <h3>سلة التسوق</h3>
-        <div class="cart-items" id="cart-items"></div>
-        
-        <!-- عرض إجمالي السعر -->
-    <div class="cart-total">
-        <strong>المجموع: </strong><span id="cart-total-price">0</span>$
-    </div>
-
-        <button class="order-button" onclick="placeOrder()">تسجيل الطلب</button>
-        <button onclick="clearCart()">مسح السلة</button>
-    </div>
+   
 
     <div class="app-container">
         <div id="main-app" class="screen">
@@ -49,7 +32,13 @@
                 <div id="home-screen" class="screen-content active">
                     <header class="header">
                         <h1 class="logo">Shop</h1>
+             
                         <nav>
+                            <% if (userId) { %>
+                                <a href="/cart/<%= userId %>" class="btn">عرض السلة</a>
+                              <% } else { %>
+                                <a href="/login" class="btn">سجل الدخول لعرض السلة</a>
+                              <% } %>
                             <a href="/homes" class="active">الصفحه الرئيسيه</a>
                             <a href="/Viewproducts">كل منتجات</a>
                             <a href="/ViewElectronicsProducts">إلكترونيات</a>
@@ -72,7 +61,7 @@
                                     
                                     <div class="card-back">
                                         <div class="details">
-                                            <h3><%= product.name %> / ID=><%= product.id %></h3>
+                                            <h3><%= product.name %></h3>
                                             <p class="description"><%= product.description %></p>
                                             <p class="price">$<%= product.price %></p>
 
@@ -84,9 +73,11 @@
                                             </div>
                                             
         
-                                            <button class="buy-button" onclick="addToCart(this, <%= product.id %>, '<%= product.name %>', <%= product.price %>, '<%= product.image %>')">
-                                                Add to Cart
+                                            <button class="buy-button" onclick="addToCart('<%= product.id %>')">
+                                                إضافة للسلة
                                             </button>
+                                        
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -99,109 +90,16 @@
     </div> 
 
     <script>
+
         function toggleCart() {
             const cartContainer = document.getElementById("cart-container");
             cartContainer.style.display = cartContainer.style.display === "block" ? "none" : "block";
         }
-
-        function addToCart(button, id, name, price, image) {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            
-            let existingProduct = cart.find(item => item.id === id);
-            if (existingProduct) {
-                existingProduct.quantity++;
-            } else {
-                cart.push({ id, name, price, quantity: 1 });
-            }
-
-            localStorage.setItem("cart", JSON.stringify(cart));
-            updateCartUI();
-            animateProductFly(button, image);
-        }
-
-        function animateProductFly(button, image) {
-            const cartIcon = document.querySelector('.cart-icon');
-            const productImage = document.createElement("img");
-            productImage.src = image;
-            productImage.classList.add("flying-product");
-
-            const rect = button.getBoundingClientRect();
-            productImage.style.top = rect.top + "px";
-            productImage.style.left = rect.left + "px";
-            document.body.appendChild(productImage);
-
-            setTimeout(() => {
-                productImage.style.top = cartIcon.getBoundingClientRect().top + "px";
-                productImage.style.left = cartIcon.getBoundingClientRect().left + "px";
-                productImage.style.width = "20px";
-                productImage.style.height = "20px";
-            }, 100);
-
-            setTimeout(() => {
-                document.body.removeChild(productImage);
-            }, 1000);
-        }
-
-        function updateCartUI() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const cartItemsContainer = document.getElementById("cart-items");
-        const cartTotalPrice = document.getElementById("cart-total-price");
-        cartItemsContainer.innerHTML = "";
-
-        let totalPrice = 0;
-
-        cart.forEach(product => {
-            totalPrice += product.price * product.quantity;
-            const itemDiv = document.createElement("div");
-            itemDiv.classList.add("cart-item");
-            itemDiv.innerHTML = `
-                <span>${product.name} (${product.quantity}) - $${product.price * product.quantity}</span>
-                <button onclick="removeFromCart(${product.id})">X</button>
-            `;
-            cartItemsContainer.appendChild(itemDiv);
-        });
-
-        document.getElementById("cart-count").innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
-        cartTotalPrice.innerText = totalPrice.toFixed(2);
-    }
-
-    function removeFromCart(id) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart = cart.filter(item => item.id !== id);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartUI();
-    }
-
-    function clearCart() {
-        localStorage.removeItem("cart");
-        updateCartUI();
-    }
-
-    function placeOrder() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    if (cart.length === 0) {
-        alert("السلة فارغة!");
-        return;
-    }
-     
-    // جلب userId من الخادم
-    fetch('/get_user')
-    .then(response => response.json())
-    .then(userData => {
-        if (!userData.userId) {
-            alert("يجب تسجيل الدخول أولًا!");
-            return;
-        }
-
-        
-    })
-    .catch(error => console.error('Error fetching user data:', error));
-}
-
     document.addEventListener("DOMContentLoaded", updateCartUI);
+
 </script>
 <script>
+    
     function toggleLike(button, productId) {
     const icon = button.querySelector('span');
     const likeCountElement = document.getElementById(`like-count-${productId}`);
@@ -240,8 +138,49 @@ function updateLikesInDB(productId, likes) {
         console.error('Error:', error);
     });
 }
-
 </script>
+
+
+<script>
+    function addToCart(productId) {
+        // الخطوة 1: الحصول على userId من الجلسة
+        fetch('/get_user')
+            .then(response => response.json())
+            .then(userData => {
+                if (!userData.userId) {
+                    alert("يجب تسجيل الدخول أولًا!");
+                    return;
+                }
+    
+                const userId = userData.userId;
+    
+                // الخطوة 2: إرسال الطلب لإضافة المنتج إلى السلة
+                fetch('/add-to-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: productId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("تمت إضافة المنتج إلى السلة!");
+                    } else {
+                        alert("حدث خطأ أثناء الإضافة!");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+    
+            });
+    }
+    </script>
+    
 
 </body>
 </html>

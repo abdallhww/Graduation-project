@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff2770, #313638, #808080);
+  background: linear-gradient(135deg, #2c3e50, #3498db);
   background-size: cover;
   font-family: Arial, sans-serif;
   color: white;
@@ -71,13 +71,13 @@ h1 {
 .broker a {
   display: inline-block;
   font-size: 20px;
-  color: #FFD700;
+  color: #4167e4;
   margin: 10px 5px;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .broker a:hover {
-  color: #ff2770;
+  color: #160146;
   transform: scale(1.2);
 }
 
@@ -90,7 +90,7 @@ h1 {
 
 .star-rating i {
   font-size: 22px;
-  color: #FFD700;
+  color: #00010f;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -103,7 +103,7 @@ h1 {
 
 /* زر التقييم */
 .evaluate-btn {
-  background: linear-gradient(45deg, #ff2770, #ff5733);
+  background: linear-gradient(45deg, #3737b9, #3b33ae);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -116,9 +116,9 @@ h1 {
 }
 
 .evaluate-btn:hover {
-  background: linear-gradient(45deg, #ff5733, #ff2770);
+  background: linear-gradient(45deg, #360f84, #2d0b8b);
   transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 39, 112, 0.6);
+  box-shadow: 0 0 10px rgba(4, 0, 253, 0.6);
 }
 
 /* نافذة التقييم */

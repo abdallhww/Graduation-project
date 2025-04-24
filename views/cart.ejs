@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>سلة المشتريات</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #1e1e2f;
+            color: white;
+            padding: 30px;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .cart-item img {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-item-details h4 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .cart-item-details p {
+            margin: 5px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <form action="/Viewproducts" method="get" style="display: inline;">
+        <button type="submit" style="
+          background: linear-gradient(135deg, #4e54c8, #8f94fb);
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          font-size: 16px;
+          border-radius: 12px;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          عرض المنتجات
+        </button>
+      </form>
+      
+    <div class="cart-container">
+        <h2>سلة المشتريات</h2>
+        <% if (cartItems.length === 0) { %>
+            <p>لا توجد منتجات في السلة.</p>
+        <% } else { %>
+            <% cartItems.forEach(item => { %>
+                <div class="cart-item">
+                    <img src="/images/<%= item.image %>" alt="<%= item.name %>">
+                    <div class="cart-item-details">
+                        <h4><%= item.name %></h4>
+                        <p>السعر: <%= item.price %> شيكل</p>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</body>
+</html>

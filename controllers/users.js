@@ -67,7 +67,7 @@ const registration = async (req, res, next) => {
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
   if (!passwordRegex.test(regpassword)) {
-    errors.password = "Password must contain at least 8 characters, an uppercase letter, a lowercase letter, and a number";
+    errors.password = "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، حرف كبير، حرف صغير، ورقم";
   }
 
   try {

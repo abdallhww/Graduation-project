@@ -2,8 +2,8 @@
 
   :root{
       --white: black;
-      --black: white; 
-      --lightBulue: #ff2770;
+      --black: rgb(255, 255, 255); 
+      --lightBulue: #5371cb;
   }
   
   *{
@@ -20,7 +20,7 @@
     font-size: 80px; 
     font-weight: 800;
     color: #333;
-    text-shadow: 5px 5px 10px rgba(234, 7, 189, 0.992); /* تأثير ظل */
+    text-shadow: 5px 5px 10px rgba(33, 6, 205, 0.992); /* تأثير ظل */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -31,7 +31,7 @@
       min-height: 100vh;
       background-color: #313638;
       /*background-image: url('./a.webp');*/
-      background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
+      background: linear-gradient(135deg, #2c3e50, #3498db);
       background-size: cover;
   }
   
@@ -40,9 +40,9 @@
       width: 800px;
       height: 500px;
       background: var(--white);
-      border: 2px solid #ff2770;
+      border: 2px solid #2768ff;
       border-radius: 10px;
-      box-shadow: 0 0 25px #ff2770;
+      box-shadow: 0 0 25px #5d27ff;
       overflow: hidden;
   }
   
@@ -104,9 +104,7 @@
   
   .input-box input:focus,
   .input-box input:valid{
-      /* border-bottom-color: var(--lightBulue); */
-  
-      border-bottom-color: #ff2770;
+      border-bottom-color: #4c28db;
   }
   
   .input-box label{
@@ -147,8 +145,8 @@
       height: 45px;
       /* background-color: var(--black); */
       background: transparent;
-      color:  #ff2770;
-      border: 2px solid #ff2770;
+      color:  #4427ff;
+      border: 2px solid #6127ff;
       outline: none;
       border-radius: 40px;
       cursor: pointer;
@@ -170,7 +168,7 @@
   }
   
   .linkTxt p a{
-      color: #ff2770;
+      color: #5d27ff;
       text-decoration: none;
       font-weight: 600;
   }
@@ -241,7 +239,7 @@
       right: 0;
       width: 850px;
       height: 600px;
-      background: #ff2770;
+      background: #332077;
       transform: rotate(10deg) skewY(40deg);
       transform-origin: bottom right;
       transition: 1.5s ease;
@@ -341,7 +339,7 @@
 }
 
 .input-box select:focus {
-    border-bottom-color: #ff2770;
+    border-bottom-color: #210af0;
 }
 
 .input-box label {

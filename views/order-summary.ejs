@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>ملخص الطلب</title>
+    <style>
+        body { font-family: 'Roboto', sans-serif; background: #1e1e2f; color: white; padding: 20px; }
+        .order-item { background: rgba(255,255,255,0.05); padding: 15px; margin-bottom: 10px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <h1>ملخص الطلب</h1>
+    <% order.forEach(item => { %>
+        <div class="order-item">
+            <h3><%= item.name %></h3>
+            <p>الكمية: <%= item.quantity %></p>
+            <p>السعر لكل قطعة: $<%= item.price %></p>
+            <p>الإجمالي: $<%= (item.price * item.quantity).toFixed(2) %></p>
+        </div>
+    <% }); %>
+</body>
+</html>

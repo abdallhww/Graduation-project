@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>عرض الوسطاء</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #4ca1af, #c4e0e5);
+      padding: 40px;
+      direction: rtl;
+      margin: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      background-color: #ffffffdd;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #00796b;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+
+    form {
+      display: inline;
+    }
+
+    button {
+      background-color: #e74c3c;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>قائمة الوسطاء</h2>
+
+  <div style="text-align: center; margin: 20px 0;">
+    <form action="/searchBroker" method="get">
+      <input type="text" name="name" placeholder="ابحث عن وسيط بالاسم" required
+             style="padding: 10px; width: 50%; border-radius: 8px; border: 1px solid #ccc;">
+      <button type="submit" style="padding: 10px 20px; border-radius: 8px; background-color: #00796b; color: white; border: none;">بحث</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>الاسم</th>
+        <th>البريد</th>
+        <th>رقم الهاتف</th>
+        <th>التقيم</th>
+        <th>تاريخ التسجيل</th>
+        <th>إجراء</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% brokers.forEach(broker => { %>
+        <tr>
+          <td><%= broker.name %></td>
+          <td><%= broker.emil %></td>
+          <td><%= broker.phone %></td>
+          <td><%= broker.Rating %></td>
+          <td><%= broker.created_at.toLocaleString() %></td>
+          <td>
+            <form action="/deletBroker" method="post" onsubmit="return confirmDelete()">
+              <input type="hidden" name="id" value="<%= broker.id %>">
+              <button type="submit">حذف</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <form action="/goadminhome" method="POST" style="display: inline;">
+    <button type="submit" class="logout-btn">ذهاب الي الصفحه الرئيسيه</button>
+</form>
+
+</body>
+<script>
+  function confirmDelete() {
+    return confirm("هل أنت متأكد أنك تريد حذف هذا الوسيط؟");
+  }
+</script>
+
+<script>
+  function confirmDelete() {
+    return confirm("هل أنت متأكد أنك تريد حذف هذا الوسيط؟");
+  }
+
+  // وظيفة البحث
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("input", function () {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+
+    rows.forEach(row => {
+      const nameCell = row.querySelector("td");
+      if (nameCell) {
+        const nameText = nameCell.textContent.toLowerCase();
+        row.style.display = nameText.includes(filter) ? "" : "none";
+      }
+    });
+  });
+</script>
+
+
+</html>

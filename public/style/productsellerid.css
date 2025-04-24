@@ -1,8 +1,11 @@
 body {
-    background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
-      background-size: cover;
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
 }
 
+/* الحاوية العامة */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -14,23 +17,59 @@ body {
 .product-form {
     flex: 1;
     max-width: 350px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1); /* خلفية شفافة */
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px); /* تأثير زجاجي */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: sticky;
     top: 20px;
     height: fit-content;
+    color: #fff;
 }
 
 .product-form label {
     font-weight: bold;
     margin-top: 10px;
+    display: block;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    outline: none;
+}
+
+.product-form input::placeholder,
+.product-form textarea::placeholder {
+    color: #ddd;
 }
 
 .product-form button {
     width: 100%;
     margin-top: 15px;
+    padding: 10px;
+    background: #2980b9;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.product-form button:hover {
+    background: #1c5980;
 }
 
 /* تنسيق قائمة المنتجات */
@@ -40,61 +79,8 @@ body {
 }
 
 .card {
-    transition: 0.3s ease-in-out;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: scale(1.03);
-}
-
-/* تصغير حجم صور المنتجات */
-.card-img-top {
-    height: 200px; /* تحديد الارتفاع */
-    object-fit: cover; /* التأكد من أن الصورة لا تفقد تناسقها */
-}
-
-/* أزرار التعديل والحذف */
-.card-body .btn {
-    width: 48%;
-}
-
-.logout-btn {
-    margin-top: 20px;
-    display: block;
-    width: 150px;
-    padding: 10px;
-    text-align: center;
-    border: none;
-    background: #007bff;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.logout-btn:hover {
-    background: #0056b3;
-}
-
-/* تحسين التجاوب */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .product-form {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .products-container {
-        margin-left: 0;
-    }
-
-    .card-img-top {
-        height: 180px;
-    }
-}
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);

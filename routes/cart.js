@@ -1,11 +1,47 @@
 const express = require("express");
 const cartRoutes = express.Router();
-const {add_to_cart,viwe_cart,get_user} = require("../controllers/cart");
+const { get_user } = require("../controllers/cart");
+const { pool } = require("../utils/db");
 
-cartRoutes.post("/add_to_cart", add_to_cart);
+cartRoutes.get("/get_user", get_user);
 
-cartRoutes.post("/viwe_cart", viwe_cart);
+// إضافة منتج إلى السلة
+cartRoutes.post('/add-to-cart', (req, res) => {
+    const { userId, productId } = req.body;
 
-cartRoutes.get("/get_user",get_user);
+    pool.query(
+        'INSERT INTO cart (user_id, product_id) VALUES (?, ?)',
+        [userId, productId],
+        (error, result) => {
+            if (error) {
+                console.error("Error inserting into cart:", error);
+                return res.status(500).json({ success: false, message: "Database error" });
+            }
 
-module.exports = {cartRoutes};
+            res.json({ success: true });
+        }
+    );
+});
+
+// عرض المنتجات في السلة
+cartRoutes.get('/cart/:userId', (req, res) => {
+    const userId = req.params.userId;
+
+    const query = `
+        SELECT p.id, p.name, p.price, p.image 
+        FROM cart c 
+        JOIN products p ON c.product_id = p.id 
+        WHERE c.user_id = ?
+    `;
+
+    pool.query(query, [userId], (err, cartItems) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('خطأ في جلب المنتجات');
+        }
+
+        res.render('cart', { cartItems });
+    });
+});
+
+module.exports = { cartRoutes };

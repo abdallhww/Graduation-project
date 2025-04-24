@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الرسائل الداعمة</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .timestamp {
+      color: #aaa;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <h1>الرسائل الخاصة بك</h1>
+
+  <% if (showmassf.length === 0) { %>
+    <p>لا توجد رسائل حالياً.</p>
+  <% } else { %>
+    <% showmassf.forEach(msg => { %>
+      <div class="card">
+        <p><strong>الحالة:</strong> <%= msg.status %></p>
+        <p><strong>الرسالة:</strong> <%= msg.message %></p>
+        <p class="timestamp"><%= msg.created_at.toLocaleString() %></p>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <button onclick="goBack()">رجوع</button>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+</body>
+</html>

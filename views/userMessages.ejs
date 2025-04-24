@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>رسائلي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      padding: 30px;
+      background: linear-gradient(135deg, #f0f4f7, #d9e2ec);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      text-align: center;
+    }
+    th {
+      background-color: #00796b;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>رسائلي</h2>
+
+  <% if (userMessages.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>الرسالة</th>
+          <th>الحالة</th>
+          <th>تاريخ الإرسال</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% userMessages.forEach(msg => { %>
+          <tr>
+            <td><%= msg.message %></td>
+            <td><%= msg.status %></td>
+            <td><%= new Date(msg.created_at).toLocaleString() %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p style="text-align: center;">لا توجد رسائل حتى الآن.</p>
+  <% } %>
+  <button onclick="goBack()">رجوع</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

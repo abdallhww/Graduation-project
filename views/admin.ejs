@@ -3,84 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>لوحة التحكم - الأدمن</title>
+  <link rel="stylesheet" href="/style/admin.css" />
   <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #222;
-      padding: 20px;
+    .section-title {
+      grid-column: 1 / -1;
       text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      padding: 40px;
-    }
-    .card {
-      position: relative;
-      background-color: #34495e;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      overflow: hidden;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      cursor: pointer;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: 5px;
-      background: linear-gradient(to bottom, #f1c40f, #e67e22, #e74c3c);
-      animation: moveStripe 2s linear infinite;
-    }
-    @keyframes moveStripe {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 0% 100%; }
-    }
-    .card h2 {
-      margin-bottom: 20px;
-    }
-    .card button {
-      background-color: #1abc9c;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 15px;
+      font-size: 24px;
       font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .card button:hover {
-      background-color: #16a085;
-      transform: scale(1.05);
-      cursor: pointer;
-    }
-    form {
-      margin: 0;
+      margin: 30px 0 10px;
+      color: #ffffff;
+      border-bottom: 2px solid #1abc9c;
+      padding-bottom: 10px;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>لوحة تحكم الأدمن</h1>
+    <div class="admin-info">
+      <img src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" alt="Admin Icon">
+      <span>Abdallh</span>
+    </div>
   </header>
 
   <div class="dashboard">
+
+    <!-- قسم الإدارة -->
+    <div class="section-title">قسم الإدارة</div>
+
     <div class="card">
       <h2>رسائل الدعم الفني</h2>
       <form action="/showmassge" method="get">
@@ -88,26 +39,73 @@
       </form>
     </div>
 
+
+    <!-- قسم الوسطاء -->
+    <div class="section-title">قسم الوسطاء</div>
+
     <div class="card">
-      <h2>الطلبات (Orders)</h2>
+      <h2>إدارة الوسطاء</h2>
+      <form action="/viweBrokers" method="get">
+        <button type="submit">عرض الوسطاء</button>
+      </form>
+    </div>
+
+    <!-- قسم التجار -->
+    <div class="section-title">قسم التجار</div>
+
+    <div class="card">
+      <h2>إدارة التجار</h2>
+      <form action="/showMerchants" method="get">
+        <button type="submit">عرض التجار</button>
+      </form>
+    </div>
+
+    <!-- قسم الطلبات -->
+    <div class="section-title">قسم الطلبات</div>
+
+    <div class="card">
+      <h2>الطلبات</h2>
       <form action="/showOrders" method="get">
         <button type="submit">عرض الطلبات وحالاتها</button>
       </form>
     </div>
 
+    <!-- قسم المبيعات -->
+    <div class="section-title">قسم المبيعات</div>
+
     <div class="card">
-      <h2>إدارة الوسطاء</h2>
-      <form action="/showBrokers" method="get">
-        <button type="submit">عرض الوسطاء</button>
+      <h2>مبيعات اليوم</h2>
+      <form action="/sales/today" method="get">
+        <button type="submit">عرض مبيعات اليوم</button>
       </form>
     </div>
 
     <div class="card">
-      <h2>الأسئلة الشائعة</h2>
-      <form action="/faqManager" method="get">
-        <button type="submit">إدارة الأسئلة</button>
+      <h2>مبيعات الأسبوع</h2>
+      <form action="/sales/week" method="get">
+        <button type="submit">عرض مبيعات الأسبوع</button>
       </form>
     </div>
+
+    <div class="card">
+      <h2>مبيعات الشهر</h2>
+      <form action="/sales/month" method="get">
+        <button type="submit">عرض مبيعات الشهر</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>إجمالي المبيعات</h2>
+      <form action="/sales/total" method="get">
+        <button type="submit">عرض الإجمالي</button>
+      </form>
+    </div>
+
   </div>
+
+  <form action="/logout" method="POST" style="display: inline;">
+    <button type="submit" class="logout-btn">تسجيل خروج</button>
+  </form>
+
 </body>
 </html>

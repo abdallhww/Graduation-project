@@ -233,4 +233,24 @@ const updateusers = async (req, res, next) => {
   }
 };
 
-module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes ,logout};
+const showUserMessages = (req, res, next) => {
+  const userId = req.session.userId;
+
+  const query = `
+    SELECT message, status, created_at 
+    FROM support_messages 
+    WHERE user_id = ? 
+    ORDER BY created_at DESC
+  `;
+
+  pool.query(query, [userId], (err, rows) => {
+    if (err) return next(err);
+
+    res.render("userMessages", {
+      userMessages: rows,
+    });
+  });
+};
+
+
+module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes , logout , showUserMessages};

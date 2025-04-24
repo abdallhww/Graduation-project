@@ -1,7 +1,7 @@
 /* تنسيق عام */
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #ff2770, #313638, #808080);
+    background: linear-gradient(135deg, #2c3e50, #3498db);
     margin: 0;
     padding: 0;
     direction: rtl;
@@ -157,7 +157,7 @@ h3 {
 
 /* زر الشراء */
 .buy-button {
-    background-color: #4caf50;
+    background-color: #402fc2;
     color: white;
     padding: 10px;
     width: 100%;
@@ -169,7 +169,7 @@ h3 {
 }
 
 .buy-button:hover {
-    background-color: #388e3c;
+    background-color: #2f00ff;
 }
 body {
     font-family: 'Roboto', sans-serif;
@@ -305,7 +305,7 @@ border-radius: 10px; /* لضمان زوايا دائرية (اختياري) */
 .order-button {
     width: 100%;
     padding: 10px;
-    background: #28a745;
+    background: #2510af;
     color: white;
     border: none;
     cursor: pointer;

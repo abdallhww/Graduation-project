@@ -17,7 +17,8 @@ const { productsRouter } = require("./routes/products");
 const { cartRoutes } = require("./routes/cart");
 const { reviewsRoutes} = require("./routes/reviews");
 const { productfilter } = require("./routes/productfilter");
-const { admanRouter }= require("./routes/adman");
+const { admanRouter } = require("./routes/adman");
+const { orderRouter } = require("./routes/order");
 
 
 app.use((req, res, next) => {
@@ -66,6 +67,8 @@ app.use('/', likesRoutes);
 //app.use('/api/likes', likesRoutes); 
 
 app.use("/",admanRouter);
+
+app.use("/",orderRouter);
 
 
 

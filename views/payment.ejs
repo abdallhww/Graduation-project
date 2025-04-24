@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>اختيار طريقة الدفع</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            direction: rtl;
+            background: linear-gradient(to left, #222831, #393E46);
+            color: #EEEEEE;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .order-info {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 40px;
+            width: 400px;
+            margin: 0 auto 40px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .order-info p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 300px;
+        }
+
+        .payment-btn {
+            background-color: #00ADB5;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .payment-btn:hover {
+            background-color: #007c80;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>اختيار طريقة الدفع</h1>
+
+    <!-- معلومات الطلب -->
+    <div class="order-info">
+        <p><strong>رقم الطلب:</strong> <%= order.id %></p>
+        <p><strong>تاريخ الطلب:</strong> <%= order.created_at.toLocaleString() %></p>
+        <p><strong>إجمالي السعر:</strong> $<%= order.total.toFixed(2) %></p>
+    </div>
+
+    <div class="payment-options">
+        <!-- الدفع عند الاستلام -->
+        <div class="payment-option">
+            <form action="/complete-payment" method="POST">
+                <input type="hidden" name="orderId" value="<%= order.id %>">
+                <input type="hidden" name="paymentMethod" value="الدفع عند الاستلام">
+                <button type="submit" class="payment-btn">الدفع عند الاستلام</button>
+            </form>
+        </div>
+
+        <!-- الدفع ببطاقة إلكترونية -->
+        <div class="payment-option">
+            <form action="/complete-payment" method="POST">
+                <input type="hidden" name="orderId" value="<%= order.id %>">
+                <input type="hidden" name="paymentMethod" value="بطاقة إلكترونية">
+                <button type="submit" class="payment-btn">الدفع ببطاقة إلكترونية</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

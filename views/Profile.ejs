@@ -46,14 +46,17 @@
                 </form>
             </div>
         </div>
+        <form action="/user/messages" method="get" style="margin-top: 20px;">
+            <button type="submit" class="update-btn">عرض رسائلي</button>
+          </form>
+          
+
+        <form action="/orders/<%= user.id %>" method="GET" style="margin-top: 20px;">
+            <button type="submit" class="update-btn">عرض طلباتي</button>
+        </form>
+
+        <button onclick="goBack()">رجوع</button>
     </div>
-
-    <form action="/user/messages" method="get" style="margin-top: 20px;">
-  <button type="submit" class="update-btn">عرض رسائلي</button>
-</form>
-
-
-    <button onclick="goBack()">رجوع</button>
 
     <script>
       function goBack() {

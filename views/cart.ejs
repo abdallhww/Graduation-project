@@ -42,25 +42,45 @@
         .cart-item-details p {
             margin: 5px 0 0;
         }
+        .gradient-btn {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .delete-btn {
+            background: crimson;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .total-price {
+            margin-top: 20px;
+            font-size: 1.3em;
+            text-align: right;
+        }
+
     </style>
 </head>
 <body>
+    
     <form action="/Viewproducts" method="get" style="display: inline;">
-        <button type="submit" style="
-          background: linear-gradient(135deg, #4e54c8, #8f94fb);
-          border: none;
-          color: white;
-          padding: 12px 24px;
-          font-size: 16px;
-          border-radius: 12px;
-          cursor: pointer;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-          transition: all 0.3s ease;
-        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-          عرض المنتجات
-        </button>
-      </form>
-      
+        <button type="submit" class="gradient-btn">عرض المنتجات</button>
+    </form>
+
     <div class="cart-container">
         <h2>سلة المشتريات</h2>
         <% if (cartItems.length === 0) { %>
@@ -68,14 +88,29 @@
         <% } else { %>
             <% cartItems.forEach(item => { %>
                 <div class="cart-item">
-                    <img src="/images/<%= item.image %>" alt="<%= item.name %>">
+                    <img src="<%= item.image %>" alt="<%= item.name %>">
                     <div class="cart-item-details">
                         <h4><%= item.name %></h4>
-                        <p>السعر: <%= item.price %> شيكل</p>
+                        <p>السعر: $<%= parseFloat(item.price).toFixed(2) %></p>
                     </div>
+                    <form action="/cart/delete" method="POST" style="display:inline;">
+                        <input type="hidden" name="cart_item_id" value="<%= item.cart_item_id %>">
+                        <input type="hidden" name="product_id" value="<%= item.product_id %>">
+                        <input type="hidden" name="user_id" value="<%= userId %>">
+                        <button type="submit" class="delete-btn">حذف</button>
+                    </form>
+                    
                 </div>
             <% }); %>
+            <div class="total-price">
+                <strong>الإجمالي: $<%= totalPrice %></strong>
+            </div>
         <% } %>
+
+        <form action="/submit-order/:userId" method="POST" style="display:inline;">
+            <button type="submit" class="delete-btn"> تسجيل طلب</button>
+          </form>
     </div>
+
 </body>
 </html>

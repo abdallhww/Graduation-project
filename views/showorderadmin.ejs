@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إدارة الطلبات</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      padding: 40px;
+      margin: 0;
+      direction: rtl;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      background-color: #ffffffaa;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #009688;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+
+    button {
+      background-color: #009688;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      font-size: 14px;
+      border-radius: 8px;
+      margin: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00796b;
+      transform: scale(1.05);
+    }
+
+    .delete-btn {
+      background-color: #e74c3c;
+    }
+
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+
+    form {
+      display: inline;
+    }
+
+    select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      margin: 5px 0;
+    }
+    .search-input {
+  padding: 10px 15px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #009688;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0,150,136,0.4);
+}
+
+  </style>
+</head>
+<body>
+
+  <h2>إدارة الطلبات</h2>
+  <h3>عرض منتجات طلب</h3>
+  <form action="/searchOrderItems" method="get" style="margin-bottom: 20px; text-align: center;">
+    <input type="number" name="orderId" placeholder="ادخل رقم الطلب" required class="search-input" />
+    <button type="submit">بحث</button>
+  </form>
+  <hr>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>رقم الطلب</th>
+        <th>اسم العميل</th>
+        <th>طريقة الدفع</th>
+        <th>الحالة</th>
+        <th>السعر الإجمالي</th>
+        <th>تاريخ الإنشاء</th>
+        <th>تعديل / حذف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(order => { %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.username %></td>
+          <td><%= order.payment_method %></td>
+          <td><%= order.status %></td>
+          <td><%= order.total_price %> ر.س</td>
+          <td><%= new Date(order.created_at).toLocaleString('ar-EG') %></td>
+          <td>
+            <!-- فورم تعديل الحالة -->
+            <form action="/updateOrderStatus" method="post">
+              <input type="hidden" name="id" value="<%= order.id %>">
+              <select name="status">
+                <option value="قيد المعالجة" <%= order.status === 'قيد المعالجة' ? 'selected' : '' %>>قيد المعالجة</option>
+                <option value="تم الشحن" <%= order.status === 'تم الشحن' ? 'selected' : '' %>>تم الشحن</option>
+                <option value="تم التوصيل" <%= order.status === 'تم التوصيل' ? 'selected' : '' %>>تم التوصيل</option>
+                <option value="ملغي" <%= order.status === 'ملغي' ? 'selected' : '' %>>ملغي</option>
+              </select>
+              <button type="submit">تحديث</button>
+            </form>
+
+            <!-- فورم حذف الطلب -->
+            <form action="/deleteOrder" method="post" onsubmit="return confirm('هل أنت متأكد من حذف هذا الطلب؟');">
+              <input type="hidden" name="id" value="<%= order.id %>">
+              <button type="submit" class="delete-btn">🗑 حذف</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <form action="/goadminhome" method="POST" style="display: inline;">
+    <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
+  </form>
+
+  <button onclick="goBack()">رجوع</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+</body>
+</html>

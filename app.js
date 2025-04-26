@@ -19,6 +19,7 @@ const { reviewsRoutes} = require("./routes/reviews");
 const { productfilter } = require("./routes/productfilter");
 const { admanRouter } = require("./routes/adman");
 const { orderRouter } = require("./routes/order");
+const { adminorder } = require("./routes/adminorder");
 
 
 app.use((req, res, next) => {
@@ -70,6 +71,7 @@ app.use("/",admanRouter);
 
 app.use("/",orderRouter);
 
+app.use("/",adminorder);
 
 
 app.use((err, req, res, next) => {

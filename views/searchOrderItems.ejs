@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تفاصيل منتجات الطلب</title>
+  <link rel="stylesheet" href="/style/admin.css" />
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>تفاصيل منتجات الطلب</h1>
+  </header>
+
+  <button onclick="goBack()">رجوع</button>
+
+    <% if (error) { %>
+      <p style="color: red;"><%= error %></p>
+    <% } %>
+
+    <% if (items.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>صورة المنتج</th>
+            <th>اسم المنتج</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>التصنيف</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach(item => { %>
+            <tr>
+              <td><img src="<%= item.image %>" alt="صورة المنتج"></td>
+              <td><%= item.product_name %></td>
+              <td><%= item.quantity %></td>
+              <td><%= item.price %> $</td>
+              <td><%= item.category %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+</body>
+</html>

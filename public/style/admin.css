@@ -105,3 +105,20 @@ body {
     transform: scale(1.05);
     cursor: pointer;
   }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+    }

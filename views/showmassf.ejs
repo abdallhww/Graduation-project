@@ -34,6 +34,7 @@
         <p><strong>الحالة:</strong> <%= msg.status %></p>
         <p><strong>الرسالة:</strong> <%= msg.message %></p>
         <p class="timestamp"><%= msg.created_at.toLocaleString() %></p>
+        <p claas="timestamp"><strong>رد:  </strong><%= msg.reply %></p>
       </div>
     <% }) %>
   <% } %>

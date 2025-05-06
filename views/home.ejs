@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,15 +19,14 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #2c3e50, #3498db);
-      margin: 0;
-      padding: 0;
       color: white;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
+      padding-top: 120px;
     }
 
     .header {
@@ -47,7 +46,7 @@
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: bold;
       color: #f39c12;
     }
@@ -68,25 +67,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      margin-top: 130px;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease forwards;
     }
 
     h3.dd {
       font-size: 3em;
       font-weight: bold;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
     .welcome-section {
       background-color: #34495e;
-      padding: 40px;
+      padding: 40px 30px;
       border-radius: 16px;
       box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      max-width: 600px;
+      max-width: 700px;
+      margin-bottom: 50px;
     }
 
     .welcome-section h2 {
@@ -98,7 +97,8 @@
     .welcome-section p {
       font-size: 18px;
       color: #ecf0f1;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      line-height: 1.7;
     }
 
     .btn {
@@ -109,7 +109,9 @@
       border: none;
       border-radius: 8px;
       font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+      margin-top: 20px;
     }
 
     .btn:hover {
@@ -117,28 +119,53 @@
       transform: scale(1.05);
       cursor: pointer;
     }
+
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(50px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      .logo {
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <header class="header">
     <h1 class="logo">Shop</h1>
     <nav>
-      <a href="#" class="active">الصفحة الرئيسية</a>
-      <a href="/Technicalsupport">دعم فني</a>
+      <a href="#" class="active">الرئيسية</a>
+      <a href="/Technicalsupport">الدعم الفني</a>
       <a href="/Profile">ملف شخصي</a>
       <a href="/Brokers">الوسطاء</a>
-      <a href="/Viewproducts">عرض المنتجات</a>
+      <a href="/Viewproducts">منتجاتنا</a>
     </nav>
   </header>
 
   <div class="welcome-container">
-    <h3 class="dd">Welcome</h3>
-    
+    <h3 class="dd">مرحبًا بك!</h3>
+
     <div class="welcome-section">
-      <h2>مرحبًا بك في موقعنا</h2>
-      <p>نحن نقدم أفضل الخدمات لتلبية احتياجاتك!</p>
-      <a href="/Viewproducts" class="btn">استكشاف المنتجات</a>
+      <h2>اكتشف عالم التسوق المميز</h2>
+      <p>في موقعنا نقدم لك مجموعة واسعة من المنتجات عالية الجودة التي تلبي جميع احتياجاتك ورغباتك. نضمن لك تجربة تسوق فريدة ومريحة مع أفضل الأسعار.</p>
+      
+      <p>سواء كنت تبحث عن منتجات إلكترونية، ملابس عصرية، أو أدوات منزلية، ستجد كل ذلك وأكثر لدينا. فريقنا ملتزم بتقديم خدمة عملاء استثنائية لضمان رضاك التام.</p>
+      
+      <p>انضم إلى آلاف العملاء السعداء وابدأ رحلتك معنا اليوم!</p>
+
+      
     </div>
   </div>
 

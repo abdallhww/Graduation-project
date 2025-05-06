@@ -97,15 +97,13 @@ const goadminhome = (req, res, next) => {
     const { name } = req.query;
 
     const sql = "SELECT * FROM brokers WHERE name LIKE ?";
-    const searchValue = `%${name}%`; // للبحث الجزئي
+    const searchValue = `%${name}%`; // للبحث 
 
     pool.query(sql, [searchValue], (err, results) => {
         if (err) {
             console.error("خطأ في البحث عن الوسيط:", err);
             return res.status(500).send("حدث خطأ أثناء البحث.");
         }
-
-        // عرض نفس صفحة الوسطاء مع النتائج
         res.render("adminbroker", { brokers: results });
     });
 };
@@ -120,6 +118,16 @@ const showmassf = (req, res, next) => {
   });
 };
 
+const replyMessage = async (req, res) => {
+  const { id, reply } = req.body;
+  try {
+     pool.query('UPDATE support_messages SET reply = ? WHERE id = ?', [reply, id]);
+    res.redirect('back');
+  } catch (err) {
+    console.error('خطأ أثناء تحديث الرد:', err);
+    res.status(500).send('حدث خطأ أثناء تحديث الرد');
+  }
+};
 
   module.exports = { showmassge,updateStatus,getSupportStats,goadminhome,deleteMessage,
-    viweBrokers,deletBroker,searchBroker,showmassf};
+    viweBrokers,deletBroker,searchBroker,showmassf,replyMessage};

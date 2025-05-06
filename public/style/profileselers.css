@@ -61,7 +61,7 @@ body {
 }
 
 .sidebar button:hover {
-  background-color: #16a085;
+  background-color: #00362b;
   transform: scale(1.05);
   cursor: pointer;
 }
@@ -111,7 +111,7 @@ body {
 }
 
 .logout-btn {
-  background-color: #e74c3c;
+  background-color: #1abc9c;
 }
 
 .upload-btn:hover,
@@ -124,7 +124,7 @@ body {
 button[onclick="goBack()"] {
   display: block;
   margin: 30px auto 0;
-  background-color: #f39c12;
+  background-color: #1abc9c;
   border: none;
   padding: 10px 20px;
   font-weight: bold;
@@ -134,6 +134,6 @@ button[onclick="goBack()"] {
 }
 
 button[onclick="goBack()"]:hover {
-  background-color: #e67e22;
+  background-color: #012f26;
   transform: scale(1.05);
 }

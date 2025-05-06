@@ -12,7 +12,9 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #ff2770, #1a1a2e);
+  background: linear-gradient(135deg, #1a2a6c, #053176, #372dfd);
+  background-size: 400% 400%;
+  animation: moveBackground 15s ease infinite;
   overflow: hidden;
 }
 
@@ -22,45 +24,49 @@ body {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 40px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   position: relative;
 }
 
 h1 {
-  font-size: 120px;
-  color: white;
+  font-size: 100px;
+  color: #ffffff;
   font-weight: 700;
   animation: float 2s ease-in-out infinite alternate;
-  text-shadow: 4px 4px 20px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
-.error { color: red; }
+
+.error {
+  color: #ff6b6b;
+}
+
 p {
-  font-size: 20px;
-  color: white;
+  font-size: 22px;
+  color: #e0e0e0;
   margin-bottom: 20px;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 18px;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   transition: 0.3s;
-  background: #ff2770;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   color: white;
-  box-shadow: 0 5px 15px rgba(255, 39, 112, 0.4);
+  box-shadow: 0 5px 15px rgba(101, 54, 255, 0.4);
 }
 
 button:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(255, 39, 112, 0.6);
+  box-shadow: 0 8px 25px rgba(101, 54, 255, 0.6);
 }
 
 /* Floating animation */

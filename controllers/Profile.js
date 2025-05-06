@@ -237,7 +237,7 @@ const showUserMessages = (req, res, next) => {
   const userId = req.session.userId;
 
   const query = `
-    SELECT message, status, created_at 
+    SELECT message, status, created_at ,reply
     FROM support_messages 
     WHERE user_id = ? 
     ORDER BY created_at DESC

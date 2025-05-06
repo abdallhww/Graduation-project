@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title><%= title %> Support</title>
   <link rel="stylesheet" href="/style/tecnicals.css"/>
+  
 </head>
 <body>
-  <h1><%= title %> Support</h1>
+  <h1><%= title %> الدعم الفني</h1>
   <p>إذا واجهت أي مشكلة أو تحتاج لمساعدة، يرجى ملء النموذج أدناه وسنقوم بالتواصل معك في أقرب وقت.</p>
 
   <form action="send" method="POST">
@@ -16,7 +17,32 @@
     <textarea name="message" rows="5" placeholder="اكتب رسالتك هنا..." required></textarea>
     <input type="submit" value="إرسال الرسالة" />
   </form>
-  <button onclick="goBack()">Go Back</button>
+
+  <div class="info-section">
+    <h2>📌 إرشادات قبل التواصل معنا:</h2>
+    <ul>
+      <li>تحقق من البريد الإلكتروني المدخل للتأكد من صحة الرد.</li>
+      <li>وصف المشكلة بدقة يساعدنا في خدمتك بشكل أسرع.</li>
+      <li>لا ترسل نفس الرسالة أكثر من مرة.</li>
+    </ul>
+  </div>
+
+  <div class="info-section">
+    <h2>📚 قصص وتجارب مستخدمين:</h2>
+    <p>سارة من جدة: "واجهتني مشكلة في الطلب وتم الرد خلال 12 ساعة، شكراً للدعم الرائع!"</p>
+    <p>أحمد من الرياض: "تم حل مشكلة الدفع بسهولة وبسرعة، فريق مميز."</p>
+  </div>
+
+  <div class="info-section">
+    <h2>❓الأسئلة الشائعة:</h2>
+    <ul>
+      <li><strong>متى أتلقى الرد؟</strong> عادةً خلال 24 ساعة.</li>
+      <li><strong>هل يمكن تعديل الطلب؟</strong> نعم، خلال أول ساعة من تقديمه.</li>
+      <li><strong>هل يوجد رقم للتواصل؟</strong> حالياً التواصل فقط عبر النموذج أو البريد الإلكتروني.</li>
+    </ul>
+  </div>
+
+  <button onclick="goBack()">⬅ العودة</button>
 
   <script>
     function goBack() {

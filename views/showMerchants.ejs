@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>قائمة التجار</title>
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #2178b3);
+      background-size: 400% 400%;
+      animation: moveBackground 15s ease infinite;
+      color: #ffffff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 36px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    th, td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+    }
+
+    th {
+      background-color: rgba(26, 188, 156, 0.8);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #1abc9c;
+    }
+
+    .logout-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: white;
+      cursor: pointer;
+      transition: 0.4s;
+      box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+    }
+
+    .logout-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(255, 65, 108, 0.6);
+    }
+
+    @keyframes moveBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>قائمة التجار</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>الصورة</th>
+      <th>اسم المستخدم</th>
+      <th>البريد الإلكتروني</th>
+      <th>رقم الهاتف</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% merchants.forEach(merchant => { %>
+      <tr>
+        <td><img src="<%= merchant.profile_picture %>" alt="Profile Picture"></td>
+        <td><%= merchant.username %></td>
+        <td><%= merchant.email %></td>
+        <td><%= merchant.phone %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<form action="/goadminhome" method="POST" style="display: inline;">
+    <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
+</form>
+
+</body>
+</html>

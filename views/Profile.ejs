@@ -39,11 +39,9 @@
             </form>
             <div>
                 <form action="/home" method="POST" style="display: inline;">
-                    <button type="submit" class="logout-btn">Home</button>
+                    <button type="submit" class="logout-btn">الصفحه الرئيسيه</button>
                 </form>
-                <form action="/logout" method="POST" style="display: inline;">
-                    <button type="submit" class="logout-btn"> تسجيل خروج</button>
-                </form>
+                
             </div>
         </div>
         <form action="/user/messages" method="get" style="margin-top: 20px;">
@@ -53,6 +51,9 @@
 
         <form action="/orders/<%= user.id %>" method="GET" style="margin-top: 20px;">
             <button type="submit" class="update-btn">عرض طلباتي</button>
+        </form>
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="logout-btn"> تسجيل خروج</button>
         </form>
 
         <button onclick="goBack()">رجوع</button>

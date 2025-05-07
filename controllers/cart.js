@@ -97,4 +97,4 @@ const additem = (req, res) => {
     });
 };
 
-module.exports = { get_user,viewCart,deleteitem,additem};  
+module.exports = { get_user , viewCart , deleteitem , additem };  

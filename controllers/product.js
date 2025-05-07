@@ -223,4 +223,4 @@ const uploadProductImage = async (req, res) => {
   }
 };
  
-module.exports = {addproduct,updateProduct,productsellerid,deleteProduct,uploadProductImage,upload};
+module.exports = { addproduct , updateProduct , productsellerid , deleteProduct , uploadProductImage , upload };

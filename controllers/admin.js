@@ -129,5 +129,5 @@ const replyMessage = async (req, res) => {
   }
 };
 
-  module.exports = { showmassge,updateStatus,getSupportStats,goadminhome,deleteMessage,
-    viweBrokers,deletBroker,searchBroker,showmassf,replyMessage};
+  module.exports = { showmassge , updateStatus , getSupportStats ,goadminhome , deleteMessage ,
+    viweBrokers , deletBroker, searchBroker , showmassf , replyMessage };

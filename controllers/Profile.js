@@ -253,4 +253,4 @@ const showUserMessages = (req, res, next) => {
 };
 
 
-module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes , logout , showUserMessages};
+module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes , logout , showUserMessages };

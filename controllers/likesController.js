@@ -19,4 +19,4 @@ const ubdutlikes = (req, res, next) => {
     });
   };
   
-  module.exports = {ubdutlikes};
+  module.exports = { ubdutlikes };

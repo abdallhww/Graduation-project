@@ -105,4 +105,4 @@ const registration = async (req, res, next) => {
     res.render("404", { errors: { general: "حدث خطأ أثناء التسجيل" }, regusername, regemail, role ,message:null});
   }
 };
-module.exports = {login,registration}; 
+module.exports = { login , registration }; 

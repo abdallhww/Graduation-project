@@ -2,7 +2,7 @@ const express = require("express");
 const reviewsRoutes = express.Router();
 const { pool } = require("../utils/db");
 
-const {add_rait,viwecommint} = require("../controllers/reviews");
+const { add_rait , viwecommint } = require("../controllers/reviews");
 
 reviewsRoutes.post("/evaluate",add_rait);
 
@@ -37,4 +37,4 @@ reviewsRoutes.get('/reviews/:brokerId', async (req, res) => {
 
 
 
-module.exports = {reviewsRoutes};
+module.exports = { reviewsRoutes };

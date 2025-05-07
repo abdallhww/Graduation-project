@@ -1,9 +1,9 @@
 const express = require("express");
 const productfilter = express.Router();
-const {Viewproducts,ViewFoodProducts,
-    ViewElectronicsProducts,ViewClothingProducts,
-    ViewBeautyProducts,ViewFurnitureProducts,
-    ViewBooksProducts,ViewPerfumesProducts}= require("../controllers/productfilter");
+const {Viewproducts , ViewFoodProducts ,
+    ViewElectronicsProducts , ViewClothingProducts ,
+    ViewBeautyProducts ,ViewFurnitureProducts ,
+    ViewBooksProducts , ViewPerfumesProducts}= require("../controllers/productfilter");
 
 productfilter.get('/Viewproducts',Viewproducts);
 
@@ -21,4 +21,4 @@ productfilter.get('/ViewBooksProducts',ViewBooksProducts);
 
 productfilter.get('/ViewPerfumesProducts',ViewPerfumesProducts);
 
-module.exports =  {productfilter};
+module.exports =  { productfilter };

@@ -83,4 +83,4 @@ const showOrders = (req, res) => {
     });
   };
 
-module.exports = { showOrders,searchOrderItems,updateOrderStatus,deleteOrder};  
+module.exports = { showOrders , searchOrderItems , updateOrderStatus , deleteOrder };  

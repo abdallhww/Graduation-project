@@ -147,4 +147,4 @@ const send = (req, res, next) => {
   }
 };
 
-module.exports = { Brokers , Technicalsupport , Viewproducts , Profile ,send};
+module.exports = { Brokers , Technicalsupport , Viewproducts , Profile , send };

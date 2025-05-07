@@ -99,5 +99,5 @@ const ViewPerfumesProducts = (req, res, next) => {
 };
 
   
-  module.exports = {Viewproducts,ViewFoodProducts,ViewElectronicsProducts,
-    ViewClothingProducts,ViewFurnitureProducts,ViewBeautyProducts,ViewBooksProducts,ViewPerfumesProducts};
+  module.exports = { Viewproducts , ViewFoodProducts , ViewElectronicsProducts ,
+    ViewClothingProducts , ViewFurnitureProducts , ViewBeautyProducts , ViewBooksProducts , ViewPerfumesProducts };

@@ -92,4 +92,4 @@ const getUserOrders = (req, res) => {
     });
 };
 
-module.exports = {submitOrder,showPaymentPage,getUserOrders};
+module.exports = { submitOrder , showPaymentPage , getUserOrders };

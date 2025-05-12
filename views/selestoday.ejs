@@ -71,7 +71,8 @@ th, td {
   <% } %>
 
   <p>عدد المنتجات المباعة: <%= totalSales %></p>
-  
+  <p>إجمالي المبلغ: <%= totalAmount.toFixed(2) %> دولار</p>
+
   <form action="/goadminhome" method="POST" style="display: inline;">
     <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
   </form>

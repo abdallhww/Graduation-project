@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تفاصيل المنتج</title>
+  <link rel="stylesheet" href="/style/product-details.css">
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .product-detail-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-detail-container h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .product-detail-container img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .product-detail-container p {
+      font-size: 18px;
+      line-height: 1.8;
+      margin: 10px 0;
+    }
+
+    button {
+      background: #1abc9c;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #16a085;
+    }
+  </style>
+</head>
+<body>
+  <div class="product-detail-container">
+    <h1><%= product.name %></h1>
+    <img src="<%= product.image %>" alt="<%= product.name %>">
+    <p><strong>الوصف:</strong> <%= product.description %></p>
+    <p><strong>السعر:</strong> $<%= product.price %></p>
+    <p><strong>الكمية المتوفرة:</strong> <%= product.stock_quantity %></p>
+    <p><strong>القسم:</strong> <%= product.category %></p>
+    <p><strong>الإعجابات:</strong> <%= product.likes %></p>
+    <button onclick="addToCart('<%= product.id %>')">🛒 إضافة إلى السلة</button>
+    <button onclick="goBack()">⬅ العودة</button>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+    
+    function addToCart(productId) {
+        // الخطوة 1: الحصول على userId من الجلسة
+        fetch('/get_user')
+            .then(response => response.json())
+            .then(userData => {
+                if (!userData.userId) {
+                    alert("يجب تسجيل الدخول أولًا!");
+                    return;
+                }
+    
+                const userId = userData.userId;
+    
+                // الخطوة 2: إرسال الطلب لإضافة المنتج إلى السلة
+                fetch('/add-to-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        productId: productId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("تمت إضافة المنتج إلى السلة!");
+                    } else {
+                        alert("حدث خطأ أثناء الإضافة!");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+    
+            });
+    }
+    </script>
+</body>
+</html>

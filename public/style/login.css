@@ -381,3 +381,17 @@
     z-index: 1050;
     text-align: center;
 }
+.input-box {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #2196F3; /* لون أزرق واضح */
+    font-size: 20px; /* حجم مناسب */
+    z-index: 1;
+}

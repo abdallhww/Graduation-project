@@ -222,5 +222,24 @@ const uploadProductImage = async (req, res) => {
       res.render("productsellerid", { m: "حدث خطأ أثناء رفع الصورة" });
   }
 };
+
+const viewProductDetails = (req, res) => {
+    const productId = req.params.id;
+
+    const query = 'SELECT * FROM products WHERE id = ?';
+    pool.query(query, [productId], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).send('حدث خطأ في قاعدة البيانات');
+        }
+
+        if (results.length === 0) {
+            return res.status(404).send('المنتج غير موجود');
+        }
+
+        const product = results[0];
+        res.render('product-details', { product });
+    });
+};
  
-module.exports = { addproduct , updateProduct , productsellerid , deleteProduct , uploadProductImage , upload };
+module.exports = { addproduct , updateProduct , productsellerid , deleteProduct , uploadProductImage , upload ,viewProductDetails};

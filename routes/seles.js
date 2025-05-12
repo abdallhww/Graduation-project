@@ -1,13 +1,13 @@
 const express = require("express");
 const selesRoutes = express.Router();
-const { salestoday , salesweek , salesmonth, salestotal  } = require("../controllers/seles");
+const { salestoday , salestotal , filterSales , getSalesData} = require("../controllers/seles");
 
 selesRoutes.get('/salestoday', salestoday);
 
-selesRoutes.get('/salesweek', salesweek);
-
-selesRoutes.get('/salesmonth', salesmonth);
-
 selesRoutes.get('/salestotal', salestotal);
+
+selesRoutes.get('/filter', filterSales);
+
+selesRoutes.get('/saleschart',getSalesData);
 
 module.exports =  { selesRoutes };

@@ -76,7 +76,7 @@ app.use("/",adminorder);
 
 app.use("/",adminseller);
 
-app.use("/",selesRoutes);
+app.use("/",selesRoutes); 
 
 
 app.use((err, req, res, next) => {

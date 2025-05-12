@@ -14,84 +14,14 @@ const salestoday = (req, res) => {
       return res.status(500).send('حدث خطأ أثناء عرض المبيعات');
     }
 
+    const totalAmount = results.reduce((total, item) => total + (item.price * item.quantity), 0);
+
     results.forEach(item => {
         item.creatdat = new Date(item.creatdat).toLocaleDateString();
       });
 
-    res.render('selestoday', { sales: results ,totalSales: results.length });
+    res.render('selestoday', { sales: results ,totalSales: results.length ,totalAmount});
   });
-};
-
-const salesweek = (req, res) => {
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setDate(endDate.getDate() - 7); // بداية الأسبوع الماضي
-
-    const formattedStart = startDate.toISOString().slice(0, 10);
-    const formattedEnd = endDate.toISOString().slice(0, 10);
-
-    const salesQuery = `
-      SELECT p.name AS product_name, p.price, o.quantity, o.creatdat
-      FROM order_items o
-      JOIN products p ON o.product_id = p.id
-      WHERE DATE(o.creatdat) BETWEEN ? AND ?
-    `;
-
-    pool.query(salesQuery, [formattedStart, formattedEnd], (err, results) => {
-      if (err) {
-        console.error('خطأ أثناء جلب المبيعات الأسبوعية:', err);
-        return res.status(500).send('حدث خطأ أثناء عرض مبيعات الأسبوع');
-      }
-
-      // تحويل creatdat إلى كائن تاريخ صالح
-      results.forEach(item => {
-        item.creatdat = new Date(item.creatdat).toLocaleDateString(); // تحويل creatdat إلى تنسيق تاريخ مناسب
-      });
-
-      res.render('salesweek', {
-        sales: results,
-        startDate: formattedStart,
-        endDate: formattedEnd,
-        totalSales: results.length
-      });
-    });
-};
-
-
-const salesmonth = (req, res) => {
-    const endDate = new Date();
-    const startDate = new Date();
-    startDate.setMonth(endDate.getMonth() - 1); // بداية الشهر الماضي
-
-    const formattedStart = startDate.toISOString().slice(0, 10);
-    const formattedEnd = endDate.toISOString().slice(0, 10);
-
-    const salesQuery = `
-      SELECT p.name AS product_name, p.price, o.quantity, o.creatdat
-      FROM order_items o
-      JOIN products p ON o.product_id = p.id
-      WHERE DATE(o.creatdat) BETWEEN ? AND ?
-    `;
-
-    pool.query(salesQuery, [formattedStart, formattedEnd], (err, results) => {
-      if (err) {
-        console.error('خطأ أثناء جلب مبيعات الشهر:', err);
-        return res.status(500).send('حدث خطأ أثناء عرض مبيعات الشهر');
-      }
-
-      // تحويل last_date إلى تنسيق تاريخ مناسب
-      results.forEach(item => {
-        item.creatdat = new Date(item.creatdat).toLocaleDateString();
-      });
-
-      // إرسال النتائج للعرض مع عدد المنتجات
-      res.render('salesmonth', {
-        sales: results,
-        startDate: formattedStart,
-        endDate: formattedEnd,
-        totalSales: results.length // عرض عدد المنتجات المباعة
-      });
-    });
 };
 
 const salestotal = (req, res) => {
@@ -112,13 +42,79 @@ const salestotal = (req, res) => {
         item.creatdat = new Date(item.creatdat).toLocaleDateString();
       });
 
-      // إرسال النتائج للعرض مع عدد المنتجات المباعة
+      const totalAmount = results.reduce((total, item) => total + (item.price * item.quantity), 0);
+
       res.render('salesalltime', {
         sales: results,
-        totalSales: results.length // عرض عدد المنتجات المباعة
+        totalSales: results.length,
+        totalAmount
       });
     });
 };
 
+const filterSales = (req, res) => {
+  const { from, to } = req.query;
 
-module.exports = { salestoday , salesweek , salesmonth , salestotal };
+  if (!from || !to) {
+    return res.send('يرجى تحديد تاريخ البداية والنهاية');
+  }
+
+  const salesQuery = `
+    SELECT p.name AS product_name, p.price, o.quantity, o.creatdat
+    FROM order_items o
+    JOIN products p ON o.product_id = p.id
+    WHERE DATE(o.creatdat) BETWEEN ? AND ?
+  `;
+
+  pool.query(salesQuery, [from, to], (err, results) => {
+    if (err) {
+      console.error('خطأ أثناء تصفية المبيعات حسب التاريخ:', err);
+      return res.status(500).send('حدث خطأ أثناء تصفية المبيعات');
+    }
+
+    // تنسيق التاريخ للعرض
+    results.forEach(item => {
+      item.creatdat = new Date(item.creatdat).toLocaleDateString();
+    });
+
+    
+    const totalSales = results.reduce((total, item) => total + item.quantity, 0);
+    const totalAmount = results.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+    res.render('salesalltime', {
+      sales: results,
+      totalSales,
+      totalAmount
+    });
+  });
+};
+
+const getSalesData = (req, res) => {
+  // الاستعلام للحصول على مبيعات حسب التاريخ (مثال لمبيعات الشهر)
+  const query = `
+  SELECT DATE(oi.creatdat) AS date, SUM(oi.quantity * p.price) AS sales
+  FROM order_items oi
+  JOIN products p ON oi.product_id = p.id
+  WHERE oi.creatdat BETWEEN '2023-01-01' AND '2023-01-31'
+  GROUP BY DATE(oi.creatdat)
+`;
+
+  pool.query(query, (err, results) => {
+    if (err) {
+      console.log('Error fetching sales data:', err);
+      return res.status(500).send('Error fetching data');
+    }
+
+    // تحضير البيانات لعرضها في الرسم البياني
+    const salesData = {
+      labels: results.map(row => row.date), // تواريخ المبيعات
+      values: results.map(row => row.sales) // قيم المبيعات
+    };
+
+    // إرسال البيانات إلى الصفحة
+    console.log(salesData);
+    res.render('saleschart', { salesData });
+  });
+};
+
+module.exports = { salestoday , salestotal , filterSales , getSalesData};

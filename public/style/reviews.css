@@ -80,8 +80,8 @@ a {
 }
 
 a:hover {
-    color: #3b10d3;
-    background: linear-gradient(45deg, #3737b9, #3b33ae);
+    color: #250eba;
+   
 
 }
 
@@ -109,4 +109,18 @@ button.logout-btn {
 button.logout-btn:hover {
     background: linear-gradient(45deg, #360f84, #2d0b8b);
     transform: scale(1.1);
+}
+.choose-broker-btn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #0255ae;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.choose-broker-btn:hover {
+    background-color: #0056b3;
 }

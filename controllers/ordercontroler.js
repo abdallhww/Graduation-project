@@ -30,6 +30,7 @@ const submitOrder = (req, res) => {
             if (err) return res.status(500).send('خطأ في إنشاء الطلب');
 
             const orderId = orderResult.insertId;
+            console.log(orderId);
 
             const itemsValues = cartItems.map(item => [
                 orderId,
@@ -51,7 +52,7 @@ const submitOrder = (req, res) => {
                 pool.query(clearCartQuery, [userId], (err) => {
                     if (err) console.warn('خطأ في حذف السلة بعد الطلب');
 
-                    res.render('payment', { order: { id: orderId, total: totalPrice,created_at: new Date(), payment_method: 'كاش' } 
+                    res.render('payment', { order: { id: orderId, total: totalPrice,created_at: new Date(), payment_method: 'كاش',orderId  } 
                     });
                     
 

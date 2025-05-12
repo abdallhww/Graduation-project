@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="/style/reviews.css">
 </head>
 <body>
+
+
     <% brokers.forEach(broker => { %>
         <div class="broker">
+        <h2> <%=brokerId %></h2>
             <img src="<%= broker.image %>" alt="<%= broker.name %>">
             <h3>الاسم : <%= broker.name %></h3>
             <h3>رقم هاتف : <%= broker.phone %></h3>
-            <p><%= broker.details %></p>
+            <p>سيره ذاتيه: <%= broker.details %></p>
             <a href="<%= broker.website %>" target="_blank">
                 <i class="fas fa-globe"></i>
             </a>
@@ -27,6 +30,12 @@
             <div class="star-rating">
                 <h3> <%= broker.Rating %> </h3> <i class="fas fa-star"></i>
             </div>
+            
+ 
+        <form action="/selbro/<%= brokerId %>" method="post" style="display: inline;">
+  <button type="submit" class="logout-btn"> اختيار وسيط</button>
+</form>
+
         </div> 
     <% }); %> 
     <h1>تعليقات على الوسيط</h1>
@@ -46,19 +55,15 @@
         <p>لا توجد تعليقات لهذا الوسيط.</p>
     <% } %>
 
-    
-
-    <form action="/home" method="POST" style="display: inline;">
-        <button type="submit" class="logout-btn">الصفحة الرئيسية</button>
-    </form>
-
-    <button class="logout-btn" onclick="goBack()">رجوع</button>
+          <button onclick="goBack()" class="logout-btn">رجوع</button>
+    </div>
 
     <script>
       function goBack() {
         window.history.back();
       }
     </script>
+   
 
 </body>
 </html>

@@ -61,6 +61,20 @@ const Brokers = (req, res, next) => {
   });
 };
 
+const Brokers2 = (req, res, next) => {
+  const userId = req.session.userId;
+  const orderId = req.query.orderId; // 👈 استلام رقم الطلب من الرابط
+
+  console.log(orderId);
+
+  const query = "SELECT * FROM brokers";
+  pool.query(query, (err, rows) => {
+    if (err) return next(err);
+    res.render("Brokers2", { brokers: rows, userId, orderId }); // 👈 تمرير orderId للصفحة
+  });
+};
+
+
 const Viewproducts = (req, res, next) => {
 
   const userId = req.session.userId;
@@ -72,7 +86,7 @@ const Viewproducts = (req, res, next) => {
       console.error("Error fetching products:", err);
       return res.status(500).json({ error: "Error fetching products" });
     }
-    res.render("Viewproducts", { products: rows ,userId});
+    res.render("Viewproducts", { products: rows , userId});
   });
 
 };
@@ -147,4 +161,4 @@ const send = (req, res, next) => {
   }
 };
 
-module.exports = { Brokers , Technicalsupport , Viewproducts , Profile , send };
+module.exports = { Brokers , Technicalsupport , Viewproducts , Profile , send , Brokers2 };

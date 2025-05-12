@@ -15,4 +15,4 @@ adminseller.get('/showMerchants', (req, res) => {
   });
 });
 
-module.exports = { adminseller };
+module.exports = { adminseller }; 

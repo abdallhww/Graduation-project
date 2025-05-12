@@ -117,4 +117,45 @@ const getSalesData = (req, res) => {
   });
 };
 
-module.exports = { salestoday , salestotal , filterSales , getSalesData};
+const selectBroker = (req, res) => {
+    const brokerId = req.params.brokerId;
+    const userId = req.session.userId;
+
+    // جلب آخر طلب للمستخدم
+    pool.query(
+        'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC LIMIT 1',
+        [userId],
+        (err, orders) => {
+            if (err) {
+                console.error('Error fetching orders:', err);
+                return res.status(500).send('حدث خطأ أثناء جلب الطلبات');
+            }
+
+            if (!orders || orders.length === 0) {
+                return res.status(404).send('لا يوجد طلب لهذا المستخدم');
+            }
+
+            const orderId = orders[0].id;
+
+            console.log(orderId);
+
+            // تحديث الطلب بإضافة الوسيط
+            pool.query(
+                'UPDATE orders SET broker_id = ? WHERE id = ?',
+                [brokerId, orderId],
+                (err, result) => {
+                    if (err) {
+                        console.error('Error updating order:', err);
+                        return res.status(500).send('حدث خطأ أثناء تحديث الطلب');
+                    }
+
+                    // إعادة توجيه المستخدم إلى صفحة الدفع
+                    res.render('payment2');
+                }
+            );
+        }
+    );
+};
+
+
+module.exports = { salestoday , salestotal , filterSales , getSalesData , selectBroker};

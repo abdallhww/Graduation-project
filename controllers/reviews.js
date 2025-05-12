@@ -68,4 +68,59 @@ const viwecommint = (req, res, next) => {
     res.end();
   };
 
-module.exports = { add_rait , viwecommint };
+const getBrokerReviews = async (req, res) => {
+    const brokerId = req.params.brokerId;
+
+    try {
+        const [rows] = await pool.promise().query(
+            'SELECT review, rating, created_at FROM reviews WHERE broker_id = ? ORDER BY created_at DESC',
+            [brokerId]
+        );
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            return res.render('no-reviews', { message: 'لا توجد تعليقات لهذا الوسيط' });
+        }
+
+        const [query] = await pool.promise().query(
+            'SELECT name, emil, phone, Facebook_account, image, details, Instagram_account, Rating FROM brokers WHERE id = ?',
+            [brokerId]
+        );
+
+        res.render('reviews', { reviews: rows, brokerId: brokerId, brokers: query });
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        res.status(500).render('error', { message: 'خطأ في جلب التعليقات' });
+    }
+};
+
+const getBrokerReviews2 = async (req, res) => {
+    const brokerId = req.params.brokerId;
+    const userId = req.session.userId;
+
+    console.log("brokerid =", brokerId); // هل يظهر رقم الطلب هنا؟
+
+    try {
+        const [rows] = await pool.promise().query(
+            'SELECT review, rating, created_at FROM reviews WHERE broker_id = ? ORDER BY created_at DESC',
+            [brokerId]
+        );
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            return res.render('no-reviews', { message: 'لا توجد تعليقات لهذا الوسيط' });
+        }
+
+        const [query] = await pool.promise().query(
+            'SELECT name, emil, phone, Facebook_account, image, details, Instagram_account, Rating FROM brokers WHERE id = ?',
+            [brokerId]
+        );
+
+        res.render('reviews2', { reviews: rows, brokerId: brokerId, brokers: query });
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        res.status(500).render('error', { message: 'خطأ في جلب التعليقات' }); 
+    }
+};
+
+
+
+module.exports = { add_rait , viwecommint , getBrokerReviews , getBrokerReviews2};

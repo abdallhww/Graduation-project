@@ -202,10 +202,6 @@ h1 {
   transition: opacity 0.3s ease; /* تأثير التلاشي */
 }
 
-.alert-success {
-  /* يمكنك إضافة المزيد من الأنماط الخاصة بنوع alert */
-}
-
 .btn-close {
   position: absolute; /* لضبط موقع الزر */
   top: 10px; /* المسافة من الأعلى */
@@ -257,4 +253,20 @@ z-index: 1000;
 margin-bottom: 10px;
 padding: 10px;
 border-bottom: 1px solid #eee;
+}
+button.logout-btn {
+    background: #4537c2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button.logout-btn:hover {
+    background: linear-gradient(45deg, #360f84, #2d0b8b);
+    transform: scale(1.1);
 }

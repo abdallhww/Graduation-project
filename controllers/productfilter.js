@@ -18,7 +18,7 @@ const Viewproducts = (req, res, next) => {
   const ViewFoodProducts = (req, res, next) => {
     const userId = req.session.userId;
 
-    pool.query("SELECT * FROM products WHERE category = 'Food'", (err, rows) => {
+    pool.query("SELECT * FROM products WHERE category = 'طعام'", (err, rows) => {
         if (err) {
             console.error("Error fetching food products:", err);
             return res.status(500).json({ error: "Error fetching food products" });
@@ -30,7 +30,7 @@ const Viewproducts = (req, res, next) => {
 const ViewElectronicsProducts = (req, res, next) => {
   const userId = req.session.userId;
 
-  pool.query("SELECT * FROM products WHERE category = 'Electronics'", (err, rows) => {
+  pool.query("SELECT * FROM products WHERE category = 'إلكترونيات'", (err, rows) => {
       if (err) {
           console.error("Error fetching electronics products:", err);
           return res.status(500).json({ error: "Error fetching electronics products" });
@@ -42,7 +42,7 @@ const ViewElectronicsProducts = (req, res, next) => {
 const ViewClothingProducts = (req, res, next) => {
   const userId = req.session.userId;
 
-  pool.query("SELECT * FROM products WHERE category = 'Clothing'", (err, rows) => {
+  pool.query("SELECT * FROM products WHERE category = 'ملابس'", (err, rows) => {
       if (err) {
           console.error("Error fetching clothing products:", err);
           return res.status(500).json({ error: "Error fetching clothing products" });
@@ -54,7 +54,7 @@ const ViewClothingProducts = (req, res, next) => {
 const ViewFurnitureProducts = (req, res, next) => {
   const userId = req.session.userId;
 
-  pool.query("SELECT * FROM products WHERE category = 'Furniture'", (err, rows) => {
+  pool.query("SELECT * FROM products WHERE category = 'اثاث'", (err, rows) => {
       if (err) {
           console.error("Error fetching furniture products:", err);
           return res.status(500).json({ error: "Error fetching furniture products" });
@@ -66,7 +66,7 @@ const ViewFurnitureProducts = (req, res, next) => {
 const ViewBeautyProducts = (req, res, next) => {
   const userId = req.session.userId;
 
-  pool.query("SELECT * FROM products WHERE category = 'Beauty'", (err, rows) => {
+  pool.query("SELECT * FROM products WHERE category = 'ادواة تجميل'", (err, rows) => {
       if (err) {
           console.error("Error fetching beauty products:", err);
           return res.status(500).json({ error: "Error fetching beauty products" });
@@ -78,7 +78,7 @@ const ViewBeautyProducts = (req, res, next) => {
 const ViewBooksProducts = (req, res, next) => {
   const userId = req.session.userId;
 
-  pool.query("SELECT * FROM products WHERE category = 'Books'", (err, rows) => {
+  pool.query("SELECT * FROM products WHERE category = 'كتب'", (err, rows) => {
       if (err) {
           console.error("Error fetching books products:", err);
           return res.status(500).json({ error: "Error fetching books products" });
@@ -89,7 +89,7 @@ const ViewBooksProducts = (req, res, next) => {
 
 const ViewPerfumesProducts = (req, res, next) => {
   const userId = req.session.userId;
-  pool.query("SELECT * FROM products WHERE category = 'Perfumes'", (err, rows) => {
+  pool.query("SELECT * FROM products WHERE category = 'عطور'", (err, rows) => {
       if (err) {
           console.error("Error fetching perfumes products:", err);
           return res.status(500).json({ error: "Error fetching perfumes products" });

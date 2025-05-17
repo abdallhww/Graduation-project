@@ -9,4 +9,5 @@ adminorder.get('/searchOrderItems',searchOrderItems);
 adminorder.post('/updateOrderStatus',updateOrderStatus);
 
 adminorder.post('/deleteOrder',deleteOrder);
+
 module.exports = { adminorder };

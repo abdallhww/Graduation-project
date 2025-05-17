@@ -9,7 +9,8 @@ const showOrders = (req, res) => {
         orders.total_price, 
         orders.payment_method, 
         orders.status, 
-        orders.created_at
+        orders.created_at,
+        orders.location
       FROM orders
       INNER JOIN users ON orders.user_id = users.id
       ORDER BY orders.created_at DESC

@@ -1,15 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>payment</title>
-    <link rel="stylesheet" href="/style/404.css" />
+    <title>الدفع</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #2c3e50, #4ca1af);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        padding: 20px;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+        padding: 30px;
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+        color: #ffe082;
+      }
+
+      h2 {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+        color: #ffcc80;
+      }
+
+      p {
+        font-size: 1.1em;
+        margin: 10px 0;
+        color: #f0f0f0;
+      }
+
+      .form-group {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      input[type="text"] {
+        padding: 12px;
+        width: 100%;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      input::placeholder {
+        color: #ddd;
+      }
+
+      .payment-btn {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+        border: none;
+        padding: 12px 25px;
+        font-size: 1em;
+        color: #fff;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        width: 100%;
+      }
+
+      .payment-btn:hover {
+        background: linear-gradient(to right, #0072ff, #00c6ff);
+        transform: scale(1.03);
+      }
+
+      .payment-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .payment-option {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+    </style>
   </head>
   <body>
-   
-        <h1>payment2</h1>
-        <p>payment2</p>
-    
+    <div class="container">
+      <h1>checkout</h1>
+      <h2>معلومات الطلب</h2>
+      <p>رقم الطلب: <%= orderId %></p>
+      <p>اسم الوسيط: <%= brokerName %>//<%= brokerId %> </p>
+      <p>السعر الإجمالي: $<%= totalPrice %></p>
+
+      <% if (orderLocation) { %>
+        <p>📍 موقع الاستلام: <strong><%= orderLocation %></strong></p>
+      <% } %>
+
+      <!-- إدخال موقع الاستلام -->
+      <form action="/save-location/<%= brokerId %>" method="POST" class="form-group">
+        <input type="hidden" name="orderId" value="<%= orderId %>">
+        <input
+          type="text"
+          name="location"
+          placeholder="أدخل موقع الاستلام"
+          required
+        />
+        <button type="submit" class="payment-btn">حفظ الموقع</button>
+      </form>
+
+      <!-- خيارات الدفع -->
+      <div class="payment-options">
+        <div class="payment-option">
+          <form action="/complete-payment" method="POST">
+            <input type="hidden" name="orderId" value="<%= orderId %>">
+            <input type="hidden" name="paymentMethod" value="الدفع عند الاستلام">
+            <button type="submit" class="payment-btn">الدفع عند الاستلام</button>
+          </form>
+        </div>
+
+        <div class="payment-option">
+          <form action="/complete-payment" method="POST">
+            <input type="hidden" name="orderId" value="<%= orderId %>">
+            <input type="hidden" name="paymentMethod" value="بطاقة إلكترونية">
+            <button type="submit" class="payment-btn">الدفع ببطاقة إلكترونية</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

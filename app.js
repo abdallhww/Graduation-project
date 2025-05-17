@@ -22,6 +22,7 @@ const { orderRouter } = require("./routes/order");
 const { adminorder } = require("./routes/adminorder");
 const { adminseller } = require("./routes/adminseller");
 const { selesRoutes } = require("./routes/seles");
+const { locationrouts } = require("./routes/location");
 
 app.use((req, res, next) => {
   console.log(`Method: ${req.method} | URL: ${req.url}`);
@@ -77,6 +78,8 @@ app.use("/",adminorder);
 app.use("/",adminseller);
 
 app.use("/",selesRoutes); 
+
+app.use("/",locationrouts);
 
 
 app.use((err, req, res, next) => {

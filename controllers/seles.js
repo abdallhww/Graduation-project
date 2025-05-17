@@ -137,8 +137,6 @@ const selectBroker = (req, res) => {
 
             const orderId = orders[0].id;
 
-            console.log(orderId);
-
             // تحديث الطلب بإضافة الوسيط
             pool.query(
                 'UPDATE orders SET broker_id = ? WHERE id = ?',
@@ -149,13 +147,39 @@ const selectBroker = (req, res) => {
                         return res.status(500).send('حدث خطأ أثناء تحديث الطلب');
                     }
 
-                    // إعادة توجيه المستخدم إلى صفحة الدفع
-                    res.render('payment2');
+                    // جلب بيانات الطلب وبيانات الوسيط لعرضها في الصفحة
+                    pool.query(
+                        `SELECT orders.id AS orderId, orders.total_price,orders.location, brokers.name AS brokerName 
+                         FROM orders 
+                         JOIN brokers ON orders.broker_id = brokers.id 
+                         WHERE orders.id = ?`,
+                        [orderId],
+                        (err, result) => {
+                            if (err) {
+                                console.error('Error fetching order and broker info:', err);
+                                return res.status(500).send('حدث خطأ أثناء جلب بيانات الوسيط والطلب');
+                            }
+
+                            if (result.length === 0) {
+                                return res.status(404).send('لم يتم العثور على بيانات الوسيط أو الطلب');
+                            }
+
+                            const orderInfo = result[0];
+
+                            // عرض صفحة الدفع مع البيانات
+                            res.render('payment2', {
+                                brokerName: orderInfo.brokerName,
+                                orderId: orderInfo.orderId,
+                                totalPrice: orderInfo.total_price,
+                                orderLocation: orderInfo.location,
+                                brokerId,
+                            });
+                        }
+                    );
                 }
             );
         }
     );
 };
-
 
 module.exports = { salestoday , salestotal , filterSales , getSalesData , selectBroker};

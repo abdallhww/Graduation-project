@@ -27,6 +27,7 @@
         <th>طريقة الدفع</th>
         <th>الحالة</th>
         <th>السعر الإجمالي</th>
+        <th>موقع الاستلام</th>
         <th>تاريخ الإنشاء</th>
         <th>تعديل / حذف</th>
       </tr>
@@ -39,6 +40,8 @@
           <td data-label="طريقة الدفع"><%= order.payment_method %></td>
           <td data-label="الحالة"><%= order.status %></td>
           <td data-label="السعر الإجمالي"><%= order.total_price %>$</td>
+          <td data-label="موقع الاستلام"><%= order.location %>$</td>
+          
           <td data-label="تاريخ الإنشاء"><%= new Date(order.created_at).toLocaleString('ar-EG') %></td>
           <td data-label="تعديل / حذف">
             <form action="/updateOrderStatus" method="post" style="display:inline;">

@@ -132,4 +132,55 @@ body {
     background-color: #024336;
     transform: scale(1.05);
   }
-  
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+            background: #529bdb;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-image img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .upload-btn,
+        .update-btn,
+        .logout-btn,
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .logout-btn {
+            background-color: #e74c3c;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }

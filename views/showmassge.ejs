@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>رسائل الدعم الفني</title>
-  <link rel="stylesheet" href='/style/showmassge.css'>
+  <link rel="stylesheet" href="/style/showmassge.css">
   
 </head>
 <body>
 
   <h2>لوحة تحكم الدعم الفني</h2>
 
-  <form action="/supportStats" method="get" style="display: inline;">
-    <button type="submit" class="logout-btn">عرض الإحصائيات</button>
-  </form>
+  <div class="action-group">
+    <form action="/supportStats" method="get">
+      <button type="submit" class="logout-btn">عرض الإحصائيات</button>
+    </form>
+    <form action="/goadminhome" method="POST">
+      <button type="submit" class="logout-btn">الصفحة الرئيسية</button>
+    </form>
+  </div>
 
-  
   <table>
     <thead>
       <tr>
@@ -23,7 +27,7 @@
         <th>الرسالة</th>
         <th>التاريخ</th>
         <th>الحالة</th>
-        <th>تعديل</th>
+        <th>الإجراءات</th>
       </tr>
     </thead>
     <tbody>
@@ -35,53 +39,40 @@
           <td><%= msg.created_at.toLocaleString() %></td>
           <td><%= msg.status %></td>
           <td>
-            <!-- زر تعديل أو تحديد حالة جديد -->
+            <!-- تحديث الحالة -->
             <form action="/updateStatus" method="post">
-                <input type="hidden" name="id" value="<%= msg.id %>">
-                <select name="status">
-                  <option value="بانتظار الرد" <%= msg.status === 'بانتظار الرد' ? 'selected' : '' %>>بانتظار الرد</option>
-                  <option value="تم الرد" <%= msg.status === 'تم الرد' ? 'selected' : '' %>>تم الرد</option>
-                  <option value="مغلق" <%= msg.status === 'مغلق' ? 'selected' : '' %>>مغلق</option>
-                </select>
-                <button type="submit">تحديث</button>
-              </form>
+              <input type="hidden" name="id" value="<%= msg.id %>">
+              <select name="status">
+                <option value="بانتظار الرد" <%= msg.status === 'بانتظار الرد' ? 'selected' : '' %>>بانتظار الرد</option>
+                <option value="تم الرد" <%= msg.status === 'تم الرد' ? 'selected' : '' %>>تم الرد</option>
+                <option value="مغلق" <%= msg.status === 'مغلق' ? 'selected' : '' %>>مغلق</option>
+              </select>
+              <button type="submit">تحديث</button>
+            </form>
 
-              <!-- نموذج حذف الرسالة -->
-  <form action="/deleteMessage" method="post" onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');" style="display:inline-block;">
-    <input type="hidden" name="id" value="<%= msg.id %>">
-    <button type="submit" style="background-color:#e74c3c; color:white; border:none;">🗑 حذف</button>
-  </form>
+            <!-- حذف الرسالة -->
+            <form action="/deleteMessage" method="post" onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');" style="margin-top: 5px;">
+              <input type="hidden" name="id" value="<%= msg.id %>">
+              <button type="submit" style="background-color:#e74c3c;">🗑 حذف</button>
+            </form>
 
-  <form action="/replyMessage" method="post" style="margin-top:10px;">
-    <input type="hidden" name="id" value="<%= msg.id %>">
-    <textarea name="reply" placeholder="اكتب الرد هنا..." rows="2" style="width: 100%; border-radius:6px; padding:8px;"></textarea>
-    <button type="submit" style="margin-top:5px;">إرسال الرد</button>
-  </form>
+            <!-- الرد على الرسالة -->
+            <form action="/replyMessage" method="post" style="margin-top:10px;">
+              <input type="hidden" name="id" value="<%= msg.id %>">
+              <textarea name="reply" placeholder="اكتب الرد هنا..." rows="2"></textarea>
+              <button type="submit" style="margin-top:5px;">إرسال الرد</button>
+            </form>
 
-  <% if (msg.reply) { %>
-    <div style="margin-top:10px; background-color:#f1f1f1; padding:10px; border-radius:8px;">
-      <strong>الرد:</strong> <%= msg.reply %>
-    </div>
-  <% } %>
-              
+            <% if (msg.reply) { %>
+              <div class="reply-box">
+                <strong>الرد:</strong> <%= msg.reply %>
+              </div>
+            <% } %>
           </td>
         </tr>
       <% }) %>
     </tbody>
   </table>
-
-  <form action="/goadminhome" method="POST" style="display: inline;">
-    <button type="submit" class="logout-btn">ذهاب الي الصفحه الرئيسيه</button>
-</form>
- 
-
-<button onclick="goBack()">رجوع</button>
-
-    <script>
-      function goBack() {
-        window.history.back();
-      }
-    </script>
 
 </body>
 </html>

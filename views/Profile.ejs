@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملف المستخدم</title>
     <link rel="stylesheet" href="/style/profile2.css">
-    <title>User Profile</title>
+   
 </head>
 <body>
 
@@ -14,6 +15,7 @@
         </div>
         <div class="profile-details">
             <h2>ملف شخصي</h2>
+
             <div class="upload-image">
                 <h3>تحميل صورة الملف الشخصي الجديدة</h3>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
@@ -21,7 +23,9 @@
                     <button type="submit" class="upload-btn">رفع</button>
                 </form>
             </div>
-            <h4>تم الإنشاء في:"<%= new Date(user.created_at).toLocaleString() %>" </h4>
+
+            <h4>تم الإنشاء في: "<%= new Date(user.created_at).toLocaleString() %>" </h4>
+
             <form action="/updateusers" method="POST">
                 <label>الاسم:</label>
                 <input type="text" name="username" value="<%= user.username %>" required>
@@ -29,34 +33,37 @@
                 <label>ايميل:</label>
                 <input type="email" name="email" value="<%= user.email %>" required>
 
-                <label>رقم هاتف</label>
+                <label>رقم هاتف:</label>
                 <input type="text" name="phone" value="<%= user.phone %>">
 
-                <label>كلمة سر </label>
+                <label>كلمة السر:</label>
                 <input type="text" name="password" value="<%= user.password %>">
 
-                <button type="submit" class="update-btn">تعديل </button>
+                <button type="submit" class="update-btn">تعديل</button>
             </form>
-            <div>
-                <form action="/home" method="POST" style="display: inline;">
+
+            <!-- الأزرار الجانبية -->
+            <div class="button-group">
+                <form action="/home" method="POST">
                     <button type="submit" class="logout-btn">الصفحه الرئيسيه</button>
                 </form>
-                
+
+                <form action="/user/messages" method="get">
+                    <button type="submit" class="update-btn">عرض رسائلي</button>
+                </form>
+
+                <form action="/orders/<%= user.id %>" method="GET">
+                    <button type="submit" class="update-btn">عرض طلباتي</button>
+                </form>
+
+                <form action="/logout" method="POST">
+                    <button type="submit" class="logout-btn">تسجيل خروج</button>
+                </form>
+
+                <button onclick="goBack()">رجوع</button>
             </div>
+
         </div>
-        <form action="/user/messages" method="get" style="margin-top: 20px;">
-            <button type="submit" class="update-btn">عرض رسائلي</button>
-          </form>
-          
-
-        <form action="/orders/<%= user.id %>" method="GET" style="margin-top: 20px;">
-            <button type="submit" class="update-btn">عرض طلباتي</button>
-        </form>
-        <form action="/logout" method="POST" style="display: inline;">
-            <button type="submit" class="logout-btn"> تسجيل خروج</button>
-        </form>
-
-        <button onclick="goBack()">رجوع</button>
     </div>
 
     <script>
@@ -64,7 +71,6 @@
         window.history.back();
       }
     </script>
-
 
 </body>
 </html>

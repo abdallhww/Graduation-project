@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <title>تفاصيل منتجات الطلب</title>
-  <link rel="stylesheet" href="/style/admin.css" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="/style/searchOrderItems.css"/>
 </head>
 <body>
 
@@ -14,35 +14,34 @@
 
   <button onclick="goBack()">رجوع</button>
 
-    <% if (error) { %>
-      <p style="color: red;"><%= error %></p>
-    <% } %>
+  <% if (error) { %>
+    <p><%= error %></p>
+  <% } %>
 
-    <% if (items.length > 0) { %>
-      <table>
-        <thead>
+  <% if (items.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>صورة المنتج</th>
+          <th>اسم المنتج</th>
+          <th>الكمية</th>
+          <th>السعر</th>
+          <th>التصنيف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(item => { %>
           <tr>
-            <th>صورة المنتج</th>
-            <th>اسم المنتج</th>
-            <th>الكمية</th>
-            <th>السعر</th>
-            <th>التصنيف</th>
+            <td data-label="صورة المنتج"><img src="<%= item.image %>" alt="صورة المنتج"></td>
+            <td data-label="اسم المنتج"><%= item.product_name %></td>
+            <td data-label="الكمية"><%= item.quantity %></td>
+            <td data-label="السعر"><%= item.price %> $</td>
+            <td data-label="التصنيف"><%= item.category %></td>
           </tr>
-        </thead>
-        <tbody>
-          <% items.forEach(item => { %>
-            <tr>
-              <td><img src="<%= item.image %>" alt="صورة المنتج"></td>
-              <td><%= item.product_name %></td>
-              <td><%= item.quantity %></td>
-              <td><%= item.price %> $</td>
-              <td><%= item.category %></td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
-    <% } %>
-  </div>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
 
   <script>
     function goBack() {

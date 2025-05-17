@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <title>إدارة الطلبات</title>
-  <link rel="stylesheet" href='/style/showorderadmin.css'>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href='/style/showorderadmin.css'>
   
 </head>
 <body>
 
   <h2>إدارة الطلبات</h2>
   <h3>عرض منتجات طلب</h3>
-  <form action="/searchOrderItems" method="get" style="margin-bottom: 20px; text-align: center;">
-    <input type="number" name="orderId" placeholder="ادخل رقم الطلب" required class="search-input" />
+
+  <form action="/searchOrderItems" method="get">
+    <input type="number" name="orderId" placeholder="ادخل رقم الطلب" required />
     <button type="submit">بحث</button>
   </form>
+
   <hr>
- 
+
   <table>
     <thead>
       <tr>
@@ -31,15 +34,14 @@
     <tbody>
       <% orders.forEach(order => { %>
         <tr>
-          <td><%= order.id %></td>
-          <td><%= order.username %></td>
-          <td><%= order.payment_method %></td>
-          <td><%= order.status %></td>
-          <td><%= order.total_price %> ر.س</td>
-          <td><%= new Date(order.created_at).toLocaleString('ar-EG') %></td>
-          <td>
-            <!-- فورم تعديل الحالة -->
-            <form action="/updateOrderStatus" method="post">
+          <td data-label="رقم الطلب"><%= order.id %></td>
+          <td data-label="اسم العميل"><%= order.username %></td>
+          <td data-label="طريقة الدفع"><%= order.payment_method %></td>
+          <td data-label="الحالة"><%= order.status %></td>
+          <td data-label="السعر الإجمالي"><%= order.total_price %>$</td>
+          <td data-label="تاريخ الإنشاء"><%= new Date(order.created_at).toLocaleString('ar-EG') %></td>
+          <td data-label="تعديل / حذف">
+            <form action="/updateOrderStatus" method="post" style="display:inline;">
               <input type="hidden" name="id" value="<%= order.id %>">
               <select name="status">
                 <option value="قيد المعالجة" <%= order.status === 'قيد المعالجة' ? 'selected' : '' %>>قيد المعالجة</option>
@@ -50,8 +52,7 @@
               <button type="submit">تحديث</button>
             </form>
 
-            <!-- فورم حذف الطلب -->
-            <form action="/deleteOrder" method="post" onsubmit="return confirm('هل أنت متأكد من حذف هذا الطلب؟');">
+            <form action="/deleteOrder" method="post" onsubmit="return confirm('هل أنت متأكد من حذف هذا الطلب؟');" style="display:inline;">
               <input type="hidden" name="id" value="<%= order.id %>">
               <button type="submit" class="delete-btn">🗑 حذف</button>
             </form>
@@ -61,7 +62,7 @@
     </tbody>
   </table>
 
-  <form action="/goadminhome" method="POST" style="display: inline;">
+  <form action="/goadminhome" method="POST">
     <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
   </form>
 

@@ -14,5 +14,5 @@ adminseller.get('/showMerchants', (req, res) => {
     res.render('showMerchants', { merchants: results });
   });
 });
-
+ 
 module.exports = { adminseller }; 

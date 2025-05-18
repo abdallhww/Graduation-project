@@ -1,8 +1,8 @@
-const {pool} = require('../utils/db'); // الاتصال بقاعدة البيانات
+const {pool} = require('../utils/db');
 
 const saveLocation = (req, res) => {
   const { orderId, location } = req.body;
-  const brokerId = req.params.brokerId; // من عنوان الرابط /save-location/:brokername
+  const brokerId = req.params.brokerId; // من عنوان الرابط /save-location/:brokerid
 
 console.log(brokerId);
 
@@ -17,7 +17,30 @@ console.log(brokerId);
 };
 
 const thanks = (req, res) => {
-  res.render('thank-you');
+  const { orderId, paymentMethod } = req.body;
+
+  console.log(orderId);
+
+  try {
+    pool.query(
+      'UPDATE orders SET payment_method = ? WHERE id = ?',
+      [paymentMethod, orderId]
+    );
+
+    // إعادة التوجيه لصفحة الشكر بعد تحديث الطلب
+   res.render('thank-you');
+  } catch (err) {
+    console.error('Error updating payment method:', err);
+    res.status(500).send('حدث خطأ أثناء إكمال عملية الدفع');
+  }
 };
 
-module.exports = { saveLocation , thanks };
+const thanks2 = (req, res) => {
+const { orderId, paymentMethod } = req.body;
+
+console.log(orderId);
+
+res.render('card-payment');
+};
+
+module.exports = { saveLocation , thanks , thanks2 };

@@ -23,6 +23,7 @@ const { adminorder } = require("./routes/adminorder");
 const { adminseller } = require("./routes/adminseller");
 const { selesRoutes } = require("./routes/seles");
 const { locationrouts } = require("./routes/location");
+const { paypalrouts } = require("./routes/paypal");
 
 app.use((req, res, next) => {
   console.log(`Method: ${req.method} | URL: ${req.url}`);
@@ -80,6 +81,8 @@ app.use("/",adminseller);
 app.use("/",selesRoutes); 
 
 app.use("/",locationrouts);
+
+app.use("/",paypalrouts);
 
 
 app.use((err, req, res, next) => {

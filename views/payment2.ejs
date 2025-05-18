@@ -141,10 +141,19 @@
         </div>
 
         <div class="payment-option">
-          <form action="/complete-payment" method="POST">
+          <form action="/complete-payment2" method="POST">
             <input type="hidden" name="orderId" value="<%= orderId %>">
             <input type="hidden" name="paymentMethod" value="بطاقة إلكترونية">
             <button type="submit" class="payment-btn">الدفع ببطاقة إلكترونية</button>
+          </form>
+        </div>
+
+        <div class="payment-option">
+          <form action="/complete-payment3" method="POST">
+            <input type="hidden" name="orderId" value="<%= orderId %>">
+            <input type="hidden" name="paymentMethod" value="PayPal">
+            <input type="hidden" name="totalPrice" value="<%= totalPrice %>">
+            <button type="submit" class="payment-btn">دفع PayPal  </button>  
           </form>
         </div>
       </div>

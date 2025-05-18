@@ -156,49 +156,72 @@ const updateBroker = async (req, res, next) => {
   }
 };
 const updateusers = async (req, res, next) => {
-  const { username, email, phone,password} = req.body;
+  const { username, email, phone, password } = req.body;
   const id = req.session.userId;
-  const userrole=req.session.role;
+  const userrole = req.session.role;
   let errors = {};
 
-  console.log(id);
- console.log(username);
+  // التحقق من وجود المستخدم في الجلسة
   if (!id) {
     errors.general = "لم يتم العثور على المستخدم في الجلسة";
     return res.render("404", { errors, message: null });
   }
 
+  // التحقق من صحة المدخلات
+  if (!username || username.length < 3) {
+    errors.username = "اسم المستخدم يجب أن يكون 3 أحرف على الأقل.";
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email || !emailRegex.test(email)) {
+    errors.email = "البريد الإلكتروني غير صالح. تأكد أن يكون على الشكل التالي مثل: user@example.com أو ahmed123@gmail.com أو test@domain.org";
+  }
+
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phone || !phoneRegex.test(phone)) {
+    errors.phone = "رقم الهاتف يجب أن يحتوي على 10 أرقام فقط.";
+  }
+
+  if (!password || password.length < 6) {
+    errors.password = "كلمة المرور يجب أن تكون 6 أحرف على الأقل.";
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return res.render("404", {
+      errors,
+      username,
+      email,
+      phone,
+      message: null,
+    });
+  }
+
   try {
-    // التحقق من تكرار
+    // التحقق من التكرار
     const [existingUser] = await pool
       .promise()
-      .query("SELECT * FROM users WHERE (username = ? OR email = ?) AND id != ?", [
-        username,
-        email,
-        id,
-      ]);
+      .query(
+        "SELECT * FROM users WHERE (username = ? OR email = ?) AND id != ?",
+        [username, email, id]
+      );
 
     if (existingUser.length > 0) {
       errors.existingData = "اسم المستخدم أو البريد الإلكتروني مكرر. يرجى إدخال بيانات مختلفة.";
-    }
-
-    if (Object.keys(errors).length > 0) {
       return res.render("404", {
         errors,
         username,
         email,
         phone,
-        profile_picture,
         message: null,
       });
     }
 
-    //تحديث البيانات 
+    // تحديث البيانات
     const [result] = await pool
       .promise()
       .query(
-        "UPDATE users SET username = ?, email = ?, phone = ?,password=? WHERE id = ?",
-        [username, email, phone,password, id]
+        "UPDATE users SET username = ?, email = ?, phone = ?, password = ? WHERE id = ?",
+        [username, email, phone, password, id]
       );
 
     if (result.affectedRows === 0) {
@@ -208,22 +231,34 @@ const updateusers = async (req, res, next) => {
       });
     }
 
-    // جلب بيانات
-    const [userData] = await pool.promise().query("SELECT * FROM users WHERE id = ?", [id]);
+    // جلب البيانات بعد التحديث
+    const [userDataRows] = await pool
+      .promise()
+      .query("SELECT * FROM users WHERE id = ?", [id]);
 
-    if (userData.length === 0) {
+    if (!userDataRows || userDataRows.length === 0) {
       return res.render("404", {
         errors: { general: "حدث خطأ أثناء جلب بيانات المستخدم" },
         message: null,
       });
     }
-   if(userrole=="seller"){
-    res.render("Profileselers", { user: userData[0],message: "updet suqses" });
-    console.log("updet suqses");
-   }
-   else{
-    res.render("Profile", { user: userData[0] });
-    console.log("updet suqses");}
+
+    const userData = userDataRows[0];
+
+    // عرض الصفحة المناسبة حسب نوع المستخدم
+    if (userrole === "seller") {
+      res.render("Profileselers", {
+        user: userData,
+        message: "تم التحديث بنجاح",
+      });
+    } else {
+      res.render("Profile", {
+        user: userData,
+        message: "تم التحديث بنجاح",
+      });
+    }
+
+    console.log("تم التحديث بنجاح");
   } catch (err) {
     console.error("Error during update:", err);
     res.render("404", {
@@ -232,6 +267,7 @@ const updateusers = async (req, res, next) => {
     });
   }
 };
+
 
 const showUserMessages = (req, res, next) => {
   const userId = req.session.userId;

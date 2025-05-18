@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تعليقات على الوسيط</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <link rel="stylesheet" href="/style/reviews.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="/style/reviews.css" />
 </head>
 <body>
-
-
     <% brokers.forEach(broker => { %>
         <div class="broker">
-        <h2> <%=brokerId %></h2>
             <img src="<%= broker.image %>" alt="<%= broker.name %>">
             <h3>الاسم : <%= broker.name %></h3>
             <h3>رقم هاتف : <%= broker.phone %></h3>
-            <p>سيره ذاتيه: <%= broker.details %></p>
+            <p><%= broker.details %></p>
             <a href="<%= broker.website %>" target="_blank">
                 <i class="fas fa-globe"></i>
             </a>
@@ -28,42 +24,40 @@
                 <i class="fab fa-instagram"></i>
             </a>
             <div class="star-rating">
-                <h3> <%= broker.Rating %> </h3> <i class="fas fa-star"></i>
+                <h3><%= broker.Rating %></h3> <i class="fas fa-star"></i>
             </div>
-            
- 
-        <form action="/selbro/<%= brokerId %>" method="post" style="display: inline;">
+        </div> 
+    <% }); %> 
+
+    <form action="/selbro/<%= brokerId %>" method="post" style="display: inline;">
   <button type="submit" class="logout-btn"> اختيار وسيط</button>
 </form>
 
-        </div> 
-    <% }); %> 
+<hr>
+
     <h1>تعليقات على الوسيط</h1>
 
-    <% if (reviews.length > 0) { %>
+    <% if (message) { %>
+        <p class="no-reviews"><%= message %></p>
+    <% } else { %>
         <ul>
             <% reviews.forEach(review => { %>
                 <li>
-                    <p><strong>التقييم:⭐</strong> <%= review.rating %></p>
+                    <p><strong>التقييم: ⭐</strong> <%= review.rating %></p>
                     <p><strong>التعليق:</strong> <%= review.review %></p>
                     <p><strong>تاريخ:</strong> <%= new Date(review.created_at).toLocaleDateString() %></p>
                     <hr>
                 </li>
             <% }); %>
         </ul>
-    <% } else { %>
-        <p>لا توجد تعليقات لهذا الوسيط.</p>
     <% } %>
 
-          <button onclick="goBack()" class="logout-btn">رجوع</button>
-    </div>
+    <button class="logout-btn" onclick="goBack()">رجوع</button>
 
     <script>
       function goBack() {
         window.history.back();
       }
     </script>
-   
-
 </body>
 </html>

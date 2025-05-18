@@ -77,16 +77,22 @@ const getBrokerReviews = async (req, res) => {
             [brokerId]
         );
 
-        if (!Array.isArray(rows) || rows.length === 0) {
-            return res.render('no-reviews', { message: 'لا توجد تعليقات لهذا الوسيط' });
-        }
-
         const [query] = await pool.promise().query(
             'SELECT name, emil, phone, Facebook_account, image, details, Instagram_account, Rating FROM brokers WHERE id = ?',
             [brokerId]
         );
 
-        res.render('reviews', { reviews: rows, brokerId: brokerId, brokers: query });
+        const noReviewsMessage = (!Array.isArray(rows) || rows.length === 0)
+            ? 'لا توجد تعليقات لهذا الوسيط'
+            : null;
+
+        res.render('reviews', {
+            reviews: rows,
+            brokerId: brokerId,
+            brokers: query,
+            message: noReviewsMessage
+        });
+
     } catch (error) {
         console.error('Error fetching reviews:', error);
         res.status(500).render('error', { message: 'خطأ في جلب التعليقات' });
@@ -95,9 +101,6 @@ const getBrokerReviews = async (req, res) => {
 
 const getBrokerReviews2 = async (req, res) => {
     const brokerId = req.params.brokerId;
-    const userId = req.session.userId;
-
-    console.log("brokerid =", brokerId); // هل يظهر رقم الطلب هنا؟
 
     try {
         const [rows] = await pool.promise().query(
@@ -105,22 +108,26 @@ const getBrokerReviews2 = async (req, res) => {
             [brokerId]
         );
 
-        if (!Array.isArray(rows) || rows.length === 0) {
-            return res.render('no-reviews', { message: 'لا توجد تعليقات لهذا الوسيط' });
-        }
-
         const [query] = await pool.promise().query(
             'SELECT name, emil, phone, Facebook_account, image, details, Instagram_account, Rating FROM brokers WHERE id = ?',
             [brokerId]
         );
 
-        res.render('reviews2', { reviews: rows, brokerId: brokerId, brokers: query });
+        const noReviewsMessage = (!Array.isArray(rows) || rows.length === 0)
+            ? 'لا توجد تعليقات لهذا الوسيط'
+            : null;
+
+        res.render('reviews2', {
+            reviews: rows,
+            brokerId: brokerId,
+            brokers: query,
+            message: noReviewsMessage
+        });
+
     } catch (error) {
         console.error('Error fetching reviews:', error);
-        res.status(500).render('error', { message: 'خطأ في جلب التعليقات' }); 
+        res.status(500).render('error', { message: 'خطأ في جلب التعليقات' });
     }
 };
-
-
 
 module.exports = { add_rait , viwecommint , getBrokerReviews , getBrokerReviews2};

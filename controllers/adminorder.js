@@ -2,28 +2,31 @@ const { pool } = require("../utils/db");
 
 // عرض الطلبات
 const showOrders = (req, res) => {
-    const query = `
-      SELECT 
-        orders.id, 
-        users.username, 
-        orders.total_price, 
-        orders.payment_method, 
-        orders.status, 
-        orders.created_at,
-        orders.location
-      FROM orders
-      INNER JOIN users ON orders.user_id = users.id
-      ORDER BY orders.created_at DESC
-    `;
-  
-    pool.query(query, (err, results) => {
-      if (err) {
-        console.error('خطأ أثناء جلب الطلبات:', err);
-        return res.status(500).send('حدث خطأ في السيرفر');
-      }
-      res.render('showorderadmin', { orders: results });
-    });
-  };
+  const query = `
+    SELECT 
+      orders.id, 
+      users.username, 
+      orders.total_price, 
+      orders.payment_method, 
+      orders.status, 
+      orders.created_at,
+      orders.location,
+      brokers.name AS broker_name
+    FROM orders
+    INNER JOIN users ON orders.user_id = users.id
+    LEFT JOIN brokers ON orders.broker_id = brokers.id
+    ORDER BY orders.created_at DESC
+  `;
+
+  pool.query(query, (err, results) => {
+    if (err) {
+      console.error('خطأ أثناء جلب الطلبات:', err);
+      return res.status(500).send('حدث خطأ في السيرفر');
+    }
+    res.render('showorderadmin', { orders: results });
+  });
+};
+
 
   const searchOrderItems = (req, res) => {
     const orderId = req.query.orderId;

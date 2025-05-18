@@ -19,7 +19,7 @@
             <h3>Upload New Profile Picture</h3>
             <form action="/upload" method="POST" enctype="multipart/form-data">
                 <input type="file" name="image" required />
-                <button type="submit" class="upload-btn">Upload</button>
+                <button type="submit" class="upload-btn">رفع</button>
             </form>
             <form action="/updateBroker" method="POST">
                 <label>الاسم</label>
@@ -48,7 +48,7 @@
 
             <div>
                 <form action="/home" method="POST" style="display: inline;">
-                    <button type="submit" class="home-btn">Home</button>
+                    <button type="submit" class="home-btn">الصفحه الرئيسيه</button>
                 </form>
                 <form action="/logout" method="POST" style="display: inline;">
                     <button type="submit" class="logout-btn"> تسجيل خروج</button>
@@ -59,14 +59,5 @@
             </div>
         </div>
     </div>
-
-    <button onclick="goBack()">رجوع</button>
-
-    <script>
-      function goBack() {
-        window.history.back();
-      }
-    </script>
-
 </body>
 </html>

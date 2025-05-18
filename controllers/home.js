@@ -99,9 +99,10 @@ const send = (req, res, next) => {
   if (!userId && !brokerId) {
     return res.status(401).send('يجب تسجيل الدخول أولاً.');
   }
+console.log("userid = "+userId+"  "+"brokerId = "+brokerId);
 
   // التحقق من المستخدم العادي
-  if (userId) {
+  if (req.session.role=="seller"||req.session.role=="buyer") {
     const checkUserSql = "SELECT * FROM users WHERE id = ? AND username = ? AND email = ?";
     pool.query(checkUserSql, [userId, name, email], (err, results) => {
       if (err) {
@@ -131,9 +132,9 @@ const send = (req, res, next) => {
   }
 
   // التحقق من الوسيط
-  else if (brokerId) {
+  else if (req.session.role === "broker") {
     const checkBrokerSql = "SELECT * FROM brokers WHERE id = ? AND name = ? AND emil = ?";
-    pool.query(checkBrokerSql, [brokerId, name, email], (err, results) => {
+    pool.query(checkBrokerSql, [userId, name, email], (err, results) => {
       if (err) {
         console.error("خطأ في التحقق من الوسيط:", err);
         return res.status(500).send("حدث خطأ داخلي.");
@@ -145,8 +146,8 @@ const send = (req, res, next) => {
         });
       }
 
-      const insertSql = "INSERT INTO support_messages (broker_id , name , email , message , status) VALUES (?, ?, ?, ?,'بانتظار الرد')";
-      pool.query(insertSql, [brokerId, name, email, message], (err, result) => {
+      const insertSql = "INSERT INTO support_messages (user_id , name , email , message , status) VALUES (?, ?, ?, ?,'بانتظار الرد')";
+      pool.query(insertSql, [userId, name, email, message], (err, result) => {
         if (err) {
           console.error("خطأ أثناء التخزين (وسيط):", err);
           return res.status(500).send("حدث خطأ أثناء إرسال الرسالة.");

@@ -24,6 +24,7 @@
       <tr>
         <th>رقم الطلب</th>
         <th>اسم العميل</th>
+        <th>اسم وسيط</th>
         <th>طريقة الدفع</th>
         <th>الحالة</th>
         <th>السعر الإجمالي</th>
@@ -37,13 +38,13 @@
         <tr>
           <td data-label="رقم الطلب"><%= order.id %></td>
           <td data-label="اسم العميل"><%= order.username %></td>
+          <td><%= order.broker_name || 'لا يوجد' %></td>
           <td data-label="طريقة الدفع"><%= order.payment_method %></td>
           <td data-label="الحالة"><%= order.status %></td>
           <td data-label="السعر الإجمالي"><%= order.total_price %>$</td>
           <td data-label="موقع الاستلام"><%= order.location %>$</td>
-          
           <td data-label="تاريخ الإنشاء"><%= new Date(order.created_at).toLocaleString('ar-EG') %></td>
-          <td data-label="تعديل / حذف">
+          <td data-label="تعديل / الغاء طلب">
             <form action="/updateOrderStatus" method="post" style="display:inline;">
               <input type="hidden" name="id" value="<%= order.id %>">
               <select name="status">
@@ -55,9 +56,9 @@
               <button type="submit">تحديث</button>
             </form>
 
-            <form action="/deleteOrder" method="post" onsubmit="return confirm('هل أنت متأكد من حذف هذا الطلب؟');" style="display:inline;">
+            <form action="/deleteOrder" method="post" onsubmit="return confirm('هل أنت متأكد من الغاء هذا الطلب؟');" style="display:inline;">
               <input type="hidden" name="id" value="<%= order.id %>">
-              <button type="submit" class="delete-btn">🗑 حذف</button>
+              <button type="submit" class="delete-btn">🗑 الغاء طلب</button>
             </form>
           </td>
         </tr>
@@ -68,14 +69,6 @@
   <form action="/goadminhome" method="POST">
     <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
   </form>
-
-  <button onclick="goBack()">رجوع</button>
-
-  <script>
-    function goBack() {
-      window.history.back();
-    }
-  </script>
 
 </body>
 </html>

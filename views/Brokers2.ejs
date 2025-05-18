@@ -17,13 +17,12 @@
         <h3> <%=broker.id %></h3>
         <img src="<%= broker.image %>" alt="<%= broker.name %>">
         <h3>الاسم: <%= broker.name %></h3>
-        <h3><%= broker.phone %></h3>
         <div class="star-rating">
          <h3> <%=broker.Rating%> </h3> <i class="fas fa-star"></i>
         </div>
   
         <form action="/reviews2/<%= broker.id %>" method="get" style="display: inline;">
-  <button type="submit" class="btn">عرض معلومات</button>
+  <button type="submit" class="btn">عرض معلومات وسيط</button>
 </form>
      
       </div>

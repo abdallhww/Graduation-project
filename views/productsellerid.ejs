@@ -41,13 +41,13 @@
 
                 <label>التصنيف</label>
                 <select name="category" id="category" required>
-                    <option value="Electronics">إلكترونيات</option>
-                    <option value="Clothing">ملابس</option>
-                    <option value="Food">طعام</option>
-                    <option value="Beauty">أدوات تجميل</option>
-                    <option value="Books">كتب </option>
-                    <option value="Furniture">أثاث </option>
-                    <option value="Perfumes">عطور</option>
+                    <option value="إلكترونيات">إلكترونيات</option>
+                    <option value="ملابس">ملابس</option>
+                    <option value="طعام">طعام</option>
+                    <option value="أدوات تجميل">أدوات تجميل</option>
+                    <option value="كتب">كتب </option>
+                    <option value="أثاث">أثاث </option>
+                    <option value="عطور">عطور</option>
 
                 </select>
                 <button type="submit" class="btn btn-primary">تعديل المنتج</button>
@@ -91,9 +91,9 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title"><%= product.name %> /ID=><%= product.id %></h5>
                                     <p class="card-text"><%= product.description %></p>
-                                    <p class="text-success">السعر: <%= product.price %> $</p>
+                                    <p class="text-muted">السعر: <%= product.price %> $</p>
                                     <p class="text-muted">المتوفر: <%= product.stock_quantity %> قطعة</p>
-                                    <p class="text-primary">التصنيف: <%= product.category ? product.category : "غير محدد" %></p>
+                                    <p class="text-muted">التصنيف: <%= product.category ? product.category : "غير محدد" %></p>
                                 </div>
                             </div>
                         </div>
@@ -102,15 +102,6 @@
             <% } %>
         </div>
     </div>
-
-    <button onclick="goBack()">رجوع</button>
-
-    <script>
-      function goBack() {
-        window.history.back();
-      }
-    </script>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

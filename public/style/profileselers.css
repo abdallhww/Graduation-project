@@ -137,3 +137,12 @@ button[onclick="goBack()"]:hover {
   background-color: #012f26;
   transform: scale(1.05);
 }
+        .alert-container {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            z-index: 1050;
+            text-align: center;
+        }

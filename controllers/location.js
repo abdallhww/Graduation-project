@@ -36,11 +36,22 @@ const thanks = (req, res) => {
 };
 
 const thanks2 = (req, res) => {
-const { orderId, paymentMethod } = req.body;
+  const { orderId, paymentMethod } = req.body;
 
-console.log(orderId);
+  console.log(orderId);
 
-res.render('card-payment');
+  try {
+    pool.query(
+      'UPDATE orders SET payment_method = ? WHERE id = ?',
+      [paymentMethod, orderId]
+    );
+
+    // إعادة التوجيه لصفحة الشكر بعد تحديث الطلب
+   res.render('card-payment');
+  } catch (err) {
+    console.error('Error updating payment method:', err);
+    res.status(500).send('حدث خطأ أثناء إكمال عملية الدفع');
+  }
 };
 
 module.exports = { saveLocation , thanks , thanks2 };

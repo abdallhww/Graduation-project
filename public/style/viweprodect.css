@@ -321,3 +321,14 @@ border-radius: 10px; /* لضمان زوايا دائرية (اختياري) */
     z-index: 1000;
     pointer-events: none;
 }
+    .like-button {
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: color 0.3s;
+}
+
+.like-button.liked {
+    color: red;
+}

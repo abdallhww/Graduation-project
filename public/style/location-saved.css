@@ -1,0 +1,48 @@
+ body {
+      background: linear-gradient(to right, #141e30, #243b55);
+      font-family: 'Cairo', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      width: 300px;
+      margin: auto;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(10px);
+    }
+    .card h2 {
+      margin-bottom: 20px;
+    }
+    .btn {
+      background-color: #4CAF50;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #45a049;
+    }
+    .logout-btn {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+      }
+
+      .logout-btn:hover {
+        background: linear-gradient(to right, #0072ff, #00c6ff);
+        transform: scale(1.05);
+      }

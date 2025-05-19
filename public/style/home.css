@@ -1,80 +1,132 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cairo', sans-serif;
-    text-decoration: none;
-    list-style: none;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+      text-decoration: none;
+      list-style: none;
+    }
 
-body {
-    background: linear-gradient(135deg, rgba(255, 39, 112, 0.8), rgba(49, 54, 56, 0.8), rgba(128, 128, 128, 0.6));
-    /*background-image: url('./a.webp');*/
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    body {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      padding-top: 120px;
+    }
 
-/* شريط التنقل */
-.header {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      background-color: #34495e;
+      padding: 15px 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-}
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #f39c12;
+    }
 
-nav a {
-    color: #fff;
-    font-size: 18px;
-    margin: 0 10px;
-    transition: 0.3s ease;
-}
+    nav a {
+      color: #ecf0f1;
+      font-size: 18px;
+      margin: 0 10px;
+      transition: 0.3s ease;
+    }
 
-nav a:hover, nav a.active {
-    color: #ffeb3b;
-    transform: scale(1.1);
-}
+    nav a:hover, nav a.active {
+      color: #f1c40f;
+      transform: scale(1.05);
+    }
 
-/* قسم الترحيب */
-.welcome-section {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    margin-top: 100px;
-}
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease forwards;
+    }
 
-.welcome-section h2 {
-    font-size: 36px;
-    color: #fff;
-}
+    h3 {
+      font-size: 3em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.4);
+      animation: float 2s ease-in-out infinite alternate;
+    }
 
-.welcome-section p {
-    font-size: 18px;
-    color: #fff;
-    margin-bottom: 20px;
-}
+    .welcome-section {
+      background-color: #34495e;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      max-width: 700px;
+      margin-bottom: 50px;
+    }
 
-/* زر استكشاف
+    .welcome-section h2 {
+      font-size: 32px;
+      color: #f39c12;
+      margin-bottom: 15px;
+    }
+
+    .welcome-section p {
+      font-size: 18px;
+      color: #ecf0f1;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      background-color: #1abc9c;
+      color: white;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #16a085;
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(50px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      .logo {
+        font-size: 22px;
+      }
+    }

@@ -182,4 +182,4 @@ const selectBroker = (req, res) => {
     );
 };
 
-module.exports = { salestoday , salestotal , filterSales , getSalesData , selectBroker};
+module.exports = { salestoday , salestotal , filterSales , getSalesData , selectBroker };

@@ -5,6 +5,10 @@ const environment = new paypal.core.SandboxEnvironment(
   process.env.DB_Secret_key_1
   
 );
+
 const client = new paypal.core.PayPalHttpClient(environment);
 
-module.exports = client;
+module.exports = {
+  paypal,
+  paypalClient: client
+};

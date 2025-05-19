@@ -1,0 +1,99 @@
+      * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #2c3e50, #4ca1af);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        padding: 20px;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+        padding: 30px;
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+        color: #ffe082;
+      }
+
+      h2 {
+        font-size: 1.4em;
+        margin-bottom: 20px;
+        color: #ffcc80;
+      }
+
+      p {
+        font-size: 1.1em;
+        margin: 10px 0;
+        color: #f0f0f0;
+      }
+
+      .form-group {
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      input[type="text"] {
+        padding: 12px;
+        width: 100%;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+
+      input::placeholder {
+        color: #ddd;
+      }
+
+      .payment-btn {
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+        border: none;
+        padding: 12px 25px;
+        font-size: 1em;
+        color: #fff;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        width: 100%;
+      }
+
+      .payment-btn:hover {
+        background: linear-gradient(to right, #0072ff, #00c6ff);
+        transform: scale(1.03);
+      }
+
+      .payment-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .payment-option {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }

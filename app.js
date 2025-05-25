@@ -84,7 +84,6 @@ app.use("/",locationrouts);
 
 app.use("/",paypalrouts);
 
-
 app.use((err, req, res, next) => {
   console.error("🚨 ERROR:", err.stack); // طباعة الخطأ مع التفاصيل
   res.status(500).render("404", { errors: { general: "حدث خطأ غير متوقع" } });

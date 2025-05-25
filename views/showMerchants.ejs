@@ -7,6 +7,13 @@
 </head>
 <body>
 
+  <form action="/searchMerchantProducts" method="GET" style="margin-bottom: 20px;">
+  <input type="text" id="merchantName" name="merchantName" required>
+  <button type="submit">بحث</button>
+  <label for="merchantName">ادخل اسم تاجر لعرض منتجات مباعه التي تخص تاجر</label>
+</form>
+
+
 <h1>قائمة التجار</h1>
 
 <table>
@@ -32,6 +39,10 @@
 
 <form action="/goadminhome" method="POST" style="display: inline;">
     <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
+</form>
+
+<form action="/salesReports" method="get" style="display: inline;">
+    <button type="submit" class="logout-btn">  تقارير</button>
 </form>
 
 </body>

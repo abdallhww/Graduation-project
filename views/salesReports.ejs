@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقارير المبيعات</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    table {
+      margin: 0 auto;
+      width: 90%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffd700;
+    }
+
+    td {
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .paid {
+      color: #00ff7f;
+      font-weight: bold;
+    }
+
+    .unpaid {
+      color: #ff8080;
+      font-weight: bold;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #ffd700;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #e0c200;
+    }
+  </style>
+</head>
+<body>
+  <h1>تقارير المبيعات للتجار</h1>
+
+  <% if (reports.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>اسم التاجر</th>
+          <th>من تاريخ</th>
+          <th>إلى تاريخ</th>
+          <th>إجمالي المبيعات ($)</th>
+          <th>نسبة المتجر (%)</th>
+          <th>حصة المتجر ($)</th>
+          <th>تعليق الإدمن</th>
+          <th>الحالة</th>
+          <th>تاريخ التسجيل</th>
+          <th>إجراء</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reports.forEach(r => { %>
+          <tr>
+            <td><%= r.merchant_name %></td>
+            <td><%= r.start_date.toISOString().split('T')[0] %></td>
+            <td><%= r.end_date.toISOString().split('T')[0] %></td>
+            <td><%= Number(r.total_sales).toFixed(2) %></td>
+            <td><%= Number(r.store_percentage).toFixed(2) %></td>
+            <td><%= Number(r.store_share).toFixed(2) %></td>
+            <td><%= r.admin_comment || '---' %></td>
+            <td class="<%= r.payment_status === 'مدفوع' ? 'paid' : 'unpaid' %>"><%= r.payment_status %></td>
+            <td><%= r.recorded_at.toLocaleString() %></td>
+           <td>
+  <% if (r.payment_status === 'غير مدفوع') { %>
+    <form action="/salesReports/updateStatus" method="POST" style="display:inline;">
+      <input type="hidden" name="report_id" value="<%= r.id %>">
+      <button type="submit" style="padding: 6px 12px; background-color: #00ff7f; color: #000; border: none; border-radius: 5px; cursor: pointer;">
+        تم الدفع
+      </button>
+    </form>
+  <% } else { %>
+    ---
+  <% } %>
+
+  <!-- زر الحذف -->
+  <form action="/salesReports/delete" method="POST" style="display:inline; margin-right: 5px;" onsubmit="return confirm('هل أنت متأكد من حذف هذا التقرير؟');">
+    <input type="hidden" name="report_id" value="<%= r.id %>">
+    <button type="submit" style="padding: 6px 12px; background-color: #ff4d4d; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+      حذف
+    </button>
+  </form>
+</td>
+
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>لا توجد تقارير مبيعات حتى الآن.</p>
+  <% } %>
+
+  
+
+  <h2>إجمالي حصة المتجر من التقارير المدفوعة: <%= Number(totalPaidShare).toFixed(2) %> $</h2>
+
+
+  <a href="/showMerchants">العودة لقائمة التجار</a>
+</body>
+</html>

@@ -1,5 +1,6 @@
 const express = require('express');
 const adminseller = express.Router();
+const { calculateSalesReport , saveSalesReport , viewSalesReports , updatePaymentStatus , deleteReport } = require("../controllers/adminseller");
 const { pool } = require('../utils/db'); // تأكد أنك موصل قاعدة البيانات (ممكن يكون اسم الملف مختلف)
 
 adminseller.get('/showMerchants', (req, res) => {
@@ -14,5 +15,15 @@ adminseller.get('/showMerchants', (req, res) => {
     res.render('showMerchants', { merchants: results });
   });
 });
+
+adminseller.get('/calculateSalesReport', calculateSalesReport);
+
+adminseller.post('/saveSalesReport', saveSalesReport);
+
+adminseller.get('/salesReports', viewSalesReports);
+
+adminseller.post('/salesReports/updateStatus', updatePaymentStatus);
+
+adminseller.post('/salesReports/delete', deleteReport);
  
 module.exports = { adminseller }; 

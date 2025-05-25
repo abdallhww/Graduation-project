@@ -129,5 +129,57 @@ const replyMessage = async (req, res) => {
   }
 };
 
-  module.exports = { showmassge , updateStatus , getSupportStats ,goadminhome , deleteMessage ,
-    viweBrokers , deletBroker, searchBroker , showmassf , replyMessage };
+const searchMerchantProducts = (req, res) => {
+  const merchantName = req.query.merchantName;
+
+  pool.query('SELECT id FROM users WHERE username = ?', [merchantName], (err, merchantResult) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send("حدث خطأ في البحث عن التاجر.");
+    }
+
+    if (merchantResult.length === 0) {
+      return res.send(`<h2>لم يتم العثور على تاجر بهذا الاسم.</h2><a href="/showMerchants">الرجوع</a>`);
+    }
+
+    const merchantId = merchantResult[0].id;
+
+    const sql = `
+      SELECT 
+        oi.product_name, 
+        oi.quantity, 
+        oi.creatdat,
+        p.price,
+        (oi.quantity * p.price) AS total_price
+      FROM order_items oi
+      JOIN products p ON oi.product_id = p.id
+      WHERE p.seler_id = ?
+    `;
+
+    pool.query(sql, [merchantId], (err2, productsResult) => {
+      if (err2) {
+        console.error(err2);
+        return res.status(500).send("حدث خطأ أثناء جلب المنتجات.");
+      }
+
+      let totalSales = 0;
+      productsResult.forEach(p => {
+        totalSales += Number(p.total_price) || 0;
+      });
+
+      const storePercentage = 0.10;
+      const storeShare = totalSales * storePercentage;
+
+      res.render('merchantProducts', {
+        merchantName: merchantName,
+        products: productsResult,
+        totalSales: totalSales.toFixed(2),
+        storeShare: storeShare.toFixed(2)
+      });
+    });
+  });
+};
+
+
+module.exports = { showmassge , updateStatus , getSupportStats ,goadminhome , deleteMessage ,
+    viweBrokers , deletBroker, searchBroker , showmassf , replyMessage , searchMerchantProducts};

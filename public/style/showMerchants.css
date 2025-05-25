@@ -59,16 +59,16 @@
       font-weight: bold;
       border: none;
       border-radius: 10px;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      background: linear-gradient(135deg, #1fdeb2, #3af1f4);
       color: white;
       cursor: pointer;
       transition: 0.4s;
-      box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+      box-shadow: 0 5px 15px rgba(8, 136, 132, 0.4);
     }
 
     .logout-btn:hover {
       transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(255, 65, 108, 0.6);
+      box-shadow: 0 8px 20px rgba(28, 211, 205, 0.6);
     }
 
     @keyframes moveBackground {

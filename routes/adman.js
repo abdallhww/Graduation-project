@@ -1,7 +1,7 @@
 const express = require("express");
 const admanRouter = express.Router();
 const {showmassge , updateStatus , getSupportStats , goadminhome , deleteMessage , viweBrokers , deletBroker
-    , searchBroker , showmassf , replyMessage } = require("../controllers/admin");
+    , searchBroker , showmassf , replyMessage , searchMerchantProducts } = require("../controllers/admin");
 
 admanRouter.post('/goadminhome', goadminhome);
 
@@ -22,5 +22,7 @@ admanRouter.get('/searchBroker', searchBroker);
 admanRouter.post('/showmassf',showmassf);
 
 admanRouter.post('/replyMessage', replyMessage);
+
+admanRouter.get('/searchMerchantProducts',searchMerchantProducts);
 
 module.exports =  { admanRouter };

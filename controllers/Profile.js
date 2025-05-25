@@ -288,5 +288,26 @@ const showUserMessages = (req, res, next) => {
   });
 };
 
+const viewMySalesReports = (req, res) => {
+  const merchantId = req.session.userId; // أو حسب طريقة تخزين المستخدم
 
-module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes , logout , showUserMessages };
+  const sql = `
+    SELECT sr.*, u.username AS merchant_name
+    FROM sales_reports sr
+    JOIN users u ON sr.merchant_id = u.id
+    WHERE sr.merchant_id = ?
+    ORDER BY sr.recorded_at DESC
+  `;
+
+  pool.query(sql, [merchantId], (err, results) => {
+    if (err) {
+      console.error('خطأ في جلب تقارير التاجر:', err);
+      return res.status(500).send("حدث خطأ أثناء جلب تقاريرك.");
+    }
+
+    res.render('mySalesReports', { reports: results });
+  });
+};
+
+
+module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes , logout , showUserMessages , viewMySalesReports};

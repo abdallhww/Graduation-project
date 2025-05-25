@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>منتجات التاجر <%= merchantName %></title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    table {
+      margin: 0 auto;
+      width: 80%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #ffd700;
+    }
+
+    td {
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #ffd700;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #e0c200;
+    }
+  </style>
+</head>
+<body>
+
+    <form action="/calculateSalesReport" method="GET" style="margin-bottom: 30px;">
+  <label>من: <input type="date" name="startDate" required></label>
+  <br>
+  <label>إلى: <input type="date" name="endDate" required></label>
+  <br>
+  <input type="hidden" name="merchantName" value="<%= merchantName %>">
+  <button type="submit">حساب التقرير</button>
+</form>
+
+  <h1>منتجات التاجر: <%= merchantName %></h1>
+
+  <% if (products.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>اسم المنتج</th>
+          <th>الكمية</th>
+          <th>السعر للوحدة</th>
+          <th>تاريخ الطلب</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          <tr>
+            <td><%= product.product_name %></td>
+            <td><%= product.quantity %></td>
+            <td><%= product.price %>$</td>
+            <td><%= product.creatdat.toLocaleString() %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>لا توجد منتجات لهذا التاجر.</p>
+  <% } %>
+
+  <a href="/showMerchants">العودة لقائمة التجار</a>
+
+</body>
+</html>

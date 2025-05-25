@@ -1,6 +1,6 @@
 const express = require("express");
 const ProfileRouter = express.Router();
-const { upload , uploadImage , updateBroker , updateusers , home , homes , logout , showUserMessages } = require("../controllers/Profile");
+const { upload , uploadImage , updateBroker , updateusers , home , homes , logout , showUserMessages , viewMySalesReports} = require("../controllers/Profile");
 
 ProfileRouter.post('/upload', upload.single('image'), uploadImage);
 
@@ -16,5 +16,6 @@ ProfileRouter.post('/logout',logout);
 
 ProfileRouter.get("/user/messages", showUserMessages);
 
+ProfileRouter.post('/mySalesReports', viewMySalesReports);
 
 module.exports =   { ProfileRouter };

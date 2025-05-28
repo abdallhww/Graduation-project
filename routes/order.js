@@ -8,5 +8,4 @@ orderRouter.get('/payment/:orderId', showPaymentPage);
 
 orderRouter.get('/orders/:userId',getUserOrders);
 
-
 module.exports =  { orderRouter };

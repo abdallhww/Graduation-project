@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>ملاحظاتي</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 30px;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00d4ff;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #009879;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #00b4d8;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>جميع الملاحظات التي كتبتها</h2>
+
+    <% if (notes.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>رقم الطلب</th>
+            <th>الحالة</th>
+            <th>السعر الكلي</th>
+            <th>الملاحظة</th>
+            <th>تاريخ انشاء طلب </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% notes.forEach(note => { %>
+            <tr>
+              <td><%= note.order_id %></td>
+              <td><%= note.status %></td>
+              <td><%= note.total_price %> د.ع</td>
+              <td><%= note.note %></td>
+              <td><%= new Date(note.created_at).toLocaleString("ar-EG") %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p style="text-align:center;">لم تقم بإضافة أي ملاحظات بعد.</p>
+    <% } %>
+
+    <button class="logout-btn" onclick="goBack()">رجوع</button>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </div>
+</body>
+</html>

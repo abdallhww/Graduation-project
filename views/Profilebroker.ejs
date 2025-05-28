@@ -43,19 +43,23 @@
                 <label>تفاصيل</label>
                 <textarea name="details"><%= broker.details %></textarea>
 
-                <button type="submit" class="update-btn">تعديل</button>
+                <button type="submit" class="update-btn" >تعديل</button>
             </form>
 
             <div>
                 <form action="/home" method="POST" style="display: inline;">
                     <button type="submit" class="home-btn">الصفحه الرئيسيه</button>
                 </form>
-                <form action="/logout" method="POST" style="display: inline;">
-                    <button type="submit" class="logout-btn"> تسجيل خروج</button>
-                </form>
-                <form action="/showmassf" method="post" style="margin-top: 20px;">
+                <form action="/showmassf" method="post" style="display: inline;">
                     <button type="submit" class="update-btn">عرض رسائلي</button>
                   </form>
+                  <form action="/broker/orders" method="POST" style="display: inline;">
+                  <button type="submit" class="update-btn">عرض طلبات</button>
+                </form>
+
+                  <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="logout-btn"> تسجيل خروج</button>
+                </form>
             </div>
         </div>
     </div>

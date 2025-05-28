@@ -24,6 +24,7 @@ const { adminseller } = require("./routes/adminseller");
 const { selesRoutes } = require("./routes/seles");
 const { locationrouts } = require("./routes/location");
 const { paypalrouts } = require("./routes/paypal");
+const { notsrouts } = require("./routes/nots");
 
 app.use((req, res, next) => {
   console.log(`Method: ${req.method} | URL: ${req.url}`);
@@ -83,6 +84,8 @@ app.use("/",selesRoutes);
 app.use("/",locationrouts);
 
 app.use("/",paypalrouts);
+
+app.use("/",notsrouts);
 
 app.use((err, req, res, next) => {
   console.error("🚨 ERROR:", err.stack); // طباعة الخطأ مع التفاصيل

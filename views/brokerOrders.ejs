@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>طلباتي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="/style/orders.css" />
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #fff;
+      direction: rtl;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .orders-container {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #00d4ff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #009879;
+      color: #ffffff;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0077b6;
+    }
+  </style>
+</head>
+<body>
+  <div class="orders-container">
+    <h2>جميع الطلبات المرتبطة بك كوسيط</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>رقم الطلب</th>
+          <th>اسم المستخدم</th>
+          <th>السعر الكلي</th>
+          <th>طريقة الدفع</th>
+          <th>الحالة</th>
+          <th>التاريخ</th>
+          <th>الموقع</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (orders.length > 0) { %>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.username %></td>
+              <td><%= order.total_price %> د.ع</td>
+              <td><%= order.payment_method %></td>
+              <td><%= order.status %></td>
+              <td><%= new Date(order.created_at).toLocaleString("ar-EG") %></td>
+              <td><%= order.location %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="7">لا توجد طلبات مرتبطة بك حالياً.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 40px; color: #00d4ff;">إضافة/تعديل  تقرير / ملاحظة على طلب</h3>
+<form class="note-form" action="/broker/add-note" method="post">
+  <label for="order_id">رقم الطلب:</label>
+  <input type="number" name="order_id" id="order_id" required placeholder="أدخل رقم الطلب">
+
+  <label for="note">ملاحظتك:</label>
+  <textarea name="note" id="note" rows="4" required placeholder="اكتب تفاصيل الطلب..."></textarea>
+
+  <button type="submit" class="save-note-btn">حفظ /تعديل الملاحظة</button>
+</form>
+
+<form action="/my-notes" method="get">
+  <button type="submit" class="logout-btn" style="display: inline;">عرض ملاحظاتي</button>
+</form>
+
+<form action="/Profile" method="get">
+    <button type="submit" class="logout-btn" style="display: inline;">عوده ملف شخصي</button>
+</form>
+</body>
+</html>

@@ -289,7 +289,7 @@ const showUserMessages = (req, res, next) => {
 };
 
 const viewMySalesReports = (req, res) => {
-  const merchantId = req.session.userId; // أو حسب طريقة تخزين المستخدم
+  const merchantId = req.session.userId; 
 
   const sql = `
     SELECT sr.*, u.username AS merchant_name
@@ -309,5 +309,52 @@ const viewMySalesReports = (req, res) => {
   });
 };
 
+const showBrokerOrders = (req, res) => {
+    const brokerId = req.session.userId;
 
-module.exports = { upload , uploadImage , home , updateBroker , updateusers , homes , logout , showUserMessages , viewMySalesReports};
+    if (!brokerId) {
+        return res.redirect('/login');
+    }
+
+    const query = `
+        SELECT orders.*, users.username 
+        FROM orders 
+        JOIN users ON orders.user_id = users.id 
+        WHERE orders.broker_id = ?
+    `;
+
+    pool.query(query, [brokerId], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).send('حدث خطأ في الخادم');
+        }
+        res.render('brokerOrders', { orders: results });
+    });
+};
+
+const addBrokerNote = (req, res) => {
+  const { order_id, note } = req.body;
+  const broker_id = req.session.userId;
+
+  if (!broker_id) {
+    return res.redirect('/login');
+  }
+
+  const query = `
+    INSERT INTO broker_notes (order_id, broker_id, note)
+    VALUES (?, ?, ?)
+    ON DUPLICATE KEY UPDATE note = VALUES(note)
+  `;
+
+  pool.query(query, [order_id, broker_id, note], (err, result) => {
+    if (err) {
+      console.error('خطأ في قاعدة البيانات:', err);
+      return res.status(500).send('فشل في حفظ أو تعديل الملاحظة');
+    }
+
+    res.render("note-success"); // عرض صفحة تأكيد النجاح
+  });
+};
+
+module.exports = { upload , uploadImage , home , updateBroker , updateusers ,
+   homes , logout , showUserMessages , viewMySalesReports , showBrokerOrders , addBrokerNote};

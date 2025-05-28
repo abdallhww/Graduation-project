@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>ملاحظات الوسطاء</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      color: white;
+      padding: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>ملاحظات الوسطاء</h1>
+  <table>
+    <thead>
+  <tr>
+    <th>اسم الوسيط</th>
+    <th>رقم الطلب</th>
+    <th>الملاحظة</th>
+    <th>الرد</th>
+    <th>تاريخ الإضافة</th>
+  </tr>
+</thead>
+<tbody>
+  <% notes.forEach(note => { %>
+    <tr>
+      <td><%= note.broker_name %></td>
+      <td><%= note.order_id %></td>
+      <td><%= note.note %></td>
+      <td>
+          <form action="/replyNote" method="POST">
+            <input type="hidden" name="note_id" value="<%= note.id %>">
+            <input type="text" name="reply" value="<%= note.reply || '' %>" placeholder="اكتب الرد" required style="width: 100%;">
+            <button type="submit"><%= note.reply ? 'تحديث' : 'إرسال' %></button>
+          </form>
+      </td>
+      <td><%= new Date(note.created_at).toLocaleString('ar-EG') %></td>
+    </tr>
+  <% }) %>
+</tbody>
+  </table>
+  <button onclick="goBack()">رجوع</button>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+</body>
+</html>

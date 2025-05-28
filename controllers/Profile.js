@@ -352,7 +352,7 @@ const addBrokerNote = (req, res) => {
       return res.status(500).send('فشل في حفظ أو تعديل الملاحظة');
     }
 
-    res.render("note-success"); // عرض صفحة تأكيد النجاح
+    res.render("note-success", { message: "تمت إضافة الملاحظة بنجاح!" });
   });
 };
 

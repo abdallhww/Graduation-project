@@ -24,5 +24,34 @@ const getMyNotes = (req, res) => {
     res.render('my-notes', { notes });
   });
 };
+
+const getBrokerNotes = (req, res) => {
+  const query = `
+    SELECT 
+      broker_notes.*, 
+      brokers.name AS broker_name 
+    FROM broker_notes
+    JOIN brokers ON broker_notes.broker_id = brokers.id
+  `;
+
+  pool.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).send("خطأ في الخادم");
+    }
+    res.render('brokerNotesPage', { notes: results });
+  });
+};
+
+const replyToNote = (req, res) => {
+  const { note_id, reply } = req.body;
+  const query = 'UPDATE broker_notes SET reply = ? WHERE id = ?';
+
+  pool.query(query, [reply, note_id], (err, result) => {
+    if (err) {
+      return res.status(500).send("فشل في حفظ الرد");
+    }
+    res.render("note-success", { message: "تم  حفظ رد !" });
+  });
+};
   
-  module.exports = { getMyNotes };
+  module.exports = { getMyNotes , getBrokerNotes , replyToNote };

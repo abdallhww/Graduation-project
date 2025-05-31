@@ -11,7 +11,7 @@ const home = (req, res, next) => {
     }
 else 
 {
-  res.render("home");
+  res.render("index");
   res.end();
 }
 };
@@ -22,7 +22,7 @@ const logout =(req,res,next) =>{
 }
 
 const homes=(req,res,next)=>{
-  res.render("home");
+  res.render("index");
 }
 
 const uploadImage = (req, res, next) => {

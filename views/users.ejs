@@ -28,13 +28,13 @@
 
                 <div class="input-box animation" style="--i:1; --j:22">
                     <input type="text" name="username" id="username" required>
-                    <label for="username">Username</label>
+                    <label for="username">الاسم</label>
                     <i class='bx bxs-user'></i>
                 </div>
 
                 <div class="input-box animation" style="--i:2; --j:23">
                     <input type="password" name="password" id="password" required>
-                    <label for="password">Password</label>
+                    <label for="password">كلمة سر</label>
                     <span class="toggle-password" onclick="togglePassword()">
                         <i class='bx bx-show'></i>
                     </span>
@@ -66,19 +66,19 @@
 
                 <div class="input-box animation" style="--i:18; --j:1">
                     <input type="text" name="regusername" id="regusername" required>
-                    <label for="regusername">Username</label>
+                    <label for="regusername">الاسم</label>
                     <i class='bx bxs-user'></i>
                 </div>
 
                 <div class="input-box animation" style="--i:19; --j:2">
                     <input type="email" name="regemail" id="regemail" required>
-                    <label for="regemail">Email</label>
+                    <label for="regemail">ايميل</label>
                     <i class='bx bxs-envelope'></i>
                 </div>
 
                 <div class="input-box animation" style="--i:20; --j:3">
                     <input type="password" name ="regpassword" id="regpassword" required>
-                    <label for="regpassword">Password</label>
+                    <label for="regpassword">كلمة سر</label>
                     <span class="toggle-password" onclick="togglePassword1()">
                         <i class='bx bx-show'></i>
                     </span>
@@ -87,11 +87,13 @@
 
                 <div class="input-box animation" style="--i:20; --j:3">
                     <select name="role" id="role" required>
-                        <option value="broker">Broker</option>
-                        <option value="seller">Seller</option>
-                        <option value="buyer">buyer</option>
+                        <option value="" disabled selected hidden>اختر دورك</option>
+                        <option value="broker">وسيط</option>
+                        <option value="seller">تاجر</option>
+                        <option value="buyer">المشتري</option>
                     </select>
                 </div>
+
 
                 <button style="color: rgb(36, 20, 255);" type="submit" class="btn animation" style="--i:21;--j:4">Sign Up</button>
 

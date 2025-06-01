@@ -87,6 +87,12 @@ app.use("/",paypalrouts);
 
 app.use("/",notsrouts);
 
+console.log("MYSQLHOST:", process.env.MYSQLHOST);
+console.log("MYSQLUSER:", process.env.MYSQLUSER);
+console.log("MYSQLPORT:", process.env.MYSQLPORT);
+console.log("MYSQLPASSWORD:", process.env.MYSQLPASSWORD);
+console.log("MYSQLDATABASE:", process.env.MYSQLDATABASE);
+
 app.use((err, req, res, next) => {
   console.error("🚨 ERROR:", err.stack); // طباعة الخطأ مع التفاصيل
   res.status(500).render("404", { errors: { general: "حدث خطأ غير متوقع" } });

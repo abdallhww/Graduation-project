@@ -28,11 +28,6 @@ const addproduct = async (req, res, next) => {
         [name]
       );
   
-      /*if (existingProducts.length > 0) {
-        errors.existingProduct = "اسم المنتج مسجل مسبقًا";
-        return res.render("404", { errors, message: null });
-      }*/
-  
     try {
       const seler_id = req.session.userId;
   
@@ -82,7 +77,6 @@ const addproduct = async (req, res, next) => {
     try {
         const seler_id = req.session.userId; // الحصول على معرف البائع من الجلسة
 
-        // التحقق من أن المنتج موجود ويعود إلى  البائع
         const [product] = await pool.promise().query(
             "SELECT * FROM products WHERE id = ? AND seler_id = ?",
             [id, seler_id]
@@ -144,7 +138,6 @@ const deleteProduct = async (req, res, next) => {
   try {
       const seller_id = req.session.userId; // الحصول على معرف البائع من الجلسة
 
-      // التحقق مما إذا كان المنتج موجودًا ويعود إلى هذا البائع
       const [product] = await pool.promise().query(
           "SELECT * FROM products WHERE id = ? AND seler_id = ?",
           [id, seller_id]

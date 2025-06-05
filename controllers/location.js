@@ -2,7 +2,7 @@ const {pool} = require('../utils/db');
 
 const saveLocation = (req, res) => {
   const { orderId, location } = req.body;
-  const brokerId = req.params.brokerId; // من عنوان الرابط /save-location/:brokerid
+  const brokerId = req.params.brokerId;
 
 console.log(brokerId);
 

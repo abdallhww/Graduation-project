@@ -124,7 +124,7 @@ const filterSales2 = (req, res) => {
 };
 
 const getSalesData = (req, res) => {
-  // الاستعلام للحصول على مبيعات حسب التاريخ (مثال لمبيعات الشهر)
+  // الاستعلام للحصول على مبيعات حسب التاريخ ( لمبيعات الشهر)
   const query = `
   SELECT DATE(oi.creatdat) AS date, SUM(oi.quantity * p.price) AS sales
   FROM order_items oi

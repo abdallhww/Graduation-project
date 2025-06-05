@@ -11,7 +11,7 @@ const add_rait = async (req, res) => {
 
     try {
         const query = "SELECT * FROM brokers";
-        const user_id = req.session.userId; // الحصول على ID المستخدم من الجلسة
+        const user_id = req.session.userId;
         console.log("user ", user_id);
         
         // تحقق مما إذا كان المستخدم قد قام بتقييم الوسيط  

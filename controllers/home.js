@@ -63,14 +63,14 @@ const Brokers = (req, res, next) => {
 
 const Brokers2 = (req, res, next) => {
   const userId = req.session.userId;
-  const orderId = req.query.orderId; // 👈 استلام رقم الطلب من الرابط
+  const orderId = req.query.orderId; 
 
   console.log(orderId);
 
   const query = "SELECT * FROM brokers";
   pool.query(query, (err, rows) => {
     if (err) return next(err);
-    res.render("Brokers2", { brokers: rows, userId, orderId }); // 👈 تمرير orderId للصفحة
+    res.render("Brokers2", { brokers: rows, userId, orderId });
   });
 };
 

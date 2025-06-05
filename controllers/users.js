@@ -84,8 +84,6 @@ const registration = async (req, res, next) => {
       return res.render("404", { errors, regusername, regemail, role ,message:null});
     }
 
-
-    //const hashedPassword = await bcrypt.hash(regpassword, 10);
     if (role=="broker"){
       await pool.promise().query(
       "INSERT INTO brokers (name,password,emil,role) VALUES (?,?,?,?)",

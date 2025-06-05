@@ -1,0 +1,25 @@
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #1e3c72, #2a5298);
+        color: #fff;
+        text-align: center;
+        padding: 50px;
+      }
+      h3 {
+        font-size: 28px;
+        color: #ffd700;
+        margin-bottom: 30px;
+      }
+      a {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #ffd700;
+        color: #000;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      a:hover {
+        background-color: #e0c200;
+      }

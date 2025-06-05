@@ -9,6 +9,6 @@ usersRouter.get('/login', (req, res) => {
 
 usersRouter.post('/login', login);
 
-usersRouter.post('/registration',registration);
+usersRouter.post('/registration', registration );
 
 module.exports =  { usersRouter }; 

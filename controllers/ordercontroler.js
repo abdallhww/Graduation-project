@@ -1,4 +1,4 @@
-const { pool } = require("../utils/db"); // تأكد أنك رابط قاعدة البيانات صح
+const { pool } = require("../utils/db");
 
 const submitOrder = (req, res) => {
     const userId = req.session.userId;
@@ -32,7 +32,7 @@ const submitOrder = (req, res) => {
             const orderId = orderResult.insertId;
             console.log("orderId = " + orderId);
 
-            // 🟢 هنا نضيف السعر وقت الشراء
+            // انضيف السعر وقت الشراء
             const itemsValues = cartItems.map(item => [
                 orderId,
                 item.product_id,

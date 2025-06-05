@@ -68,7 +68,7 @@ const showOrders = (req, res) => {
     const { id, status } = req.body;
     pool.query('UPDATE orders SET status = ? WHERE id = ?', [status, id], (err, results) => {
       if (err) throw err;
-      res.redirect('/showOrders'); // رجع لصفحة الطلبات بعد التحديث
+      res.redirect('/showOrders'); // رجوع لصفحة الطلبات بعد التحديث
     });
   };
 
@@ -83,12 +83,12 @@ const showOrders = (req, res) => {
             console.error("فشل في حذف طلب:", err);
             return res.status(500).send("حدث خطأ أثناء حذف طلب.");
       }
-        res.redirect('/showOrders'); // غير الرابط حسب الحاجة
+        res.redirect('/showOrders'); 
     });
   };
 
   const showOrdersForBroker = (req, res) => {
-  const brokerName = req.body.name; // تأكد من أن الاسم يرسل من الفورم أو الريكوست
+  const brokerName = req.body.name;
 
   const query = `
     SELECT 

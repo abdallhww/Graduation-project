@@ -23,7 +23,7 @@ const goadminhome = (req, res, next) => {
         return res.status(500).send("حدث خطأ أثناء التحديث");
       }
   
-      res.redirect("/showmassge"); // ارجع لصفحة الرسائل بعد التحديث
+      res.redirect("/showmassge"); // رجوع لصفحة الرسائل بعد التحديث
     });
   };
 
@@ -66,7 +66,7 @@ const goadminhome = (req, res, next) => {
         console.error("فشل في حذف الرسالة:", err);
         return res.status(500).send("حدث خطأ أثناء حذف الرسالة.");
       }
-      res.redirect('/showmassge'); // تأكد إنه الراوت هذا يطابق عرض الرسائل
+      res.redirect('/showmassge');
     });
   };
 
@@ -181,4 +181,4 @@ const searchMerchantProducts = (req, res) => {
 };
 
 module.exports = { showmassge , updateStatus , getSupportStats ,goadminhome , deleteMessage ,
-    viweBrokers , deletBroker, searchBroker , showmassf , replyMessage , searchMerchantProducts};
+    viweBrokers , deletBroker , searchBroker , showmassf , replyMessage , searchMerchantProducts };

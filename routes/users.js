@@ -7,6 +7,11 @@ usersRouter.get('/login', (req, res) => {
     res.end();
 });
 
+usersRouter.get('/login2', (req, res) => {
+    res.render("users", { title: "=>Shop Store",message:null,messag:null});
+    res.end();
+});
+
 usersRouter.post('/login', login);
 
 usersRouter.post('/registration', registration );

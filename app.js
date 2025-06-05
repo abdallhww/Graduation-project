@@ -42,12 +42,22 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// ⬇️ إعداد الاتصال بقاعدة البيانات لحفظ الجلسات
+const sessionStore = new MySQLStore({
+  host: process.env.MYSQLHOST,
+  port: process.env.MYSQLPORT,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE
+});
+
 // إعداد الجلسات
 app.use(session({
-  secret: "Abdallh2002*",
+  secret: "akJ393k_jdi2Plls8@!xZ*",
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false } 
+  store: sessionStore,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // يوم كامل
 }));
 
 //--------------------------

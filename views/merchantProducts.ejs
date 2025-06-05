@@ -73,7 +73,7 @@
   <label>إلى: <input type="date" name="endDate" required></label>
   <br>
   <input type="hidden" name="merchantName" value="<%= merchantName %>">
-  <button type="submit">حساب التقرير</button>
+  <button type="submit">انشاء  التقرير</button>
 </form>
 
   <h1>منتجات التاجر: <%= merchantName %></h1>
@@ -93,7 +93,7 @@
           <tr>
             <td><%= product.product_name %></td>
             <td><%= product.quantity %></td>
-            <td><%= product.price %>$</td>
+            <td><%= product.product_price %>$</td>
             <td><%= product.creatdat.toLocaleString() %></td>
           </tr>
         <% }) %>

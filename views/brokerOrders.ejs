@@ -76,6 +76,12 @@
 <body>
   <div class="orders-container">
     <h2>جميع الطلبات المرتبطة بك كوسيط</h2>
+    <label>لعرض منتجات الموجوده في طلب </label>
+    <form action="/searchOrderItems" method="get" class="search-form">
+            <input type="number" name="orderId" placeholder="ادخل رقم الطلب" required class="search-input" />
+            <button type="submit" class="search-btn">بحث</button>
+    </form>
+
     <table>
       <thead>
         <tr>

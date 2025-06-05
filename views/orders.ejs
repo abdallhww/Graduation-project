@@ -11,7 +11,7 @@
         <h2 style="text-align: center; margin-bottom: 20px;">طلباتي</h2>
         <h3 style="text-align: center; margin-bottom: 20px;">تفاصيل طلب</h3>
 
-        <!-- تم تعديل الفورم -->
+        
         <form action="/searchOrderItems" method="get" class="search-form">
             <input type="number" name="orderId" placeholder="ادخل رقم الطلب" required class="search-input" />
             <button type="submit" class="search-btn">بحث</button>
@@ -26,6 +26,7 @@
                     <div class="order-info">
                         <p><strong>تاريخ الطلب:</strong> <%= new Date(order.created_at).toLocaleString() %></p>
                         <p><strong>السعر الإجمالي:</strong> $<%= parseFloat(order.total_price).toFixed(2) %></p>
+                        <p>الوسيط: <%= order.broker_name ? order.broker_name : 'غير محدد' %></p>
                         <p><strong>الحالة:</strong> <%= order.status %></p>
                     </div>
                 </div>

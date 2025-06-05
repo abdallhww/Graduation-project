@@ -73,7 +73,7 @@
         <tr>
           <td><%= product.product_name %></td>
           <td><%= product.quantity %></td>
-          <td><%= product.price %> $</td>
+          <td><%= product.product_price %> $</td>
           <td><%= new Date(product.creatdat).toLocaleString() %></td>
           <td><%= (product.quantity * product.price).toFixed(2) %> $</td>
         </tr>

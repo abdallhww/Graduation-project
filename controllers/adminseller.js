@@ -15,17 +15,16 @@ const calculateSalesReport = (req, res) => {
 
     const merchantId = merchantResult[0].id;
 
-    // جلب المنتجات المباعة ضمن الفترة الزمنية
     const sql = `
       SELECT 
         oi.product_name,
         oi.quantity,
-        p.price,
-        (oi.quantity * p.price) AS total_price,
+        oi.product_price,
+        (oi.quantity * oi.product_price) AS total_price,
         oi.creatdat
       FROM order_items oi
       JOIN products p ON oi.product_id = p.id
-      WHERE p.seler_id = ? AND oi.creatdat BETWEEN ? AND ?
+      WHERE p.seler_id = ? AND DATE(oi.creatdat) BETWEEN ? AND ?
     `;
 
     pool.query(sql, [merchantId, startDate, endDate], (err2, productsResult) => {
@@ -34,9 +33,10 @@ const calculateSalesReport = (req, res) => {
       let totalSales = 0;
       productsResult.forEach(p => {
         totalSales += Number(p.total_price) || 0;
+        p.creatdat = new Date(p.creatdat).toLocaleDateString(); // تنسيق التاريخ
       });
 
-      const defaultPercentage = 10; // 10%
+      const defaultPercentage = 10;
 
       res.render('salesReportForm', {
         merchantName,

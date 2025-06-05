@@ -149,8 +149,8 @@ const searchMerchantProducts = (req, res) => {
         oi.product_name, 
         oi.quantity, 
         oi.creatdat,
-        p.price,
-        (oi.quantity * p.price) AS total_price
+        oi.product_price,
+        (oi.quantity * oi.product_price) AS total_price
       FROM order_items oi
       JOIN products p ON oi.product_id = p.id
       WHERE p.seler_id = ?
@@ -179,7 +179,6 @@ const searchMerchantProducts = (req, res) => {
     });
   });
 };
-
 
 module.exports = { showmassge , updateStatus , getSupportStats ,goadminhome , deleteMessage ,
     viweBrokers , deletBroker, searchBroker , showmassf , replyMessage , searchMerchantProducts};

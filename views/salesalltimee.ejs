@@ -3,10 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>مبيعات اليوم</title>
-  <link rel="stylesheet" href='/style/selestoday.css'>
+  <link rel="stylesheet" href="/style/salesalltime.css" />
+  
 </head>
 <body>
-  <h1>مبيعات اليوم</h1>
+  <h2>عرض المبيعات حسب التاريخ</h2>
+<form action="/filter2" method="GET" style="margin-bottom: 30px;">
+  <input type="date" id="from" name="from" required>
+  <label for="from">من تاريخ:</label>
+<hr>
+  <input type="date" id="to" name="to" required>
+   <label for="to">إلى تاريخ:</label>
+<hr>
+  <button type="submit" class="logout-btn" style="margin-top: 10px;">عرض</button>
+</form>
+
+  <h1>مبيعات </h1>
+
 
   <% if (sales.length > 0) { %>
     <table>
@@ -22,18 +35,23 @@
           <td><%= item.product_price %></td>
           <td><%= item.quantity %></td>
           <td><%= item.creatdat %></td>
+
         </tr>
       <% }) %>
     </table>
   <% } else { %>
-    <p>لا توجد مبيعات اليوم.</p>
+    <p>لا توجد مبيعات الشهر.</p>
   <% } %>
-
+  
   <p>عدد المنتجات المباعة: <%= totalSales %></p>
   <p>إجمالي المبلغ: <%= totalAmount.toFixed(2) %> دولار</p>
 
-  <form action="/goadminhome" method="POST" style="display: inline;">
-    <button type="submit" class="logout-btn">ذهاب إلى الصفحة الرئيسية</button>
-  </form>
+   <button onclick="goBack()">⬅ العودة</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ const submitOrder = (req, res) => {
         WHERE c.user_id = ?
     `;
 
-    console.log("userid = "+userId);
+    console.log("userid = " + userId);
 
     pool.query(cartQuery, [userId], (err, cartItems) => {
         if (err) return res.status(500).send('خطأ في جلب السلة');
@@ -20,27 +20,29 @@ const submitOrder = (req, res) => {
         const totalPrice = cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
         const insertOrderQuery = `
-        INSERT INTO orders (user_id, total_price, payment_method, status, created_at) 
-        VALUES (?, ?, ?, 'قيد المعالجة', NOW())
+            INSERT INTO orders (user_id, total_price, payment_method, status, created_at) 
+            VALUES (?, ?, ?, 'قيد المعالجة', NOW())
         `;
-        
-        console.log(totalPrice);//سعر
+
+        console.log("totalPrice = " + totalPrice);
 
         pool.query(insertOrderQuery, [userId, totalPrice, 'كاش'], (err, orderResult) => {
             if (err) return res.status(500).send('خطأ في إنشاء الطلب');
 
             const orderId = orderResult.insertId;
-            console.log(orderId);
+            console.log("orderId = " + orderId);
 
+            // 🟢 هنا نضيف السعر وقت الشراء
             const itemsValues = cartItems.map(item => [
                 orderId,
                 item.product_id,
                 item.product_name,
-                1
+                1, // الكمية
+                item.price // السعر وقت الشراء
             ]);
 
             const insertItemsQuery = `
-                INSERT INTO order_items (order_id, product_id, product_name, quantity) 
+                INSERT INTO order_items (order_id, product_id, product_name, quantity, product_price) 
                 VALUES ?
             `;
 
@@ -52,11 +54,15 @@ const submitOrder = (req, res) => {
                 pool.query(clearCartQuery, [userId], (err) => {
                     if (err) console.warn('خطأ في حذف السلة بعد الطلب');
 
-                    res.render('payment', { order: { id: orderId, total: totalPrice,created_at: new Date(), payment_method: 'كاش',orderId  } 
+                    res.render('payment', {
+                        order: {
+                            id: orderId,
+                            total: totalPrice,
+                            created_at: new Date(),
+                            payment_method: 'كاش',
+                            orderId
+                        }
                     });
-                    
-
-
                 });
             });
         });
@@ -81,7 +87,13 @@ const showPaymentPage = (req, res) => {
 const getUserOrders = (req, res) => {
     const userId = req.params.userId;
 
-    const query = 'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC';
+    const query = `
+        SELECT orders.*, brokers.name AS broker_name
+        FROM orders
+        LEFT JOIN brokers ON orders.broker_id = brokers.id
+        WHERE orders.user_id = ?
+        ORDER BY orders.created_at DESC
+    `;
 
     pool.query(query, [userId], (err, results) => {
         if (err) {

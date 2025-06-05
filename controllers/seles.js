@@ -2,9 +2,12 @@ const { pool } = require("../utils/db");
 
 const salestoday = (req, res) => {
   const salesQuery = `
-    SELECT p.name AS product_name, p.price, o.quantity, o.creatdat 
+    SELECT 
+      o.product_name, 
+      o.product_price, 
+      o.quantity, 
+      o.creatdat 
     FROM order_items o
-    JOIN products p ON o.product_id = p.id
     WHERE DATE(o.creatdat) = CURDATE()
   `;
 
@@ -14,7 +17,7 @@ const salestoday = (req, res) => {
       return res.status(500).send('حدث خطأ أثناء عرض المبيعات');
     }
 
-    const totalAmount = results.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const totalAmount = results.reduce((total, item) => total + (item.product_price * item.quantity), 0);
 
     results.forEach(item => {
         item.creatdat = new Date(item.creatdat).toLocaleDateString();
@@ -26,29 +29,27 @@ const salestoday = (req, res) => {
 
 const salestotal = (req, res) => {
     const salesQuery = `
-      SELECT p.name AS product_name, p.price, o.quantity, o.creatdat
+      SELECT o.product_name, o.product_price, o.quantity, o.creatdat
       FROM order_items o
-      JOIN products p ON o.product_id = p.id
     `;
 
     pool.query(salesQuery, (err, results) => {
-      if (err) {
-        console.error('خطأ أثناء جلب جميع المبيعات:', err);
-        return res.status(500).send('حدث خطأ أثناء عرض إجمالي المبيعات');
-      }
+        if (err) {
+            console.error('خطأ أثناء جلب جميع المبيعات:', err);
+            return res.status(500).send('حدث خطأ أثناء عرض إجمالي المبيعات');
+        }
 
-      // تحويل creatdat إلى تنسيق تاريخ مناسب
-      results.forEach(item => {
-        item.creatdat = new Date(item.creatdat).toLocaleDateString();
-      });
+        results.forEach(item => {
+            item.creatdat = new Date(item.creatdat).toLocaleDateString();
+        });
 
-      const totalAmount = results.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const totalAmount = results.reduce((total, item) => total + (item.product_price * item.quantity), 0);
 
-      res.render('salesalltime', {
-        sales: results,
-        totalSales: results.length,
-        totalAmount
-      });
+        res.render('salesalltime', {
+            sales: results,
+            totalSales: results.length,
+            totalAmount
+        });
     });
 };
 
@@ -60,9 +61,8 @@ const filterSales = (req, res) => {
   }
 
   const salesQuery = `
-    SELECT p.name AS product_name, p.price, o.quantity, o.creatdat
+    SELECT o.product_name, o.product_price, o.quantity, o.creatdat
     FROM order_items o
-    JOIN products p ON o.product_id = p.id
     WHERE DATE(o.creatdat) BETWEEN ? AND ?
   `;
 
@@ -77,11 +77,45 @@ const filterSales = (req, res) => {
       item.creatdat = new Date(item.creatdat).toLocaleDateString();
     });
 
-    
     const totalSales = results.reduce((total, item) => total + item.quantity, 0);
-    const totalAmount = results.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const totalAmount = results.reduce((total, item) => total + (item.product_price * item.quantity), 0);
 
     res.render('salesalltime', {
+      sales: results,
+      totalSales,
+      totalAmount
+    });
+  });
+};
+
+const filterSales2 = (req, res) => {
+  const { from, to } = req.query;
+
+  if (!from || !to) {
+    return res.send('يرجى تحديد تاريخ البداية والنهاية');
+  }
+
+  const salesQuery = `
+    SELECT o.product_name, o.product_price, o.quantity, o.creatdat
+    FROM order_items o
+    WHERE DATE(o.creatdat) BETWEEN ? AND ?
+  `;
+
+  pool.query(salesQuery, [from, to], (err, results) => {
+    if (err) {
+      console.error('خطأ أثناء تصفية المبيعات حسب التاريخ:', err);
+      return res.status(500).send('حدث خطأ أثناء تصفية المبيعات');
+    }
+
+    // تنسيق التاريخ للعرض
+    results.forEach(item => {
+      item.creatdat = new Date(item.creatdat).toLocaleDateString();
+    });
+
+    const totalSales = results.reduce((total, item) => total + item.quantity, 0);
+    const totalAmount = results.reduce((total, item) => total + (item.product_price * item.quantity), 0);
+
+    res.render('salesalltimee', {
       sales: results,
       totalSales,
       totalAmount
@@ -182,4 +216,43 @@ const selectBroker = (req, res) => {
     );
 };
 
-module.exports = { salestoday , salestotal , filterSales , getSalesData , selectBroker };
+const salestotalw = (req, res) => {
+   const userId = req.session.userId;
+
+  if (!userId) {
+    return res.status(403).send('غير مصرح لك بالوصول إلى هذه الصفحة');
+  }
+
+  const salesQuery = `
+    SELECT 
+      o.product_name, 
+      o.product_price,
+      o.quantity, 
+      o.creatdat
+    FROM order_items o
+    JOIN products p ON o.product_id = p.id
+    WHERE p.seler_id = ?
+  `;
+
+  pool.query(salesQuery, [userId], (err, results) => {
+    if (err) {
+      console.error('خطأ أثناء جلب مبيعات التاجر:', err);
+      return res.status(500).send('حدث خطأ أثناء عرض إجمالي المبيعات');
+    }
+
+    // تحويل creatdat إلى تنسيق تاريخ مناسب
+    results.forEach(item => {
+      item.creatdat = new Date(item.creatdat).toLocaleDateString();
+    });
+
+    const totalAmount = results.reduce((total, item) => total + (item.product_price * item.quantity), 0);
+
+    res.render('salesalltimee', {
+      sales: results,
+      totalSales: results.length,
+      totalAmount
+    });
+  });
+};
+
+module.exports = { salestoday , salestotal , filterSales , getSalesData , selectBroker , salestotalw , filterSales2};

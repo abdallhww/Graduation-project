@@ -45,7 +45,7 @@ const login = async (req, res, next) => {
     console.log(role);
 
     if(role=='seller'||role=='broker')
-    res.render("home2", {message:null });
+    res.render("home2", {message:null , role ,username});
   else if(role=='buyer')
     res.render("index", {message:null });
   else if(role=='admin')

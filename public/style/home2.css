@@ -81,3 +81,35 @@ h3.dd {
     background-color: #16a085;
     transform: scale(1.05);
 }
+.user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 30px auto;
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    color: #000000;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.4rem;
+    width: fit-content;
+}
+
+.user-role {
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 154, 158, 0.4);
+}
+
+.user-name {
+    background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(161, 196, 253, 0.4);
+}

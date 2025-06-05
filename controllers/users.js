@@ -47,7 +47,7 @@ const login = async (req, res, next) => {
     if(role=='seller'||role=='broker')
     res.render("home2", {message:null , role ,username});
   else if(role=='buyer')
-    res.render("index", {message:null });
+    res.render("index", {message:null, messag:"مرحبا بك في متجر و موقع الذي يجمع وسطاء ",username});
   else if(role=='admin')
   res.render("admin", {message:null });
 

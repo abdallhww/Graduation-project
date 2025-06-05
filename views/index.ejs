@@ -10,21 +10,29 @@
 </head>
 
 <body>
+<header class="header">
+  <h1 class="logo">Shop</h1>
+  <nav>
+    <% if (!username) { %>
+      <a href="/login2">تسجيل دخول // انشاء حساب</a>
+    <% }  %>
 
-  <header class="header">
-    <h1 class="logo">Shop</h1>
-    <nav>
-      <a href="/login2">تسجيل دخول//انشاء حساب</a>
-      <a href="#" class="active">الرئيسية</a>
-      <a href="/Technicalsupport">الدعم الفني</a>
-      <a href="/Profile">ملف شخصي</a>
-      <a href="/Brokers">الوسطاء</a>
-      <a href="/Viewproducts">منتجاتنا</a>
-    </nav>
-  </header>
+    <a href="#" class="active">الرئيسية</a>
+    <a href="/Technicalsupport">الدعم الفني</a>
+    <a href="/Profile">ملف شخصي</a>
+    <a href="/Brokers">الوسطاء</a>
+    <a href="/Viewproducts">منتجاتنا</a>
+  </nav>
+</header>
 
   <div class="welcome-container">
-    <h3>مرحبًا بك!</h3>
+    <h3>مرحبًا بك! 
+       <% if (username) { %>
+      <span> <%= username %></span>
+    <% } else { %>
+      <span>.</span>
+    <% } %>
+    </h3>
 
     <div class="welcome-section">
       <h2>اكتشف عالم التسوق المميز</h2>

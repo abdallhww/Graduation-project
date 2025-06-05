@@ -15,7 +15,8 @@ homeRouter.get('/Profile', Profile );
 homeRouter.post('/send', send );
 
 homeRouter.get('/', (req, res) => {
-  res.render('index'); // أو اسم الصفحة الرئيسية
+  const username=null;
+  res.render('index',{ username}); // أو اسم الصفحة الرئيسية
 });
 
 module.exports =  { homeRouter };

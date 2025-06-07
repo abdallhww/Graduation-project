@@ -3,17 +3,25 @@ const multer = require("multer");
 const upload = multer({ dest: "public/uploads/" });
 
 const home = (req, res, next) => {
+  const id = req.session.userId;
 
-  if(req.session.role=="seller"||req.session.role=="broker")
-    {
-  res.render("home2");
-  res.end();
-    }
-else 
-{
-  res.render("index");
-  res.end();
-}
+  if (req.session.role === "seller" || req.session.role === "broker") {
+    res.render("home2");
+  } else {
+    const query = "SELECT username FROM users WHERE id = ?";
+    pool.query(query, [id], (err, results) => {
+      if (err) {
+        return next(err); // تمرير الخطأ إلى الوسيط التالي
+      }
+
+      let username = null;
+      if (results.length > 0) {
+        username = results[0].username;
+      }
+
+      res.render("index", { username });
+    });
+  }
 };
 
 const logout =(req,res,next) =>{
@@ -22,8 +30,26 @@ const logout =(req,res,next) =>{
 }
 
 const homes=(req,res,next)=>{
-  res.render("index");
-}
+  const id = req.session.userId;
+
+  if (req.session.role === "seller" || req.session.role === "broker") {
+    res.render("home2");
+  } else {
+    const query = "SELECT username FROM users WHERE id = ?";
+    pool.query(query, [id], (err, results) => {
+      if (err) {
+        return next(err); // تمرير الخطأ إلى الوسيط التالي
+      }
+
+      let username = null;
+      if (results.length > 0) {
+        username = results[0].username;
+      }
+
+      res.render("index", { username });
+    });
+  }
+};
 
 const uploadImage = (req, res, next) => {
   if (!req.file) {

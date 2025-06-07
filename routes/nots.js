@@ -4,7 +4,7 @@ const { getMyNotes , getBrokerNotes , replyToNote } = require("../controllers/no
 
 notsrouts.get('/my-notes', getMyNotes );
 
-notsrouts.get('/brokerNotes',getBrokerNotes );
+notsrouts.get('/brokerNotes', getBrokerNotes );
 
 notsrouts.post('/replyNote', replyToNote );
 

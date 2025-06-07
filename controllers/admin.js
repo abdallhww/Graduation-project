@@ -108,6 +108,21 @@ const goadminhome = (req, res, next) => {
     });
 };
 
+const searchBroker2 = (req, res) => {
+    const { name } = req.query;
+    const message=null;
+    const sql = "SELECT * FROM brokers WHERE name LIKE ?";
+    const searchValue = `%${name}%`; // للبحث 
+
+    pool.query(sql, [searchValue], (err, results) => {
+        if (err) {
+            console.error("خطأ في البحث عن الوسيط:", err);
+            return res.status(500).send("حدث خطأ أثناء البحث.");
+        }
+        res.render("Brokers", { brokers: results ,message});
+    });
+};
+
 const showmassf = (req, res, next) => {
   const id = req.session.userId;
 
@@ -181,4 +196,4 @@ const searchMerchantProducts = (req, res) => {
 };
 
 module.exports = { showmassge , updateStatus , getSupportStats ,goadminhome , deleteMessage ,
-    viweBrokers , deletBroker , searchBroker , showmassf , replyMessage , searchMerchantProducts };
+    viweBrokers , deletBroker , searchBroker , searchBroker2 , showmassf , replyMessage , searchMerchantProducts };

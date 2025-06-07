@@ -17,9 +17,15 @@
         </div>
     <% } %>
 </div>
-    <h1>الوسطاء <form action="/home" method="POST" style="display: inline;">
+    <h1>الوسطاء <form action="/home" method="POST" style="display: inline;">  
       <button type="submit" class="evaluate-btn">الصفحه الرئيسيه</button>
   </form></h1>
+
+   <form action="/searchBroker2" method="get">
+      <input type="text" name="name" placeholder="ابحث عن وسيط بالاسم" required>
+      <button type="submit">بحث</button>
+    </form>
+
   <div class="broker-container">
     <% brokers.forEach(broker => { %>
       <div class="broker">
@@ -60,6 +66,14 @@
   </form>
   <button class="close-btn">إغلاق</button>
   </div>
+
+  <button onclick="goBack()">⬅ العودة</button>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 
   <script>
     // الحصول على جميع أزرار التقييم

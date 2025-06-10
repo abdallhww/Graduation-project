@@ -15,7 +15,7 @@ const submitOrder = (req, res) => {
     pool.query(cartQuery, [userId], (err, cartItems) => {
         if (err) return res.status(500).send('خطأ في جلب السلة');
 
-        if (cartItems.length === 0) return res.send("السلة فارغة");
+        if (cartItems.length === 0) return res.render('full');
 
         const totalPrice = cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
 

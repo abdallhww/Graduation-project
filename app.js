@@ -53,7 +53,7 @@ const sessionStore = new MySQLStore({
 
 // إعداد الجلسات
 app.use(session({
-  secret: "akJ393k_jdi2Plls8@!xZ*",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: sessionStore,
@@ -108,4 +108,4 @@ app.use((err, req, res, next) => {
   res.status(500).render("404", { errors: { general: "حدث خطأ غير متوقع" } });
 });
 
-app.listen(PORT, () => console.log("Server is running on : " + PORT));
+app.listen(PORT, () => console.log("Server is running on : " + PORT)); 

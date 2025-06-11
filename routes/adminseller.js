@@ -1,7 +1,8 @@
 const express = require('express');
 const adminseller = express.Router();
-const { calculateSalesReport , saveSalesReport , viewSalesReports , updatePaymentStatus , deleteReport , showMerchants } = require("../controllers/adminseller");
-const { pool } = require('../utils/db'); // تأكد أنك موصل قاعدة البيانات (ممكن يكون اسم الملف مختلف)
+const { calculateSalesReport , saveSalesReport , viewSalesReports , updatePaymentStatus ,
+     deleteReport , showMerchants } = require("../controllers/adminseller");
+const { pool } = require('../utils/db');
 
 adminseller.get('/showMerchants', showMerchants );
 

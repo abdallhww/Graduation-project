@@ -17,7 +17,6 @@
         <th>الكمية</th>
         <th>السعر للوحدة</th>
         <th>التاريخ</th>
-        <th>الإجمالي</th>
       </tr>
     </thead>
     <tbody>
@@ -26,8 +25,7 @@
           <td><%= product.product_name %></td>
           <td><%= product.quantity %></td>
           <td><%= product.product_price %> $</td>
-          <td><%= new Date(product.creatdat).toLocaleString() %></td>
-          <td><%= (product.quantity * product.price).toFixed(2) %> $</td>
+          <td><%= product.creatdat %></td>
         </tr>
       <% }) %>
     </tbody>

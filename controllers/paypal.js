@@ -7,7 +7,7 @@ const completePayment = async (req, res) => {
 
   console.log(orderId + " " + paymentMethod + " " + totalPrice);
 
-  const request = new paypal.orders.OrdersCreateRequest();
+  const request = new paypal.orders.OrdersCreateRequest();// إنشاء طلب جديد لإنشاء عملية شراء جديدة  PayPal
   request.prefer('return=representation');
   request.requestBody({
     intent: 'CAPTURE',

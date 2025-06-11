@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop | Home</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-   <link rel="stylesheet" href="/style/home.css"> 
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href='/style/home.css'>
 </head>
-
 <body>
-<header class="header">
-  <h1 class="logo">Shop</h1>
-  <nav>
-    <% if (!username) { %>
+  <header class="header">
+    <h1 class="logo">Shop</h1>
+    <nav>
+      <% if (!username) { %>
       <a href="/login2">تسجيل دخول // انشاء حساب</a>
-    <% }  %>
-
-    <a href="#" class="active">الرئيسية</a>
-    <a href="/Technicalsupport">الدعم الفني</a>
-    <a href="/Profile">ملف شخصي</a>
-    <a href="/Brokers">الوسطاء</a>
-    <a href="/Viewproducts">منتجاتنا</a>
-  </nav>
-</header>
+      <% } %>
+      <a href="#" class="active">الرئيسية</a>
+      <a href="/Technicalsupport">الدعم الفني</a>
+      <a href="/Profile">ملف شخصي</a>
+      <a href="/Brokers">الوسطاء</a>
+      <a href="/Viewproducts">منتجاتنا</a>
+    </nav>
+  </header>
 
   <div class="welcome-container">
-    <h3>مرحبًا بك! 
-       <% if (username) { %>
+    <h3> مرحبًا بك يا!
+      <% if (username) { %>
       <span> <%= username %></span>
-    <% } else { %>
-      <span>.</span>
-    <% } %>
+      <% } else { %>
+      <span>زائر</span>
+      <% } %>
     </h3>
+    
 
-    <div class="welcome-section">
-      <h2>اكتشف عالم التسوق المميز</h2>
-      <p>في موقعنا نقدم لك مجموعة واسعة من المنتجات عالية الجودة التي تلبي جميع احتياجاتك ورغباتك. نضمن لك تجربة تسوق فريدة ومريحة مع أفضل الأسعار.</p>
-      
-      <p>سواء كنت تبحث عن منتجات إلكترونية، ملابس عصرية، أو أدوات منزلية، ستجد كل ذلك وأكثر لدينا. فريقنا ملتزم بتقديم خدمة عملاء استثنائية لضمان رضاك التام.</p>
-      
-      <p>انضم إلى آلاف العملاء السعداء وابدأ رحلتك معنا اليوم!</p>
-
-      
+    <div class="welcome-flex">
+      <div class="welcome-section">
+        <h2>اكتشف عالم التسوق المميز</h2>
+        <p>في موقعنا نقدم لك مجموعة واسعة من المنتجات عالية الجودة التي تلبي جميع احتياجاتك ورغباتك.</p>
+        <p>سواء كنت تبحث عن منتجات إلكترونية، ملابس عصرية، أو أدوات منزلية، ستجد كل ذلك وأكثر لدينا.</p>
+        <p>انضم إلى آلاف العملاء السعداء وابدأ رحلتك معنا اليوم!</p>
+         <div class="single-image">
+        <img src="/uploads/m.png" alt="صورة مميزة" />
+      </div>
+      </div>
     </div>
   </div>
-
 </body>
 </html>

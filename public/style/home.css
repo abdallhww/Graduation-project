@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
     * {
       margin: 0;
@@ -26,20 +26,22 @@
       left: 50%;
       transform: translateX(-50%);
       width: 90%;
-      background-color: #34495e;
+      background-color: rgba(52, 73, 94, 0.85);
       padding: 15px 30px;
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
+      z-index: 10000;
+      backdrop-filter: blur(8px);
     }
 
     .logo {
       font-size: 26px;
       font-weight: bold;
       color: #f39c12;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     }
 
     nav a {
@@ -49,35 +51,54 @@
       transition: 0.3s ease;
     }
 
-    nav a:hover, nav a.active {
+    nav a:hover,
+    nav a.active {
       color: #f1c40f;
-      transform: scale(1.05);
+      transform: scale(1.1);
+      text-shadow: 1px 1px 5px rgba(241, 196, 15, 0.7);
     }
 
     .welcome-container {
+      margin-top: 120px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 20px;
       animation: fadeIn 1s ease forwards;
+      z-index: 10;
+      position: relative;
     }
 
     h3 {
       font-size: 3em;
       font-weight: bold;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(0,0,0,0.4);
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(243, 156, 18, 0.6);
       animation: float 2s ease-in-out infinite alternate;
     }
 
+    .welcome-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto 50px auto;
+      padding: 0 10px;
+      direction: rtl; /* نص عربي صحيح */
+      text-align: right;
+    }
+
     .welcome-section {
-      background-color: #34495e;
+      flex: 1;
+      background: rgba(52, 73, 94, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.1);
       padding: 40px 30px;
       border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      max-width: 700px;
-      margin-bottom: 50px;
+      color: #ecf0f1;
     }
 
     .welcome-section h2 {
@@ -88,45 +109,67 @@
 
     .welcome-section p {
       font-size: 18px;
-      color: #ecf0f1;
-      margin-bottom: 20px;
       line-height: 1.7;
+      margin-bottom: 20px;
     }
 
-    .btn {
-      background-color: #1abc9c;
-      color: white;
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      display: inline-block;
-      margin-top: 20px;
+    .single-image {
+      flex: 1;
+      max-width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      margin-left: 0;
     }
 
-    .btn:hover {
-      background-color: #16a085;
-      transform: scale(1.05);
-      cursor: pointer;
+    .single-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
     }
 
     @keyframes fadeIn {
-      0% {opacity: 0; transform: translateY(50px);}
-      100% {opacity: 1; transform: translateY(0);}
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* Responsive */
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+
     @media (max-width: 768px) {
       .header {
         flex-direction: column;
         gap: 10px;
       }
+
       nav {
         margin-top: 10px;
       }
+
       .logo {
         font-size: 22px;
+      }
+
+      .welcome-flex {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .single-image {
+        max-width: 100%;
+        margin-top: 20px;
       }
     }

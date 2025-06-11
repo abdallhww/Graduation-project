@@ -42,6 +42,7 @@ const login = async (req, res, next) => {
     console.log(`User logged in from ${tableName}, session userId:`, req.session.userId);
     
     const role = existingUser[0].role;
+    
     console.log(role);
 
     if(role=='seller'||role=='broker')

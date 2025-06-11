@@ -88,7 +88,9 @@ const getUserOrders = (req, res) => {
     const userId = req.params.userId;
 
     const query = `
-        SELECT orders.*, brokers.name AS broker_name
+        SELECT orders.*,
+         brokers.name AS broker_name
+         , brokers.phone AS broker_phone
         FROM orders
         LEFT JOIN brokers ON orders.broker_id = brokers.id
         WHERE orders.user_id = ?

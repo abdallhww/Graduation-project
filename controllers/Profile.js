@@ -371,7 +371,7 @@ const showBrokerOrders = (req, res) => {
     }
 
     const query = `
-        SELECT orders.*, users.username 
+        SELECT orders.*, users.username , users.phone 
         FROM orders 
         JOIN users ON orders.user_id = users.id 
         WHERE orders.broker_id = ?

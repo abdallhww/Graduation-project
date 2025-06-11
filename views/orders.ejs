@@ -27,6 +27,7 @@
                         <p><strong>تاريخ الطلب:</strong> <%= new Date(order.created_at).toLocaleString() %></p>
                         <p><strong>السعر الإجمالي:</strong> $<%= parseFloat(order.total_price).toFixed(2) %></p>
                         <p>الوسيط: <%= order.broker_name ? order.broker_name : 'غير محدد' %></p>
+                        <p><strong>رقم هاتف وسيط:</strong> <%= order.broker_phone %></p>
                         <p><strong>الحالة:</strong> <%= order.status %></p>
                     </div>
                 </div>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <title>تعليقات الوسيط</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        padding: 20px;
+        max-width: 700px;
+        margin: auto;
+    }
+    h2 {
+        text-align: center;
+        color: white;
+        margin-bottom: 25px;
+    }
+    .review {
+        background: #e3f2fd; /* أزرق فاتح متناسق */
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(33, 150, 243, 0.3); /* ظل أزرق خفيف */
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .review:hover {
+        background: #bbdefb; /* أزرق أفتح عند المرور بالماوس */
+        box-shadow: 0 8px 20px rgba(30, 136, 229, 0.7);
+        transform: translateY(-5px);
+    }
+    .rating {
+        color: #1565c0; /* أزرق داكن */
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    .date {
+        color: #555; /* لون رمادي متناسب */
+        font-size: 0.9em;
+        margin-top: 8px;
+    }
+    .no-reviews {
+        text-align: center;
+        color: #cfd8dc; /* رمادي فاتح */
+        font-size: 1.2em;
+        margin-top: 50px;
+    }
+    .btn-home {
+        display: block;
+        margin: 30px auto 0;
+        padding: 10px 20px;
+        background-color: #1976d2; /* أزرق متناسق */
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .btn-home:hover {
+        background-color: #0d47a1; /* أزرق أغمق عند المرور */
+    }
+</style>
+
+</head>
+<body>
+
+<h2>تعليقات الوسيط</h2>
+
+<% if (message) { %>
+    <p class="no-reviews"><%= message %></p>
+<% } else { %>
+    <% reviews.forEach(review => { %>
+        <div class="review">
+            <div class="rating">التقييم: <%= review.rating %> / 5</div>
+            <div><strong>التعليق:</strong> <%= review.review ? review.review : 'لا يوجد تعليق' %></div>
+            <div class="date">تاريخ التعليق: <%= new Date(review.created_at).toLocaleString('ar-EG') %></div>
+        </div>
+    <% }) %>
+<% } %>
+
+<button class="btn-home" onclick="goBack()">رجوع</button>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+</body>
+</html>

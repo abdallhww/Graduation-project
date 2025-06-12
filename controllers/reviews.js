@@ -130,4 +130,32 @@ const getBrokerReviews2 = async (req, res) => {
     }
 };
 
-module.exports = { add_rait , viwecommint , getBrokerReviews , getBrokerReviews2};
+const getBrokerReviewsSimple = async (req, res) => {
+    const brokerId = req.session.userId;
+
+    try {
+        // جلب التعليقات والتقييمات والتاريخ فقط من جدول reviews حسب brokerId
+        const [rows] = await pool.promise().query(
+            'SELECT review, rating, created_at FROM reviews WHERE broker_id = ? ORDER BY created_at DESC',
+            [brokerId]
+        );
+
+        const noReviewsMessage = (!Array.isArray(rows) || rows.length === 0)
+            ? 'لا توجد تعليقات لهذا الوسيط'
+            : null;
+
+        // عرض صفحة 'reviews2' مع التعليقات فقط
+        res.render('broker-reviews', {
+            reviews: rows,
+            brokerId,
+            message: noReviewsMessage
+        });
+
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        res.status(500).render('error', { message: 'خطأ في جلب التعليقات' });
+    }
+};
+
+
+module.exports = { add_rait , viwecommint , getBrokerReviews , getBrokerReviews2 , getBrokerReviewsSimple};

@@ -1,8 +1,8 @@
-const express = require("express");
-const session = require("express-session");
-const MySQLStore = require("express-mysql-session")(session);
-const bodyParser = require("body-parser");
-const path = require("path");
+const express = require("express");//استدعاء مكتبه لبناء تطبيق ويب
+const session = require("express-session");//استدعاء مكتبه ل دارة جلسات
+const MySQLStore = require("express-mysql-session")(session);//استدعاء مكتبه لتخزين جلسات في قاعدة بيانات
+const bodyParser = require("body-parser");//لتحيل بيانات نموذج form and json
+const path = require("path");//استدعاء مكتبه ل ادارة مسارات في ملفات و مجلدات
 const db = require("./utils/db");
 const { getPool } = require('./utils/db');
 
@@ -26,6 +26,7 @@ const { locationrouts } = require("./routes/location");
 const { paypalrouts } = require("./routes/paypal");
 const { notsrouts } = require("./routes/nots");
 
+//يسجل كل طلب (method + URL) في الكونسول للمراقبة/debugging.
 app.use((req, res, next) => {
   console.log(`Method: ${req.method} | URL: ${req.url}`);
   next(); 
@@ -35,7 +36,7 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views')); 
 
-// إعداد المجلدات العامة 
+//  إعداد المجلدات العامة التي تحتوي على ملفات ثابته
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.static(path.join(__dirname, "/views")));
 app.use(bodyParser.json());
